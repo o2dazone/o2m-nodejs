@@ -17,7 +17,7 @@ export default class Results extends React.Component {
 
     return (
       <div className={styles.results}>
-        <SectionHead search={search}></SectionHead>
+        <SectionHead search={search} />
         <SongLegends />
         {search.hasResults ? <Songs results={search.results} /> : ''}
       </div>
