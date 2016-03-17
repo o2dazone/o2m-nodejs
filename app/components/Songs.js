@@ -15,8 +15,18 @@ export default class Songs extends React.Component {
     return (
       <div className={styles.songs}>
         {results.map(track => {
+          let art;
+          if (track.albumArtRef) {
+            art = track.albumArtRef[0].url;
+          }
+          const albumArt = {
+            backgroundImage: `url(${art}=w120-c-h120-e100)`
+          };
+
           return (
-            <p key={track.id}>{track.artist}</p>
+            <song>
+              {track.albumArtRef ? <albumart style={albumArt}></albumart> : <albumart></albumart>}
+            </song>
           );
         })}
       </div>
