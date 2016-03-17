@@ -1,0 +1,8 @@
+{
+  "player": {
+    "limit": 10
+  },
+  "server": {
+    "port": 3000
+  }
+}

@@ -1,0 +1,69 @@
+@import 'variables.scss';
+@import 'mediaQueries.scss';
+
+* {
+  text-indent: 0;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  border: 0;
+  outline: none;
+  list-style: none;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background: #141517;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center
+}
+
+/* make all anchor tags inherit the color of their parents, what could go wrong? */
+a {
+  color: inherit;
+}
+
+[hide] {
+  display: none;
+  visibility: hidden;
+}
+
+[glow], [fade] {
+  transition: background-color 0.35s ease;
+}
+
+[glow] {
+  background-color: $color-primary !important;
+}
+
+#app {
+  height: 100%;
+}
+
+:local {
+  .wrap {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: $font-sans;
+    @include font-smoothing;
+    min-width: 640px;
+    overflow: hidden;
+  }
+}
+

@@ -1,0 +1,47 @@
+@import 'variables.scss';
+
+
+:local {
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+    flex: none;
+    min-width: 160px;
+    color: $color-gauss;
+    background: $color-newton;
+    a, pl {
+      &:hover {
+        background: $color-highlight;
+      }
+    }
+    a {
+      font-size: 18px;
+      line-height: $sidebar-menu-height;
+      font-weight: 300;
+      text-indent: 20px;
+    }
+    [selected] {
+      text-indent: 16px;
+      &:before {
+        content: " ";
+        float: left;
+        background: $color-primary;
+        width: 4px;
+        height: $sidebar-menu-height;
+      }
+    }
+    pl {
+      font-size: 12px;
+      font-weight: bold;
+      text-indent: 30px;
+      line-height: 24px;
+      &:hover {
+        cursor: pointer;
+      }
+      &:last-child {
+        text-decoration: line-through;
+      }
+    }
+  }
+}

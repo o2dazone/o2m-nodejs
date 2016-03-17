@@ -1,0 +1,15 @@
+@import 'variables.scss';
+
+:local {
+  .footer {
+    background: $color-newton;
+    position: relative;
+    min-height: $info-album-height;
+    display: flex;
+    align-items: center;
+    flex: 0 0;
+    > * {
+      text-align: left;
+    }
+  }
+}

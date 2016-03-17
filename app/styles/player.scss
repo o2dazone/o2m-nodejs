@@ -1,0 +1,51 @@
+@import 'variables.scss';
+
+:local {
+  .player {
+    width: 30%;
+    min-width: 240px;
+    white-space: nowrap;
+    overflow: hidden;
+    > * {
+      float: left;
+    }
+
+    .previous, .next, .shuffle, .playpause, [pause] {
+      @extend %spriteProperties;
+      background-size: 275px;
+      width: 60px;
+      height: $info-album-height;
+      &:hover {
+        cursor: pointer;
+        background-color: $color-highlight;
+      }
+    }
+
+    .previous {
+      background-position: 6px -170px;
+    }
+
+    .next {
+      background-position: -138px -170px;
+    }
+
+    .shuffle {
+      background-position: -196px -170px;
+      &[on] {
+        background-position: -196px -214px;
+      }
+    }
+
+    .playpause {
+      background-position: -43px -170px;
+    }
+
+    [pause] {
+      background-position: -86px -170px;
+    }
+
+    [active] {
+      background-color: $color-primary;
+    }
+  }
+}

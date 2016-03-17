@@ -1,0 +1,57 @@
+
+@media all and (max-width: 640px) {
+  body {
+    justify-content: flex-start;
+  }
+  .container {
+    flex-flow: column;
+  }
+  [songlist] {
+    flex: 0 1 auto;
+  }
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    a {
+      width: 33%;
+      text-align: center;
+    }
+    pl {
+      display: none;
+    }
+  }
+  song {
+    min-height: 60px;
+    font-size: 20px;
+    albumart {
+      width: 60px;
+      min-width: 60px;
+      height: 60px;
+      background-size: 60px;
+    }
+    &:hover albumart:before {
+      background: $color-highlight;
+    }
+  }
+  sectionhead term {
+    width: 40%;
+  }
+  .info {
+    width: 70%;
+  }
+}
+
+@media all and (max-height: 250px) {
+  .sidebar, .header, .container {
+    display: none;
+  }
+  .footer {
+    margin-top: 3px;
+    flex: 1 0;
+    flex-flow: column;
+    .info, .player {
+      width: 100%;
+    }
+  }
+}

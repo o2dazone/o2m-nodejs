@@ -1,0 +1,140 @@
+@mixin font-smoothing($value: antialiased) {
+  @if $value == antialiased {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  @else {
+    -webkit-font-smoothing: subpixel-antialiased;
+    -moz-osx-font-smoothing: auto;
+  }
+}
+
+$color-wht: white;
+$color-blk: black;
+$color-gauss: darkgrey;
+$color-kinsey: #33353a;
+$color-newton: #232427;
+$color-sagan: gainsboro;
+$color-leland: #9c9c9c;
+$color-primary: #3179a1;
+$color-highlight: rgba(255, 255, 255, 0.05);
+
+$font-sans: "Roboto", Helvetica, Arial, sans-serif;
+$font-serif: "Georgia", serif;
+
+$info-album-height: 60px;
+$song-height: 34px;
+$progress-bar-height: 10px;
+$header-height: 65px;
+$input-height: 34px;
+$sidebar-menu-height: 36px;
+
+/* images */
+%sprite {
+  background-image: url("../images/sprite.png") !important;
+}
+
+%cover {
+  background-image: url("../images/cover.png");
+}
+
+%prop {
+  background-repeat: no-repeat;
+  text-indent: -999em;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.eq {
+  background: url("../images/eq.gif") rgba(0, 0, 0, 0.7) -2px -3px !important;
+}
+
+%spriteProperties {
+  @extend %sprite;
+  @extend %prop;
+}
+
+%songList {
+  flex: 1 0 auto;
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  albumart, name, artist, album {
+    flex: 1 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: $song-height;
+    min-height: $song-height;
+  }
+
+  songlegends, song, sectionhead {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  song, info {
+    albumart {
+      @extend %cover;
+    }
+  }
+
+  [playing] {
+    background: $color-highlight;
+  }
+
+  albumart {
+    max-width: $song-height;
+    position: relative;
+  }
+
+  name {
+    width: 30%;
+    text-indent: 8px;
+  }
+
+  artist {
+    width: 20%;
+  }
+
+  album {
+    width: 35%;
+  }
+
+  songlegends {
+    max-height: 28px;
+    min-height: 28px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $color-sagan;
+
+    & > *:hover {
+      cursor: pointer;
+    }
+  }
+
+  sectionhead {
+    color: $color-gauss;
+    background: $color-highlight;
+    max-height: 45px;
+    font-size: 22px;
+    min-height: 45px;
+    flex: 1 0 auto;
+    flex-flow: row;
+    font-weight: 300;
+    padding: 6px 0;
+    text-indent: 15px;
+    white-space: nowrap;
+  }
+
+  noresults {
+    width: 100%;
+    font-size: 20px;
+    font-weight: 300;
+    padding: 10px 0 0 15px;
+  }
+}

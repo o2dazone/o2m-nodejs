@@ -1,0 +1,21 @@
+@import 'variables';
+
+:local {
+  .songs {
+    overflow: auto;
+    color: $color-leland;
+    display: flex;
+    flex-flow: column;
+    font-size: 14px;
+    justify-content: flex-start;
+
+    &&::-webkit-scrollbar, &&::-moz-scrollbar {
+      width: 60px;
+    }
+
+    &&::-webkit-scrollbar-thumb:vertical, &&::-moz-scrollbar-thumb:vertical {
+      background: red;
+    }
+  }
+}
+

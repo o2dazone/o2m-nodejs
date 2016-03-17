@@ -1,0 +1,49 @@
+@import 'variables.scss';
+
+:local {
+  .header {
+    display: flex;
+    align-items: center;
+    flex: 0 0;
+    background: $color-kinsey;
+    min-height: $header-height;
+    padding-right: 20px;
+
+    h1 {
+      margin-right: 10px;
+      min-width: 131px;
+    }
+
+    a {
+      @extend %spriteProperties;
+      display: block;
+      background-size: 100%;
+      width: 100%;
+      background-position: 7px 0;
+      min-height: $header-height;
+    }
+
+    form {
+      width: 100%;
+
+      label {
+        float: left;
+        text-indent: -999em;
+      }
+
+      input {
+        border-radius: 3px;
+        background: black;
+        width: 100%;
+        color: $color-gauss;
+        font-size: 18px;
+        line-height: $input-height;
+        height: $input-height;
+        text-indent: 8px;
+        &:focus {
+          box-shadow: 0px 0px 5px 2px $color-primary inset;
+        }
+      }
+    }
+  }
+}
