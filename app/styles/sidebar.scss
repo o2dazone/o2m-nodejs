@@ -1,4 +1,4 @@
-@import 'variables.scss';
+@import 'variables';
 
 
 :local {
@@ -10,17 +10,20 @@
     min-width: 160px;
     color: $color-gauss;
     background: $color-newton;
+
     a, pl {
       &:hover {
         background: $color-highlight;
       }
     }
+
     a {
       font-size: 18px;
       line-height: $sidebar-menu-height;
       font-weight: 300;
       text-indent: 20px;
     }
+
     [selected] {
       text-indent: 16px;
       &:before {
@@ -31,6 +34,7 @@
         height: $sidebar-menu-height;
       }
     }
+    
     pl {
       font-size: 12px;
       font-weight: bold;

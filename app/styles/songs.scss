@@ -9,6 +9,10 @@
     font-size: 14px;
     justify-content: flex-start;
 
+    [playing] {
+      background: $color-highlight;
+    }
+
     &&::-webkit-scrollbar, &&::-moz-scrollbar {
       width: 60px;
     }
@@ -16,6 +20,74 @@
     &&::-webkit-scrollbar-thumb:vertical, &&::-moz-scrollbar-thumb:vertical {
       background: red;
     }
+  }
+
+  .song {
+    min-height: $song-height;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+
+    &[playing] {
+      .albumart:before {
+        @extend %eq;
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: $color-highlight;
+
+      .albumart:before {
+        @extend %spriteProperties;
+        background-size: 200px;
+        content: " ";
+        background-position: -65px -126px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  .albumart, .name, .artist, .album {
+    flex: 1 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: $song-height;
+    min-height: $song-height;
+  }
+
+  .albumart {
+    @extend %cover;
+    max-width: $song-height;
+    width: $song-height;
+    height: $song-height;
+    background-size: $song-height;
+    position: relative;
+  }
+
+  .name {
+    width: 30%;
+    text-indent: 8px;
+  }
+
+  .artist {
+    width: 20%;
+  }
+
+  .album {
+    width: 35%;
   }
 }
 

@@ -1,10 +1,11 @@
 import fetch from 'isomorphic-fetch';
 import { RECEIVE_SEARCH_RESULTS } from '../constants';
 
-function receiveSearchResults(results) {
+function receiveSearchResults(results, query) {
   return {
     type: RECEIVE_SEARCH_RESULTS,
-    results: results
+    results: results,
+    query: query
   };
 }
 
@@ -15,7 +16,7 @@ export function fetchSearchResults(query) {
       return fetch(reqUrl)
         .then(response => response.json())
         .then(response => {
-          dispatch(receiveSearchResults(response));
+          dispatch(receiveSearchResults(response, query));
         });
     }
   };

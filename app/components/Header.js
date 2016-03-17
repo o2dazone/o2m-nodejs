@@ -21,8 +21,8 @@ export default class Header extends React.Component {
   render() {
     return (
       <div className={styles.header}>
-        <h1><a href="index.html">o2mdb</a></h1>
-        <form action="index.html" method="get">
+        <h1><a href="/">o2mdb</a></h1>
+        <form action="/" method="get">
           <fieldset>
             <label>Search</label>
             <input type="text" placeholder="Search for songs" autoComplete="off" onKeyDown={this.onSearch} />

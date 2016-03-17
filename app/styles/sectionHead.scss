@@ -1,0 +1,38 @@
+@import 'variables';
+
+:local {
+  .head {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    color: $color-gauss;
+    background: $color-highlight;
+    max-height: 45px;
+    font-size: 22px;
+    min-height: 45px;
+    flex: 1 0 auto;
+    flex-flow: row;
+    font-weight: 300;
+    padding: 6px 0;
+    text-indent: 15px;
+    white-space: nowrap;
+
+    addall {
+      float: right;
+      cursor: pointer;
+      width: 30%;
+      text-align: left;
+      font-size: 14px;
+    }
+  }
+
+  .term {
+    margin-left: 5px;
+    margin-right: 15px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: $color-primary;
+  }
+}
