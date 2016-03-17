@@ -48,7 +48,7 @@ if (isDeveloping) {
 
 let allTracks;
 function getTracks(callback) {
-  pm.getAllTracks({'limit': appConfig.player.limit}, function(err, library) {
+  pm.getAllTracks({'limit': appConfig.allTracks.limit}, function(err, library) {
     allTracks = library.data.items;
     console.log('all tracks loaded!');
 
@@ -66,18 +66,6 @@ pm.init({email: credentials.email, password: credentials.password}, function(err
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, '../views/index.html'));
 });
-
-/*
-// app javascript
-app.get('/bundle.js', function(req, res) {
-  res.sendFile(path.join(__dirname, '../dist/bundle.js'));
-});
-
-// app styles
-app.get('/styles.css', function(req, res) {
-  res.sendFile(path.join(__dirname, '../dist/styles.css'));
-});
-*/
 
 // re-index all results
 app.get('/index-all', function(req, res) {
@@ -113,5 +101,5 @@ app.listen(port, '0.0.0.0', function onStart(err) {
   if (err) {
     console.log(err);
   }
-  console.info('==> 🌎 Listening on port %s. Open up http://0.0.0.0:%s/ in your browser.', port, port);
+  console.info('==> Server started on port %s. Open up http://0.0.0.0:%s/ in your browser.', port, port);
 });
