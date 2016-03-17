@@ -14,6 +14,7 @@ const app = express();
 
 const pm = new (require('playmusic'));
 const fs = require('fs');
+const searchIndex = require('search-index');
 
 const appConfig = JSON.parse(fs.readFileSync('./app/server/config.json'));
 const credentials = JSON.parse(fs.readFileSync('./app/server/credentials.json'));
@@ -47,12 +48,31 @@ if (isDeveloping) {
 }
 
 let allTracks;
+let searchService;
 function getTracks(callback) {
   pm.getAllTracks({'limit': appConfig.player.limit}, function(err, library) {
     allTracks = library.data.items;
     console.log('all tracks loaded!');
+    indexTracks(allTracks);
 
     if (callback) callback();
+  });
+}
+
+function indexTracks(tracks) {
+  searchIndex({}, function(err, sind) { 
+    if (err) {
+      console.log("Error creating searchService", err);
+    } else {
+      searchService = sind;
+      searchService.add(tracks, {}, function(err) { 
+        if (err) {
+          console.log("Error indexing tracks", err);
+        } else {
+          console.log("All tracks indexed");
+        }
+      });
+    }
   });
 }
 
@@ -102,11 +122,16 @@ function partialSearch(param, query) {
 
 // search
 app.get('/search', function(req, res) {
-  const searchResults = allTracks.filter(function(track) {
-    return partialSearch(track.artist, req.query.str) || partialSearch(track.album, req.query.str) || partialSearch(track.title, req.query.str);
+  searchService.search({"query" : {"*": [req.query.str]}}, function(err, results) {
+    if(err) {
+      console.log("Error executing search", q, err);
+    }
+    var hits = [];
+    results.hits.forEach(function(hit) {
+      hits.push(hit.document);
+    });
+    res.json(hits);
   });
-
-  res.json(searchResults);
 });
 
 app.listen(port, '0.0.0.0', function onStart(err) {
