@@ -5,7 +5,7 @@ export default function search(state = { hasResults: false }, action) {
 
   switch (type) {
   case actionTypes.RECEIVE_SEARCH_RESULTS:
-    return {...state, results, query, hasResults: true};
+    return {...state, results, query, hasResults: results.length ? true : false};
   default:
     return state;
   }
