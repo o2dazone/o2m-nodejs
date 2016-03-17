@@ -1,0 +1,46 @@
+@import 'variables';
+
+:local {
+  .songLegends {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    max-height: 28px;
+    min-height: 28px;
+    font-size: 12px;
+    font-weight: bold;
+    color: $color-sagan;
+
+    & > *:hover {
+      cursor: pointer;
+    }
+  }
+
+
+  .artSpacer {
+    width: $song-height;
+  }
+
+  .albumart, .name, .artist, .album {
+    flex: 1 0 auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: $song-height;
+    min-height: $song-height;
+  }
+
+  .name {
+    width: 30%;
+    text-indent: 8px;
+  }
+
+  .artist {
+    width: 20%;
+  }
+
+  .album {
+    width: 35%;
+  }
+}

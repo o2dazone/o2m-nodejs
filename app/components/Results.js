@@ -4,6 +4,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Songs from './Songs';
+import SongLegends from './SongLegends';
+import SectionHead from './SectionHead';
 
 export default class Results extends React.Component {
   constructor(props) {
@@ -15,15 +17,8 @@ export default class Results extends React.Component {
 
     return (
       <div className={styles.results}>
-        <sectionhead></sectionhead>
-
-        <songlegends>
-          <albumart></albumart>
-          <name>Name</name>
-          <artist>Artist</artist>
-          <album>Album</album>
-        </songlegends>
-
+        <SectionHead search={search}></SectionHead>
+        <SongLegends />
         {search.hasResults ? <Songs results={search.results} /> : ''}
       </div>
     );

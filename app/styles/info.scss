@@ -1,10 +1,11 @@
-@import 'variables.scss';
+@import 'variables';
 
 .info {
   color: $color-leland;
   width: 70%;
   font-weight: 300;
-  albumart {
+
+  .albumart {
     width: $info-album-height;
     height: $info-album-height;
     background-size: $info-album-height;
