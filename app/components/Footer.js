@@ -1,5 +1,7 @@
-import React from 'react';
 import styles from '../styles/footer.scss';
+
+import React from 'react';
+import { connect } from 'react-redux';
 
 import Info from './Info';
 import Player from './Player';
@@ -11,12 +13,29 @@ export default class Footer extends React.Component {
   }
 
   render() {
+    const { player } = this.props;
+
+    if (player.playing) {
+      return (
+        <div className={styles.footer}>
+          <Duration />
+          { player.playing ? <Info track={player.track} /> : ''}
+          <Player />
+        </div>
+      );
+    }
+
     return (
-      <div className={styles.footer}>
-        <Info />
-        <Player />
-        <Duration />
-      </div>
+      <div className={styles.footer}></div>
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+    player: state.player
+  };
+}
+
+export default connect(mapStateToProps, { })(Footer);
