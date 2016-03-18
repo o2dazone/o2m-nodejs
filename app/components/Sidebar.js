@@ -26,21 +26,21 @@ export default class Sidebar extends React.Component {
     return (
       <div className={styles.sidebar}>
         <a href="#" onClick={this.onShowResults} selected>Search Results</a>
-        <a href="#" onClick={this.onShowQueue}>Music Queue</a>
 
-        {/* <a href="#" playlist data-dele-click="nav.showPlaylist">Playlists</a>
+        {/*
+        <a href="#" onClick={this.onShowQueue}>Music Queue</a>
+        <a href="#" playlist data-dele-click="nav.showPlaylist">Playlists</a>
         <pl data-dele-click="search.latest">Latest Additions</pl>
-        <pl data-dele-click="search.random">Start Listening</pl> */}
+        <pl data-dele-click="search.random">Start Listening</pl>
+        */}
       </div>
     );
   }
 }
 
 
-function mapStateToProps(state) {
-  return {
-    isResultsVisible: state.isResultsVisible
-  };
+function mapStateToProps() {
+  return { };
 }
 
 export default connect(mapStateToProps, { toggleResults })(Sidebar);
