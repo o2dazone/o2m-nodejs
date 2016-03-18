@@ -9,7 +9,7 @@
     font-size: 14px;
     justify-content: flex-start;
 
-    [playing] {
+    .playing {
       background: $color-highlight;
     }
 
@@ -29,27 +29,28 @@
     flex-wrap: wrap;
     align-items: center;
 
-    &[playing] {
-      :global(.albumart):before {
-        @extend %eq;
-        content: " ";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-    }
-
     &:hover {
       cursor: pointer;
       background: $color-highlight;
 
+      // add this back in when we have Queues vs Results, make sure the hover doesnt override 'playing'
+      // :global(.albumart):before {
+      //   @extend %spriteProperties;
+      //   background-size: 200px;
+      //   content: " ";
+      //   background-position: -65px -126px;
+      //   position: absolute;
+      //   top: 0;
+      //   left: 0;
+      //   width: 100%;
+      //   height: 100%;
+      // }
+    }
+
+    &.playing {
       :global(.albumart):before {
-        @extend %spriteProperties;
-        background-size: 200px;
+        @extend %eq;
         content: " ";
-        background-position: -65px -126px;
         position: absolute;
         top: 0;
         left: 0;

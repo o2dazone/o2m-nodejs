@@ -15,20 +15,20 @@
       margin-right: 10px;
     }
 
-    name, artistalbum {
+    .name, .artistalbum {
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
       display: block;
     }
 
-    name {
+    .name {
       margin-top: 4px;
       font-size: 19px;
       color: $color-sagan;
     }
 
-    artistalbum {
+    .artistalbum {
       font-size: 16px;
       color: $color-leland;
     }
