@@ -2,8 +2,8 @@ import styles from '../styles/player.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { soundManager as sm } from 'soundmanager2';
 import { fetchStreamUrl, togglePlayPause, toggleShuffle } from '../actions/player';
+import AudioModule from './AudioModule';
 
 export default class Player extends React.Component {
   constructor(props) {
@@ -14,33 +14,13 @@ export default class Player extends React.Component {
 
   componentWillMount() {
     const { fetchStreamUrl, player } = this.props;
-
-    sm.setup({
-      'useHTML5Audio': true,
-      'preferFlash': false,
-      'debugMode': false,
-      'forceUseGlobalHTML5Audio': true
-    });
-
-    sm.createSound({
-      id: 'smTrack'
-    });
-
     // make an initial fetch on mount
     fetchStreamUrl(player.track.id);
   }
 
   componentWillReceiveProps(nextState) {
-    const { fetchStreamUrl, player } = this.props;
-    const smTrack = sm.getSoundById('smTrack');
-
-    if (nextState.player.track.id === player.track.id) {
-      smTrack.play({
-        url: nextState.player.streamUrl
-      });
-    }
-
-    if (nextState.player.track.id !== player.track.id) {
+    const { fetchStreamUrl } = this.props;
+    if (nextState.player.track.id !== this.props.player.track.id) {
       fetchStreamUrl(nextState.player.track.id);
     }
   }
@@ -56,8 +36,10 @@ export default class Player extends React.Component {
   }
 
   render() {
+    const { player } = this.props;
     return (
       <div className={styles.player}>
+        { player ? <AudioModule streamUrl={player.streamUrl} trackId={player.track.id} /> : ''}
         <a href="#" className={styles.previous}>Previous Track</a>
         <a href="#" className={styles.playpause} onClick={this.onTogglePlayPause}>Play/Pause</a>
         <a href="#" className={styles.next}>Next Track</a>
