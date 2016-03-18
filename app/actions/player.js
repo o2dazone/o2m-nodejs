@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { PLAY_SONG, RECEIVE_STREAM_URL } from '../constants';
+import { TOGGLE_PLAY_PAUSE, PLAY_SONG, RECEIVE_STREAM_URL } from '../constants';
 
 export function playSong(track) {
   return {
@@ -13,6 +13,13 @@ function receiveStreamUrl(streamUrl) {
     type: RECEIVE_STREAM_URL,
     streamUrl: streamUrl
   };
+}
+
+export function togglePlayPause(toggle) {
+  return {
+    type: TOGGLE_PLAY_PAUSE,
+    toggle: toggle
+  }
 }
 
 export function fetchStreamUrl(id) {

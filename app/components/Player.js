@@ -3,11 +3,12 @@ import styles from '../styles/player.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 import { soundManager as sm } from 'soundmanager2';
-import { fetchStreamUrl } from '../actions/player';
+import { fetchStreamUrl, togglePlayPause } from '../actions/player';
 
 export default class Player extends React.Component {
   constructor(props) {
     super(props);
+    this.onTogglePlayPause = this.onTogglePlayPause.bind(this);
   }
 
   componentWillMount() {
@@ -30,27 +31,29 @@ export default class Player extends React.Component {
 
   componentWillReceiveProps(nextState) {
     const { fetchStreamUrl, player } = this.props;
+    const smTrack = sm.getSoundById('smTrack');
+
+    if (nextState.player.track.id === player.track.id) {
+      smTrack.play({
+        url: nextState.player.streamUrl
+      });
+    }
 
     if (nextState.player.track.id !== player.track.id) {
       fetchStreamUrl(nextState.player.track.id);
     }
   }
 
-  componentDidUpdate(nextState) {
-    const { player } = this.props;
-
-    if (nextState.player.track.id === player.track.id) {
-      sm.getSoundById('smTrack').play({
-        url: player.streamUrl
-      });
-    }
+  onTogglePlayPause() {
+    const { togglePlayPause, player } = this.props;
+    togglePlayPause(player.playing ? false : true );
   }
 
   render() {
     return (
       <div className={styles.player}>
         <a href="#" className={styles.previous}>Previous Track</a>
-        <a href="#" className={styles.playpause} pause>Play/Pause</a>
+        <a href="#" className={styles.playpause} onClick={this.onTogglePlayPause}>Play/Pause</a>
         <a href="#" className={styles.next}>Next Track</a>
         <a href="#" className={styles.shuffle}>Shuffle</a>
       </div>
@@ -63,4 +66,4 @@ function mapStateToProps() {
 }
 
 
-export default connect(mapStateToProps, { fetchStreamUrl })(Player);
+export default connect(mapStateToProps, { fetchStreamUrl, togglePlayPause })(Player);
