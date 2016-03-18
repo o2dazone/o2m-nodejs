@@ -28,13 +28,13 @@ export default class Results extends React.Component {
   }
 
   render() {
-    const { search } = this.props;
+    const { search, player } = this.props;
 
     return (
       <div className={styles.results}>
         <SectionHead search={search} />
         <SongLegends />
-        {search.hasResults ? <Songs results={search.results} onPlaySong={this.onPlaySong} /> : ''}
+        {search.hasResults ? <Songs results={search.results} playingTrack={player.track ? player.track.id : null} onPlaySong={this.onPlaySong} /> : ''}
       </div>
     );
   }
@@ -42,7 +42,8 @@ export default class Results extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    search: state.search
+    search: state.search,
+    player: state.player
   };
 }
 

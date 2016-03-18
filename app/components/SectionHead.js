@@ -42,7 +42,7 @@ export default class SectionHead extends React.Component {
 
       // no results
       return (
-        <div className={styles.head}></div>
+        <div className={styles.head} />
       );
     }
 
