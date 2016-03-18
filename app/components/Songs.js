@@ -4,7 +4,6 @@ import React from 'react';
 import AlbumArt from './AlbumArt';
 
 const Songs = ({results, playingTrack, onPlaySong}) => {
-  console.log(playingTrack);
   return (
     <div className={styles.songs}>
       {results.map(track => {

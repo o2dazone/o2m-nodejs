@@ -3,9 +3,10 @@ import styles from '../styles/footer.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 
+
 import Info from './Info';
 import Player from './Player';
-import Duration from './Duration';
+// import Duration from './Duration';
 
 export default class Footer extends React.Component {
   constructor(props) {
@@ -18,9 +19,9 @@ export default class Footer extends React.Component {
     if (player.playing) {
       return (
         <div className={styles.footer}>
-          <Duration />
-          { player.playing ? <Info track={player.track} /> : ''}
-          <Player />
+          {/* <Duration />*/}
+          <Info track={player.track} />
+          <Player player={player} />
         </div>
       );
     }
