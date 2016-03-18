@@ -30,7 +30,7 @@
     align-items: center;
 
     &[playing] {
-      .albumart:before {
+      :global(.albumart):before {
         @extend %eq;
         content: " ";
         position: absolute;
@@ -45,7 +45,7 @@
       cursor: pointer;
       background: $color-highlight;
 
-      .albumart:before {
+      :global(.albumart):before {
         @extend %spriteProperties;
         background-size: 200px;
         content: " ";
@@ -59,7 +59,7 @@
     }
   }
 
-  .albumart, .name, .artist, .album {
+  :global(.albumart), .name, .artist, .album {
     flex: 1 0 auto;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -68,8 +68,9 @@
     min-height: $song-height;
   }
 
-  .albumart {
+  :global(.albumart) {
     @extend %cover;
+    display: inline-block;
     max-width: $song-height;
     width: $song-height;
     height: $song-height;

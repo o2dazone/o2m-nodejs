@@ -2,10 +2,11 @@
 
 :local {
   .player {
-    width: 30%;
-    min-width: 240px;
+    right: 15px;
+    position: fixed;
     white-space: nowrap;
     overflow: hidden;
+
     > * {
       float: left;
     }

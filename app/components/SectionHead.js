@@ -27,7 +27,7 @@ export default class SectionHead extends React.Component {
           <div className={styles.head}>
             {`You found ${search.results.length} results for`}
             <span className={styles.term}>{search.query}</span>
-            <span onClick={this.addAll} className={styles.addAll}>Add all songs to queue</span>
+            {/* <span onClick={this.addAll} className={styles.addAll}>Add all songs to queue</span>*/}
           </div>
         );
       }
