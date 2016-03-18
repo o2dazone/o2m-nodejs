@@ -11,10 +11,13 @@ export default class Player extends React.Component {
   }
 
   componentWillMount() {
+    const { fetchStreamUrl, player } = this.props;
+
     sm.setup({
       'useHTML5Audio': true,
       'preferFlash': false,
-      'debugMode': false
+      'debugMode': false,
+      'forceUseGlobalHTML5Audio': true
     });
 
     sm.createSound({
@@ -22,19 +25,23 @@ export default class Player extends React.Component {
     });
 
     // make an initial fetch on mount
-    this.props.fetchStreamUrl(this.props.player.track.id);
+    fetchStreamUrl(player.track.id);
   }
 
   componentWillReceiveProps(nextState) {
-    if (nextState.player.track.id !== this.props.player.track.id) {
-      this.props.fetchStreamUrl(nextState.player.track.id);
+    const { fetchStreamUrl, player } = this.props;
+
+    if (nextState.player.track.id !== player.track.id) {
+      fetchStreamUrl(nextState.player.track.id);
     }
   }
 
   componentDidUpdate(nextState) {
-    if (nextState.player.track.id === this.props.player.track.id) {
+    const { player } = this.props;
+
+    if (nextState.player.track.id === player.track.id) {
       sm.getSoundById('smTrack').play({
-        url: this.props.player.streamUrl
+        url: player.streamUrl
       });
     }
   }
