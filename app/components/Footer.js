@@ -46,7 +46,7 @@ export default class Footer extends React.Component {
     const { player, playSong, search } = this.props;
 
     if (player.shuffle) {
-      const randomTrack = Math.round(Math.random() * (search.results.length-1));
+      const randomTrack = Math.round(Math.random() * (search.results.length - 1));
       playSong(search.results[randomTrack]);
     } else {
       const nextTrack = this.getTrack(+1);
@@ -80,9 +80,7 @@ export default class Footer extends React.Component {
       );
     }
 
-    return (
-      <div className={styles.footer}></div>
-    );
+    return null;
   }
 }
 

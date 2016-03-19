@@ -18,38 +18,14 @@ export default class SectionHead extends React.Component {
   }
 
   render() {
-    const { search, queue } = this.props;
+    const { search } = this.props;
 
-    if (search) {
-      // has results
-      if (search.hasResults) {
-        return (
-          <div className={styles.head}>
-            {`You found ${search.results.length} results for`}
-            <span className={styles.term}>{search.query}</span>
-            {/* <span onClick={this.addAll} className={styles.addAll}>Add all songs to queue</span>*/}
-          </div>
-        );
-      }
-
-      if (search.query) {
-        return (
-          <div className={styles.head}>
-            No results for {this.makeTerm(search.query)}
-          </div>
-        );
-      }
-
-      // no results
-      return (
-        <div className={styles.head} />
-      );
-    }
-
-    // queue section head
     return (
       <div className={styles.head}>
-        {queue ? `stuff` : 'Nothing in your queue'}
+        { search.hasResults ? <span>You found {search.results.length} results for <span className={styles.term}>{search.query}</span></span> : ''}
+        { search.query && !search.hasResults ? <span>No results for {this.makeTerm(search.query)}</span> : ''}
+        { !search.query && !search.hasResults ? <span /> : '' }
+        {/* { !search ? <span>Nothing in your queue</span> : '' }*/}
       </div>
     );
   }

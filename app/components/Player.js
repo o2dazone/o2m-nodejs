@@ -3,7 +3,6 @@ import styles from '../styles/player.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchStreamUrl } from '../actions/player';
-import { soundManager as sm } from 'soundmanager2';
 import AudioModule from './AudioModule';
 
 export default class Player extends React.Component {

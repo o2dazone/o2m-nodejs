@@ -13,10 +13,13 @@ export default class Container extends React.Component {
   }
 
   render() {
+    const { search, isResultsVisible } = this.props;
+
+    const results = search.query ? <Results /> : '';
     return (
       <div className={styles.container}>
         <Sidebar />
-        {this.props.isResultsVisible ? <Results /> : <Queue />}
+        {isResultsVisible ? results : <Queue />}
       </div>
     );
   }
@@ -25,7 +28,8 @@ export default class Container extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    isResultsVisible: state.isResultsVisible
+    isResultsVisible: state.isResultsVisible,
+    search: state.search
   };
 }
 
