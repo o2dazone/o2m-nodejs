@@ -28,7 +28,6 @@ export default class Results extends React.Component {
   }
 
   render() {
-    console.log(this.props);
     const { search, player } = this.props;
 
     return (
