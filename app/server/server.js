@@ -6,7 +6,7 @@ const express = require('express');
 const webpack = require('webpack');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const config = require('./webpack.config.js');
+const config = require('../../webpack.config.js');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
@@ -65,12 +65,9 @@ function indexTracks(tracks) {
   });
 }
 
-let allTracks;
 function getTracks(callback) {
   pm.getAllTracks({'limit': appConfig.allTracks.limit}, function(err, library) {
-    allTracks = library.data.items;
-    console.log('all tracks loaded!');
-    indexTracks(allTracks);
+    indexTracks(library.data.items);
 
     if (callback) callback();
   });
@@ -90,7 +87,7 @@ app.get('/', function(req, res) {
 // re-index all results
 app.get('/index-all', function(req, res) {
   getTracks(function() {
-    res.send('Re-indexed all tracks: ' + allTracks.length + ' songs.');
+    res.send('Re-indexed all tracks');
   });
 });
 

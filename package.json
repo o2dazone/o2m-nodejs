@@ -2,14 +2,14 @@
   "name": "o2damusic-nodejs",
   "version": "1.0.0",
   "description": "o2 music player",
-  "main": "server.js",
+  "main": "app/server/server.js",
   "repository": "no",
   "author": "Brandon Murry",
   "license": "ISC",
   "homepage": "",
   "scripts": {
     "test": "",
-    "start": "node server",
+    "start": "node app/server/server",
     "build": "rimraf dist && set NODE_ENV=production && webpack --config ./webpack.production.config.js --progress --profile --colors",
     "eslint": "eslint .",
     "jscs": "jscs ."
