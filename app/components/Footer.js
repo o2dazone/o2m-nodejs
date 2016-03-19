@@ -38,7 +38,7 @@ export default class Footer extends React.Component {
         <div className={styles.footer}>
           {/* <Duration />*/}
           <Info track={player.track} />
-          <Player onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} player={player} />
+          <Player player={player} onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} />
         </div>
       );
     }

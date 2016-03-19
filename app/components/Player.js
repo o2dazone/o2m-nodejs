@@ -17,8 +17,8 @@ export default class Player extends React.Component {
   }
 
   componentWillReceiveProps(nextState) {
-    const { fetchStreamUrl } = this.props;
-    if (nextState.player.track.id !== this.props.player.track.id) {
+    const { fetchStreamUrl, player } = this.props;
+    if (nextState.player.track.id !== player.track.id) {
       fetchStreamUrl(nextState.player.track.id);
     }
   }
