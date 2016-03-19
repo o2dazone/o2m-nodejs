@@ -25,14 +25,13 @@ export default class Sidebar extends React.Component {
   render() {
     return (
       <div className={styles.sidebar}>
-        <a href="#" onClick={this.onShowResults} selected>Search Results</a>
+        <span onClick={this.onShowResults} selected>Search Results</span>
 
-        {/*
-        <a href="#" onClick={this.onShowQueue}>Music Queue</a>
-        <a href="#" playlist data-dele-click="nav.showPlaylist">Playlists</a>
-        <pl data-dele-click="search.latest">Latest Additions</pl>
-        <pl data-dele-click="search.random">Start Listening</pl>
-        */}
+
+        <span onClick={this.onShowQueue}>Music Queue</span>
+        <span>Playlists</span>
+        <span className={styles.playlist}>Latest Additions</span>
+        <span className={styles.playlist}>Start Listening</span>
       </div>
     );
   }

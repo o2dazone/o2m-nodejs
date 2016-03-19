@@ -11,17 +11,15 @@
     color: $color-gauss;
     background: $color-newton;
 
-    a, pl {
-      &:hover {
-        background: $color-highlight;
-      }
-    }
-
-    a {
+    span {
       font-size: 18px;
       line-height: $sidebar-menu-height;
       font-weight: 300;
       text-indent: 20px;
+
+      &:hover {
+        background: $color-highlight;
+      }
     }
 
     [selected] {
@@ -34,18 +32,15 @@
         height: $sidebar-menu-height;
       }
     }
-    
-    pl {
-      font-size: 12px;
-      font-weight: bold;
-      text-indent: 30px;
-      line-height: 24px;
-      &:hover {
-        cursor: pointer;
-      }
-      &:last-child {
-        text-decoration: line-through;
-      }
+  }
+
+  span.playlist {
+    font-size: 12px;
+    font-weight: bold;
+    text-indent: 30px;
+    line-height: 24px;
+    &:hover {
+      cursor: pointer;
     }
   }
 }
