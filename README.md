@@ -1,4 +1,4 @@
-# o2damusic nodeJS version
+# o2damusic nodeJS
 
 ## Startup
 * `npm i && npm start`
