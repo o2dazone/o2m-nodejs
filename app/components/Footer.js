@@ -43,9 +43,16 @@ export default class Footer extends React.Component {
   }
 
   onNextTrack() {
-    const nextTrack = this.getTrack(+1);
-    if (nextTrack) {
-      this.props.playSong(nextTrack);
+    const { player, playSong, search } = this.props;
+
+    if (player.shuffle) {
+      const randomTrack = Math.round(Math.random() * (search.results.length-1));
+      playSong(search.results[randomTrack]);
+    } else {
+      const nextTrack = this.getTrack(+1);
+      if (nextTrack) {
+        playSong(nextTrack);
+      }
     }
   }
 

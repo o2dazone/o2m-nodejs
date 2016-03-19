@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { soundManager as sm } from 'soundmanager2';
 
 export default class AudioModule extends React.Component {
@@ -34,3 +35,9 @@ export default class AudioModule extends React.Component {
     return null;
   }
 }
+
+function mapStateToProps() {
+  return { };
+}
+
+export default connect(mapStateToProps, { })(AudioModule);
