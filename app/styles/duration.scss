@@ -9,30 +9,30 @@
     background: black;
     left: 0;
     top: -$progress-bar-height;
+  }
 
-    elapsed {
-      position: absolute;
-      right: 0;
-      height: $progress-bar-height;
-      cursor: pointer;
-      background: $color-primary;
-      left: 0;
-      width: 0%;
-    }
+  .elapsed {
+    position: absolute;
+    right: 0;
+    height: $progress-bar-height;
+    cursor: pointer;
+    background: $color-primary;
+    left: 0;
+    width: 0%;
+  }
 
-    time {
-      color: $color-wht;
-      font-size: 10px;
-      background: inherit;
-      position: absolute;
-      right: -17px;
-      height: $progress-bar-height + 6px;
-      width: 35px;
-      text-align: center;
-      line-height: $progress-bar-height + 6px;
-      top: -3px;
-      background: $color-primary;
-      border-radius: 3px;
-    }
+  .time {
+    color: $color-wht;
+    font-size: 10px;
+    background: inherit;
+    position: absolute;
+    right: -17px;
+    height: $progress-bar-height + 6px;
+    width: 35px;
+    text-align: center;
+    line-height: $progress-bar-height + 6px;
+    top: -3px;
+    background: $color-primary;
+    border-radius: 3px;
   }
 }

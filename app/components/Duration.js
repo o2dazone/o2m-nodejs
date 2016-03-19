@@ -9,9 +9,9 @@ export default class Duration extends React.Component {
   render() {
     return (
       <div className={styles.duration}>
-        <elapsed data-dele-click="controls.skip">
-          <time></time>
-        </elapsed>
+        <div className={styles.elapsed}>
+          <div className={styles.time} />
+        </div>
       </div>
     );
   }
