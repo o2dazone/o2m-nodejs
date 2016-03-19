@@ -47,8 +47,25 @@ if (isDeveloping) {
   // });
 }
 
-let allTracks;
 let searchService;
+function indexTracks(tracks) {
+  searchIndex({}, function(err, sind) {
+    if (err) {
+      console.log('Error creating searchService', err);
+    } else {
+      searchService = sind;
+      searchService.add(tracks, {}, function(err) {
+        if (err) {
+          console.log('Error indexing tracks', err);
+        } else {
+          console.log('All tracks indexed');
+        }
+      });
+    }
+  });
+}
+
+let allTracks;
 function getTracks(callback) {
   pm.getAllTracks({'limit': appConfig.allTracks.limit}, function(err, library) {
     allTracks = library.data.items;
@@ -56,23 +73,6 @@ function getTracks(callback) {
     indexTracks(allTracks);
 
     if (callback) callback();
-  });
-}
-
-function indexTracks(tracks) {
-  searchIndex({}, function(err, sind) { 
-    if (err) {
-      console.log("Error creating searchService", err);
-    } else {
-      searchService = sind;
-      searchService.add(tracks, {}, function(err) { 
-        if (err) {
-          console.log("Error indexing tracks", err);
-        } else {
-          console.log("All tracks indexed");
-        }
-      });
-    }
   });
 }
 
@@ -102,19 +102,14 @@ app.get('/stream', function(req, res) {
   });
 });
 
-// create regex partial for searching
-function partialSearch(param, query) {
-  const partialRegex = new RegExp(query, 'i');
-  return param.match(partialRegex);
-}
 
 // search
 app.get('/search', function(req, res) {
-  searchService.search({"query" : {"*": [req.query.str]}}, function(err, results) {
-    if(err) {
-      console.log("Error executing search", q, err);
+  searchService.search({'query': {'*': [req.query.str]}}, function(err, results) {
+    if (err) {
+      console.log('Error executing search', err);
     }
-    let hits = [];
+    const hits = [];
     results.hits.forEach(function(hit) {
       hits.push(hit.document);
     });
