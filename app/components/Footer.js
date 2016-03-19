@@ -3,7 +3,7 @@ import styles from '../styles/footer.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 import { soundManager as sm } from 'soundmanager2';
-import { togglePlayPause, toggleShuffle } from '../actions/player';
+import { togglePlayPause, toggleShuffle, playSong } from '../actions/player';
 import Info from './Info';
 import Player from './Player';
 // import Duration from './Duration';
@@ -13,6 +13,8 @@ export default class Footer extends React.Component {
     super(props);
     this.onTogglePlayPause = this.onTogglePlayPause.bind(this);
     this.onToggleShuffle = this.onToggleShuffle.bind(this);
+    this.onNextTrack = this.onNextTrack.bind(this);
+    this.onPreviousTrack = this.onPreviousTrack.bind(this);
   }
 
   onTogglePlayPause() {
@@ -23,6 +25,34 @@ export default class Footer extends React.Component {
       sm.getSoundById('smTrack').pause();
     } else {
       sm.getSoundById('smTrack').play();
+    }
+  }
+
+  getTrack(itr) {
+    const { player, search } = this.props;
+
+    const trackid = player.track.id;
+    const results = search.results;
+    let followingTrack;
+
+    for (let i = 0; i < results.length; i++) {
+      if (results[i].id === trackid && (followingTrack = results[i + itr])) {
+        return followingTrack;
+      }
+    }
+  }
+
+  onNextTrack() {
+    const nextTrack = this.getTrack(+1);
+    if (nextTrack) {
+      this.props.playSong(nextTrack);
+    }
+  }
+
+  onPreviousTrack() {
+    const previousTrack = this.getTrack(-1);
+    if (previousTrack) {
+      this.props.playSong(previousTrack);
     }
   }
 
@@ -38,7 +68,7 @@ export default class Footer extends React.Component {
         <div className={styles.footer}>
           {/* <Duration />*/}
           <Info track={player.track} />
-          <Player player={player} onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} />
+          <Player player={player} onNextTrack={this.onNextTrack} onPreviousTrack={this.onPreviousTrack} onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} />
         </div>
       );
     }
@@ -52,8 +82,9 @@ export default class Footer extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    player: state.player
+    player: state.player,
+    search: state.search
   };
 }
 
-export default connect(mapStateToProps, { togglePlayPause, toggleShuffle })(Footer);
+export default connect(mapStateToProps, { togglePlayPause, toggleShuffle, playSong })(Footer);

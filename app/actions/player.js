@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch';
+import { soundManager as sm } from 'soundmanager2';
 import { TOGGLE_PLAY_PAUSE, TOGGLE_SHUFFLE, PLAY_SONG, RECEIVE_STREAM_URL } from '../constants';
+
 
 export function playSong(track) {
   return {
@@ -32,6 +34,7 @@ export function toggleShuffle(toggle) {
 export function fetchStreamUrl(id) {
   return function (dispatch) {
     if (id) {
+      sm.getSoundById('smTrack').pause();
       const reqUrl = `/stream?id=${id}`;
       return fetch(reqUrl)
         .then(response => response.json())

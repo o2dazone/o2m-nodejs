@@ -16,7 +16,10 @@ export default class AudioModule extends React.Component {
     });
 
     sm.createSound({
-      id: 'smTrack'
+      id: 'smTrack',
+      onfinish: function() {
+        this.props.onNextTrack();
+      }
     });
   }
 

@@ -3,6 +3,7 @@ import styles from '../styles/player.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchStreamUrl } from '../actions/player';
+import { soundManager as sm } from 'soundmanager2';
 import AudioModule from './AudioModule';
 
 export default class Player extends React.Component {
@@ -24,13 +25,13 @@ export default class Player extends React.Component {
   }
 
   render() {
-    const { player, onToggleShuffle, onTogglePlayPause } = this.props;
+    const { player, onToggleShuffle, onTogglePlayPause, onNextTrack, onPreviousTrack } = this.props;
     return (
       <div className={styles.player}>
-        { player ? <AudioModule streamUrl={player.streamUrl} /> : ''}
-        <a href="#" className={styles.previous}>Previous Track</a>
+        { player ? <AudioModule onNextTrack={onNextTrack} streamUrl={player.streamUrl} /> : ''}
+        <a href="#" className={styles.previous} onClick={onPreviousTrack}>Previous Track</a>
         { player.playing ? <a href="#" className={styles.pause} onClick={onTogglePlayPause}>Pause</a> : <a href="#" className={styles.play} onClick={onTogglePlayPause}>Play</a>}
-        <a href="#" className={styles.next}>Next Track</a>
+        <a href="#" className={styles.next} onClick={onNextTrack}>Next Track</a>
         { player.shuffle ? <a href="#" className={`${styles.shuffle} ${styles.on}`} onClick={onToggleShuffle}>Shuffle On</a> : <a href="#" className={styles.shuffle} onClick={onToggleShuffle}>Shuffle Off</a>}
       </div>
     );
