@@ -8,4 +8,22 @@
     flex-direction: column;
     width: 100%;
   }
+
+  .head {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    color: $color-gauss;
+    background: $color-highlight;
+    max-height: 45px;
+    font-size: 22px;
+    min-height: 45px;
+    flex: 1 0 auto;
+    flex-flow: row;
+    font-weight: 300;
+    padding: 6px 0 6px 10px;
+    text-indent: 15px;
+    white-space: nowrap;
+  }
 }

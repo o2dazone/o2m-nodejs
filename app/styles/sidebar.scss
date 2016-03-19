@@ -21,16 +21,16 @@
         background: $color-highlight;
       }
     }
+  }
 
-    [selected] {
-      text-indent: 16px;
-      &:before {
-        content: " ";
-        float: left;
-        background: $color-primary;
-        width: 4px;
-        height: $sidebar-menu-height;
-      }
+  span.selected {
+    text-indent: 16px;
+    &:before {
+      content: " ";
+      float: left;
+      background: $color-primary;
+      width: 4px;
+      height: $sidebar-menu-height;
     }
   }
 

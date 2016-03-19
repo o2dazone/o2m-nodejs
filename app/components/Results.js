@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 import { playSong } from 'actions/player';
 import Songs from './Songs';
 import SongLegends from './SongLegends';
-import SectionHead from './SectionHead';
 
 export default class Results extends React.Component {
   constructor(props) {
     super(props);
     this.onPlaySong = this.onPlaySong.bind(this);
+    this.makeTerm = this.makeTerm.bind(this);
   }
 
   // get exact song data from state result object
@@ -27,12 +27,24 @@ export default class Results extends React.Component {
     }
   }
 
+  makeTerm(query) {
+    return (
+      <span className={styles.term}>{query}</span>
+    );
+  }
+
   render() {
     const { search, player } = this.props;
 
     return (
       <div className={styles.results}>
-        <SectionHead search={search} />
+        <div className={styles.head}>
+          { search.hasResults ? <span>You found {search.results.length} results for {this.makeTerm(search.query)}</span> : ''}
+          { search.query && !search.hasResults ? <span>No results for {this.makeTerm(search.query)}</span> : ''}
+          { !search.query && !search.hasResults ? <span /> : '' }
+          {/* { !search ? <span>Nothing in your queue</span> : '' }*/}
+        </div>
+
         <SongLegends />
         {search.hasResults ? <Songs results={search.results} playingTrack={player.track ? player.track.id : null} onPlaySong={this.onPlaySong} /> : ''}
       </div>

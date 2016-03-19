@@ -23,12 +23,12 @@ export default class Sidebar extends React.Component {
   }
 
   render() {
+    const { isResultsVisible } = this.props;
+
     return (
       <div className={styles.sidebar}>
-        <span onClick={this.onShowResults} selected>Search Results</span>
-
-
-        <span onClick={this.onShowQueue}>Music Queue</span>
+        <span className={isResultsVisible ? styles.selected : ''} onClick={this.onShowResults}>Search Results</span>
+        <span className={!isResultsVisible ? styles.selected : ''} onClick={this.onShowQueue}>Music Queue</span>
         <span>Playlists</span>
         <span className={styles.playlist}>Latest Additions</span>
         <span className={styles.playlist}>Start Listening</span>
@@ -38,8 +38,10 @@ export default class Sidebar extends React.Component {
 }
 
 
-function mapStateToProps() {
-  return { };
+function mapStateToProps(state) {
+  return {
+    isResultsVisible: state.isResultsVisible
+  };
 }
 
 export default connect(mapStateToProps, { toggleResults })(Sidebar);
