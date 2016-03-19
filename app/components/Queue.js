@@ -15,7 +15,6 @@ export default class Queue extends React.Component {
         <SectionHead />
         <SongLegends />
         <songs data-dele-click="song.prepare" data-dele-change="queue.counter"></songs>
-
       </div>
     );
   }
