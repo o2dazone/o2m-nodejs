@@ -28,22 +28,8 @@ body {
   justify-content: center
 }
 
-/* make all anchor tags inherit the color of their parents, what could go wrong? */
 a {
   color: inherit;
-}
-
-[hide] {
-  display: none;
-  visibility: hidden;
-}
-
-[glow], [fade] {
-  transition: background-color 0.35s ease;
-}
-
-[glow] {
-  background-color: $color-primary !important;
 }
 
 #app {

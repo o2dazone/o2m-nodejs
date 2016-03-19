@@ -25,24 +25,24 @@
 
     form {
       width: 100%;
+    }
 
-      label {
-        float: left;
-        text-indent: -999em;
-      }
+    label {
+      float: left;
+      text-indent: -999em;
+    }
 
-      input {
-        border-radius: 3px;
-        background: black;
-        width: 100%;
-        color: $color-gauss;
-        font-size: 18px;
-        line-height: $input-height;
-        height: $input-height;
-        text-indent: 8px;
-        &:focus {
-          box-shadow: 0px 0px 5px 2px $color-primary inset;
-        }
+    input {
+      border-radius: 3px;
+      background: black;
+      width: 100%;
+      color: $color-gauss;
+      font-size: 18px;
+      line-height: $input-height;
+      height: $input-height;
+      text-indent: 8px;
+      &:focus {
+        box-shadow: 0px 0px 5px 2px $color-primary inset;
       }
     }
   }

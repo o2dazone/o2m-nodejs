@@ -28,10 +28,10 @@ export default class Player extends React.Component {
     return (
       <div className={styles.player}>
         { player ? <AudioModule onNextTrack={onNextTrack} streamUrl={player.streamUrl} /> : ''}
-        <a href="#" className={styles.previous} onClick={onPreviousTrack}>Previous Track</a>
-        { player.playing ? <a href="#" className={styles.pause} onClick={onTogglePlayPause}>Pause</a> : <a href="#" className={styles.play} onClick={onTogglePlayPause}>Play</a>}
-        <a href="#" className={styles.next} onClick={onNextTrack}>Next Track</a>
-        { player.shuffle ? <a href="#" className={`${styles.shuffle} ${styles.on}`} onClick={onToggleShuffle}>Shuffle On</a> : <a href="#" className={styles.shuffle} onClick={onToggleShuffle}>Shuffle Off</a>}
+        <span className={styles.previous} onClick={onPreviousTrack}>Previous Track</span>
+        { player.playing ? <span className={styles.pause} onClick={onTogglePlayPause}>Pause</span> : <span className={styles.play} onClick={onTogglePlayPause}>Play</span>}
+        <span className={styles.next} onClick={onNextTrack}>Next Track</span>
+        { player.shuffle ? <span className={`${styles.shuffle} ${styles.on}`} onClick={onToggleShuffle}>Shuffle On</span> : <span className={styles.shuffle} onClick={onToggleShuffle}>Shuffle Off</span>}
       </div>
     );
   }

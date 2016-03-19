@@ -17,12 +17,7 @@
     }
   }
 
-
-  .artSpacer {
-    width: $song-height;
-  }
-
-  .albumart, .name, .artist, .album {
+  %legendSizing {
     flex: 1 0 auto;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -31,16 +26,23 @@
     min-height: $song-height;
   }
 
+  .artSpacer {
+    @extend %legendSizing;
+  }
+
   .name {
+    @extend %legendSizing;
     width: 30%;
     text-indent: 8px;
   }
 
   .artist {
+    @extend %legendSizing;
     width: 20%;
   }
 
   .album {
+    @extend %legendSizing;
     width: 35%;
   }
 }

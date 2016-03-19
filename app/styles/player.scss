@@ -10,44 +10,49 @@
     > * {
       float: left;
     }
+  }
 
-    .previous, .next, .shuffle, .play, .pause {
-      @extend %spriteProperties;
-      background-size: 275px;
-      width: 60px;
-      height: $info-album-height;
-      &:hover {
-        cursor: pointer;
-        background-color: $color-highlight;
-      }
+  %controlButtons {
+    @extend %spriteProperties;
+    background-size: 275px;
+    width: 60px;
+    height: $info-album-height;
+    &:hover {
+      cursor: pointer;
+      background-color: $color-highlight;
     }
+  }
 
-    .previous {
-      background-position: 6px -170px;
-    }
+  .previous {
+    @extend %controlButtons;
+    background-position: 6px -170px;
+  }
 
-    .next {
-      background-position: -138px -170px;
-    }
+  .next {
+    @extend %controlButtons;
+    background-position: -138px -170px;
+  }
 
-    .shuffle {
-      background-position: -196px -170px;
-    }
+  .shuffle {
+    @extend %controlButtons;
+    background-position: -196px -170px;
+  }
 
-    .on {
-      background-position: -196px -214px;
-    }
+  .on {
+    background-position: -196px -214px;
+  }
 
-    .pause {
-      background-position: -43px -170px;
-    }
+  .pause {
+    @extend %controlButtons;
+    background-position: -43px -170px;
+  }
 
-    .play {
-      background-position: -86px -170px;
-    }
+  .play {
+    @extend %controlButtons;
+    background-position: -86px -170px;
+  }
 
-    [active] {
-      background-color: $color-primary;
-    }
+  [active] {
+    background-color: $color-primary;
   }
 }

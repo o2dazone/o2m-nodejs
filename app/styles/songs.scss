@@ -9,17 +9,17 @@
     font-size: 14px;
     justify-content: flex-start;
 
-    .playing {
-      background: $color-highlight;
-    }
-
-    &&::-webkit-scrollbar, &&::-moz-scrollbar {
+    &::-webkit-scrollbar {
       width: 60px;
     }
 
-    &&::-webkit-scrollbar-thumb:vertical, &&::-moz-scrollbar-thumb:vertical {
+    &::-webkit-scrollbar-thumb:vertical {
       background: red;
     }
+  }
+
+  .playing {
+    background: $color-highlight;
   }
 
   .song {
@@ -60,7 +60,7 @@
     }
   }
 
-  :global(.albumart), .name, .artist, .album {
+  %trackInfoSizing {
     flex: 1 0 auto;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -71,6 +71,7 @@
 
   :global(.albumart) {
     @extend %cover;
+    @extend %trackInfoSizing;
     display: inline-block;
     max-width: $song-height;
     width: $song-height;
@@ -80,15 +81,18 @@
   }
 
   .name {
+    @extend %trackInfoSizing;
     width: 30%;
     text-indent: 8px;
   }
 
   .artist {
+    @extend %trackInfoSizing;
     width: 20%;
   }
 
   .album {
+    @extend %trackInfoSizing;
     width: 35%;
   }
 }
