@@ -2,7 +2,6 @@
 
 ## Startup
 * `npm i && npm start`
-* 
 
 ## Setup
 * Install Atom
