@@ -126,7 +126,7 @@ app.get('/search', function(req, res) {
     if(err) {
       console.log("Error executing search", q, err);
     }
-    var hits = [];
+    let hits = [];
     results.hits.forEach(function(hit) {
       hits.push(hit.document);
     });
