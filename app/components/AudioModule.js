@@ -18,22 +18,16 @@ export default class AudioModule extends React.Component {
     sm.createSound({
       id: 'smTrack'
     });
-
-    sm.getSoundById('smTrack').play({
-      url: this.props.streamUrl
-    });
   }
 
   componentWillReceiveProps(nextState) {
-    if (nextState.trackId === this.props.trackId ) {
-      sm.getSoundById('smTrack').play({
-        url: nextState.streamUrl
-      });
-    }
+    sm.getSoundById('smTrack').play({
+      url: nextState.streamUrl
+    });
   }
 
   render() {
-    return <div />;
+    return null;
   }
 }
 

@@ -2,7 +2,8 @@ import styles from '../styles/footer.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { soundManager as sm } from 'soundmanager2';
+import { togglePlayPause, toggleShuffle } from '../actions/player';
 import Info from './Info';
 import Player from './Player';
 // import Duration from './Duration';
@@ -10,6 +11,24 @@ import Player from './Player';
 export default class Footer extends React.Component {
   constructor(props) {
     super(props);
+    this.onTogglePlayPause = this.onTogglePlayPause.bind(this);
+    this.onToggleShuffle = this.onToggleShuffle.bind(this);
+  }
+
+  onTogglePlayPause() {
+    const { togglePlayPause, player } = this.props;
+    togglePlayPause(player.playing ? false : true );
+
+    if (player.playing) {
+      sm.getSoundById('smTrack').pause();
+    } else {
+      sm.getSoundById('smTrack').play();
+    }
+  }
+
+  onToggleShuffle() {
+    const { toggleShuffle, player } = this.props;
+    toggleShuffle(player.shuffle ? false : true );
   }
 
   render() {
@@ -19,7 +38,7 @@ export default class Footer extends React.Component {
         <div className={styles.footer}>
           {/* <Duration />*/}
           <Info track={player.track} />
-          <Player player={player} />
+          <Player onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} player={player} />
         </div>
       );
     }
@@ -37,4 +56,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { })(Footer);
+export default connect(mapStateToProps, { togglePlayPause, toggleShuffle })(Footer);

@@ -11,7 +11,7 @@
       float: left;
     }
 
-    .previous, .next, .shuffle, .playpause, [pause] {
+    .previous, .next, .shuffle, .play, .pause {
       @extend %spriteProperties;
       background-size: 275px;
       width: 60px;
@@ -32,16 +32,17 @@
 
     .shuffle {
       background-position: -196px -170px;
-      &[on] {
+
+      &.on {
         background-position: -196px -214px;
       }
     }
 
-    .playpause {
+    .pause {
       background-position: -43px -170px;
     }
 
-    [pause] {
+    .play {
       background-position: -86px -170px;
     }
 
