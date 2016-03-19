@@ -1,9 +1,9 @@
-import styles from '../styles/sidebar.scss';
+import styles from 'styles/sidebar.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { toggleResults } from '../actions/results';
+import { toggleResults } from 'actions/results';
 
 export default class Sidebar extends React.Component {
   constructor(props) {

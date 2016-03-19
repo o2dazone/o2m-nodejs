@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { RECEIVE_SEARCH_RESULTS } from '../constants';
+import { RECEIVE_SEARCH_RESULTS } from 'constants';
 
 function receiveSearchResults(results, query) {
   return {

@@ -1,4 +1,4 @@
-import { TOGGLE_RESULTS } from '../constants';
+import { TOGGLE_RESULTS } from 'constants';
 
 export function toggleResults(visible) {
   return {

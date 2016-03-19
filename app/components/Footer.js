@@ -1,9 +1,9 @@
-import styles from '../styles/footer.scss';
+import styles from 'styles/footer.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
 import { soundManager as sm } from 'soundmanager2';
-import { togglePlayPause, toggleShuffle, playSong } from '../actions/player';
+import { togglePlayPause, toggleShuffle, playSong } from 'actions/player';
 import Info from './Info';
 import Player from './Player';
 // import Duration from './Duration';

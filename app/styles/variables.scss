@@ -30,15 +30,15 @@ $input-height: 34px;
 $sidebar-menu-height: 36px;
 
 %cover {
-  background-image: url("../images/cover.png");
+  background-image: url("images/cover.png");
 }
 
 %eq {
-  background: url("../images/eq.gif") rgba(0, 0, 0, 0.7) -2px -3px !important;
+  background: url("images/eq.gif") rgba(0, 0, 0, 0.7) -2px -3px !important;
 }
 
 %spriteProperties {
-  background-image: url("../images/sprite.png") !important;
+  background-image: url("images/sprite.png") !important;
   background-repeat: no-repeat;
   text-indent: -999em;
   overflow: hidden;

@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants';
+import * as actionTypes from 'constants';
 
 export default function search(state = { hasResults: false }, action) {
   const { type, results, query } = action;

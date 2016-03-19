@@ -81,7 +81,7 @@ pm.init({email: credentials.email, password: credentials.password}, function(err
 
 // main page
 app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, '../views/index.html'));
+  res.sendFile(path.join(__dirname, 'views/index.html'));
 });
 
 // re-index all results

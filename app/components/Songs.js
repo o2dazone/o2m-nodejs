@@ -1,4 +1,4 @@
-import styles from '../styles/songs.scss';
+import styles from 'styles/songs.scss';
 import React from 'react';
 
 import AlbumArt from './AlbumArt';

@@ -1,4 +1,4 @@
-import styles from '../styles/songLegends.scss';
+import styles from 'styles/songLegends.scss';
 
 import React from 'react';
 

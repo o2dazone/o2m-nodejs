@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants';
+import * as actionTypes from 'constants';
 
 export default function player(state = { playing: false, shuffle: false }, action) {
   const { type, track, streamUrl, toggle } = action;

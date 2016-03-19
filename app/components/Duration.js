@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/duration.scss';
+import styles from 'styles/duration.scss';
 
 export default class Duration extends React.Component {
   constructor(props) {

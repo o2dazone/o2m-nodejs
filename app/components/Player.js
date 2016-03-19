@@ -1,8 +1,8 @@
-import styles from '../styles/player.scss';
+import styles from 'styles/player.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchStreamUrl } from '../actions/player';
+import { fetchStreamUrl } from 'actions/player';
 import AudioModule from './AudioModule';
 
 export default class Player extends React.Component {

@@ -1,8 +1,8 @@
-import styles from '../styles/header.scss';
+import styles from 'styles/header.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSearchResults } from '../actions/search';
+import { fetchSearchResults } from 'actions/search';
 
 export default class Header extends React.Component {
   constructor(props) {

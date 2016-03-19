@@ -2,6 +2,7 @@
 
 var path = require('path');
 var webpack = require('webpack');
+var srcPath = path.join(__dirname, '/../app');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -14,6 +15,11 @@ module.exports = {
     path: path.join(__dirname, '/dist/'),
     filename: '[name].js',
     publicPath: '/'
+  },
+  resolve: {
+    root: srcPath,
+    extensions: ['', '.js'],
+    modulesDirectories: ['node_modules', 'app']
   },
   plugins: [
     new HtmlWebpackPlugin({

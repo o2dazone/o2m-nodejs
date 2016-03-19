@@ -1,4 +1,4 @@
-import * as actionTypes from '../constants';
+import * as actionTypes from 'constants';
 
 export function isResultsVisible(state = true, action) {
   const { type, visible } = action;

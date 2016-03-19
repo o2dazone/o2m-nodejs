@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import styles from '../styles/app.scss';
+import styles from 'styles/app.scss';
 
 import Header from './Header';
 import Container from './Container';

@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/queue.scss';
+import styles from 'styles/queue.scss';
 
 import SongLegends from './SongLegends';
 import SectionHead from './SectionHead';

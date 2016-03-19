@@ -1,8 +1,8 @@
-import styles from '../styles/container.scss';
+import styles from 'styles/container.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { isResultsVisible } from '../actions/results';
+import { isResultsVisible } from 'actions/results';
 import Sidebar from './Sidebar';
 import Results from './Results';
 import Queue from './Queue';

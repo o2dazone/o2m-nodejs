@@ -1,9 +1,9 @@
-import styles from '../styles/results.scss';
+import styles from 'styles/results.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { playSong } from '../actions/player';
+import { playSong } from 'actions/player';
 import Songs from './Songs';
 import SongLegends from './SongLegends';
 import SectionHead from './SectionHead';
