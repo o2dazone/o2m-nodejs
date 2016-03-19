@@ -34,7 +34,10 @@ export function toggleShuffle(toggle) {
 export function fetchStreamUrl(id) {
   return function (dispatch) {
     if (id) {
-      sm.getSoundById('smTrack').pause();
+      if (sm.getSoundById('smTrack')) {
+        sm.getSoundById('smTrack').pause();
+      }
+
       const reqUrl = `/stream?id=${id}`;
       return fetch(reqUrl)
         .then(response => response.json())

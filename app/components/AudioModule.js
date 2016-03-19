@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { soundManager as sm } from 'soundmanager2';
 
 export default class AudioModule extends React.Component {
@@ -8,6 +7,8 @@ export default class AudioModule extends React.Component {
   }
 
   componentWillMount() {
+    const { onNextTrack } = this.props;
+
     sm.setup({
       'useHTML5Audio': true,
       'preferFlash': false,
@@ -18,7 +19,7 @@ export default class AudioModule extends React.Component {
     sm.createSound({
       id: 'smTrack',
       onfinish: function() {
-        this.props.onNextTrack();
+        onNextTrack();
       }
     });
   }
@@ -33,10 +34,3 @@ export default class AudioModule extends React.Component {
     return null;
   }
 }
-
-function mapStateToProps() {
-  return { };
-}
-
-
-export default connect(mapStateToProps, { })(AudioModule);
