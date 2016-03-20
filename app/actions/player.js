@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { soundManager as sm } from 'soundmanager2';
-import { TOGGLE_PLAY_PAUSE, TOGGLE_SHUFFLE, PLAY_SONG, RECEIVE_STREAM_URL } from 'constants';
+import { TOGGLE_PLAY_PAUSE, TOGGLE_SHUFFLE, PLAY_SONG, RECEIVE_STREAM_URL, UPDATE_PERCENT_PLAYED } from 'constants';
 
 
 export function playSong(track) {
@@ -28,6 +28,13 @@ export function toggleShuffle(toggle) {
   return {
     type: TOGGLE_SHUFFLE,
     toggle: toggle
+  };
+}
+
+export function updatePercentPlayed(percent) {
+  return {
+    type: UPDATE_PERCENT_PLAYED,
+    percent: percent
   };
 }
 

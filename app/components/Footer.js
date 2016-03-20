@@ -3,10 +3,10 @@ import styles from 'styles/footer.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 import { soundManager as sm } from 'soundmanager2';
-import { togglePlayPause, toggleShuffle, playSong } from 'actions/player';
+import { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed } from 'actions/player';
 import Info from './Info';
 import Player from './Player';
-// import Duration from './Duration';
+import Duration from './Duration';
 
 export default class Footer extends React.Component {
   constructor(props) {
@@ -15,6 +15,20 @@ export default class Footer extends React.Component {
     this.onToggleShuffle = this.onToggleShuffle.bind(this);
     this.onNextTrack = this.onNextTrack.bind(this);
     this.onPreviousTrack = this.onPreviousTrack.bind(this);
+  }
+
+  componentDidMount() {
+    const props = this.props;
+    const soundObject = sm.getSoundById('smTrack');
+    let songLength;
+
+    if (songLength !== props.player.track.durationMillis) {
+      songLength = props.player.track.durationMillis;
+    }
+
+    setInterval(function() {
+      props.updatePercentPlayed((soundObject.position / songLength * 100).toFixed(2));
+    }, 1000);
   }
 
   onTogglePlayPause() {
@@ -70,17 +84,14 @@ export default class Footer extends React.Component {
 
   render() {
     const { player } = this.props;
-    if (player.track) {
-      return (
-        <div className={styles.footer}>
-          {/* <Duration />*/}
-          <Info track={player.track} />
-          <Player player={player} onNextTrack={this.onNextTrack} onPreviousTrack={this.onPreviousTrack} onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} />
-        </div>
-      );
-    }
 
-    return null;
+    return (
+      <div className={styles.footer}>
+        <Duration />
+        <Info track={player.track} />
+        <Player player={player} onNextTrack={this.onNextTrack} onPreviousTrack={this.onPreviousTrack} onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} />
+      </div>
+    );
   }
 }
 
@@ -92,4 +103,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { togglePlayPause, toggleShuffle, playSong })(Footer);
+export default connect(mapStateToProps, { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed })(Footer);

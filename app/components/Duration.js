@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { soundManager as sm } from 'soundmanager2';
 import styles from 'styles/duration.scss';
 
 export default class Duration extends React.Component {
@@ -7,12 +9,24 @@ export default class Duration extends React.Component {
   }
 
   render() {
+    const { player } = this.props;
+    const percent = { width: `${player.percent}%` };
+
     return (
       <div className={styles.duration}>
-        <div className={styles.elapsed}>
-          <div className={styles.time} />
+        <div style={percent} className={styles.elapsed}>
+          {/* <div className={styles.time} />*/}
         </div>
       </div>
     );
   }
 }
+
+
+function mapStateToProps(state) {
+  return {
+    player: state.player
+  };
+}
+
+export default connect(mapStateToProps, { })(Duration);
