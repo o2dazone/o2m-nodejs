@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { isResultsVisible } from 'actions/results';
 import Sidebar from './Sidebar';
 import Results from './Results';
-import Queue from './Queue';
 
 export default class Container extends React.Component {
   constructor(props) {
@@ -19,7 +18,8 @@ export default class Container extends React.Component {
     return (
       <div className={styles.container}>
         <Sidebar />
-        {isResultsVisible ? results : <Queue />}
+        {isResultsVisible ? results : ''}
+        {/* {isResultsVisible ? results : <Playlists />}*/}
       </div>
     );
   }

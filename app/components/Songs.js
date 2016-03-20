@@ -3,16 +3,16 @@ import React from 'react';
 
 import AlbumArt from './AlbumArt';
 
-const Songs = ({results, playingTrack, onClickAlbum, onClickTrack, onClickTitle, onClickArtist }) => {
+const Songs = ({results, playingTrack, onClickTrack }) => {
   return (
     <div className={styles.songs}>
-      {results.map((track, index) => {
+      {results.map((track) => {
         return (
           <div className={playingTrack === track.id ? `${styles.song} ${styles.playing}` : styles.song} onClick={onClickTrack} key={track.id} data-trackid={track.id}>
-            <AlbumArt onClickAlbum={onClickAlbum} art={track.albumArtRef ? track.albumArtRef[0].url : null} />
-            <span onClick={onClickTitle} className={styles.name}>{track.title}</span>
-            <span onClick={onClickArtist} className={styles.artist}>{track.artist}</span>
-            <span onClick={onClickAlbum} className={styles.album}>{track.album}</span>
+            <AlbumArt art={track.albumArtRef ? track.albumArtRef[0].url : null} />
+            <span className={styles.name}>{track.title}</span>
+            <span className={styles.artist}>{track.artist}</span>
+            <span className={styles.album}>{track.album}</span>
           </div>
         );
       })}

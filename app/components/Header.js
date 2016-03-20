@@ -21,7 +21,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <div className={styles.header}>
-        <h1><a href="/">o2mdb</a></h1>
+        <h1>o2mdb</h1>
         <form action="/" method="get">
           <fieldset>
             <label>Search</label>

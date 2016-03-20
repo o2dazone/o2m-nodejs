@@ -10,15 +10,11 @@
     padding-right: 20px;
 
     h1 {
+      @extend %spriteProperties;
       margin-right: 10px;
       min-width: 131px;
-    }
-
-    a {
-      @extend %spriteProperties;
       display: block;
       background-size: 100%;
-      width: 100%;
       background-position: 7px 0;
       min-height: $header-height;
     }

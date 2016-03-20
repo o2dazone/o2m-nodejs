@@ -8,18 +8,11 @@ import { toggleResults } from 'actions/results';
 export default class Sidebar extends React.Component {
   constructor(props) {
     super(props);
-    this.onShowQueue = this.onShowQueue.bind(this);
-    this.onShowResults = this.onShowResults.bind(this);
   }
 
   onShowResults(e) {
     e.preventDefault();
     this.props.toggleResults(true);
-  }
-
-  onShowQueue(e) {
-    e.preventDefault();
-    this.props.toggleResults(false);
   }
 
   render() {
@@ -28,7 +21,6 @@ export default class Sidebar extends React.Component {
     return (
       <div className={styles.sidebar}>
         <span className={isResultsVisible ? styles.selected : ''} onClick={this.onShowResults}>Search Results</span>
-        <span className={!isResultsVisible ? styles.selected : ''} onClick={this.onShowQueue}>Music Queue</span>
         <span>Playlists</span>
         <span className={styles.playlist}>Latest Additions</span>
         <span className={styles.playlist}>Start Listening</span>
