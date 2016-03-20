@@ -1,10 +1,10 @@
 import React from 'react';
 
-const AlbumArt = ({art}) => {
+const AlbumArt = ({art, onClickAlbum}) => {
   const albumArt = (art) ? { backgroundImage: `url(${art}=w120-c-h120-e100)` } : {};
 
   return (
-    <span className="albumart" style={albumArt} />
+    <span onClick={onClickAlbum} className="albumart" style={albumArt} />
   );
 };
 

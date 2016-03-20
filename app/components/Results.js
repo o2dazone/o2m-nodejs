@@ -4,27 +4,27 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { playSong } from 'actions/player';
+import { addToQueue } from 'actions/queue';
+import { getTrackById } from 'helpers';
 import Songs from './Songs';
 import SongLegends from './SongLegends';
 
 export default class Results extends React.Component {
   constructor(props) {
     super(props);
-    this.onPlaySong = this.onPlaySong.bind(this);
+    this.onClickAlbum = this.onClickAlbum.bind(this);
+    this.onClickTitle = this.onClickTitle.bind(this);
     this.makeTerm = this.makeTerm.bind(this);
   }
 
-  // get exact song data from state result object
-  onPlaySong(e) {
-    const trackid = e.target.parentNode.dataset.trackid;
-    const results = this.props.search.results;
+  onClickAlbum(e) {
+    const track = getTrackById(e.target.parentNode.dataset.trackid, this.props.search.results);
+    this.props.playSong(track);
+  }
 
-    for (let i = 0; i < results.length; i++) {
-      if (results[i].id === trackid) {
-        this.props.playSong(results[i]);
-        break;
-      }
-    }
+  onClickTitle(e) {
+    const track = getTrackById(e.target.parentNode.dataset.trackid, this.props.search.results);
+    this.props.addToQueue(track);
   }
 
   makeTerm(query) {
@@ -46,7 +46,7 @@ export default class Results extends React.Component {
         </div>
 
         <SongLegends />
-        {search.hasResults ? <Songs results={search.results} playingTrack={player.track ? player.track.id : null} onPlaySong={this.onPlaySong} /> : ''}
+        {search.hasResults ? <Songs results={search.results} playingTrack={player.track ? player.track.id : null} onClickTitle={this.onClickTitle} onClickAlbum={this.onClickAlbum} /> : ''}
       </div>
     );
   }
@@ -59,4 +59,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { playSong })(Results);
+export default connect(mapStateToProps, { playSong, addToQueue })(Results);
