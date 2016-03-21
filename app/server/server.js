@@ -99,14 +99,6 @@ app.get('/stream', function(req, res) {
   });
 });
 
-app.get('/playlists', function(req, res) {
-  pm.getPlayListEntries(function(err, data) {
-    if (err) console.error(err);
-    res.json(data.data.items);
-  });
-});
-
-
 // search
 app.get('/search', function(req, res) {
   searchService.search({'query': {'*': [req.query.str]}}, function(err, results) {
