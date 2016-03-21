@@ -2,6 +2,7 @@
 
 var path = require('path');
 var webpack = require('webpack');
+var srcPath = path.join(__dirname, '/../app');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var StatsPlugin = require('stats-webpack-plugin');
@@ -14,6 +15,11 @@ module.exports = {
     path: path.join(__dirname, '/dist/'),
     filename: '[name]-[hash].min.js',
     publicPath: '/'
+  },
+  resolve: {
+    root: srcPath,
+    extensions: ['', '.js'],
+    modulesDirectories: ['node_modules', 'app']
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -38,20 +44,13 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [{
-      test: /\.js?$/,
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        "presets": ["es2015", "stage-0", "react"]
-      }
-    }, {
-      test: /\.json?$/,
-      loader: 'json'
-    }, {
-      test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')
-    }]
+    loaders: [
+      { test: /\.js?$/, exclude: /node_modules/, loader: 'babel', query: { "presets": ["es2015", "stage-0", "react"]}},
+      { test: /\.json?$/, loader: 'json' },
+      { test: /\.scss$/, loader: "style!css!sass?outputStyle=expanded&includePaths[]=" + path.resolve(__dirname, "./node_modules/compass-mixins/lib")},
+      { test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')},
+      { test: /\.(woff|woff2|ttf|eot|svg|gif|png|jpge?g)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?name=[name].[hash].[ext]'}
+    ]
   },
   postcss: [
     require('autoprefixer')

@@ -1,8 +1,11 @@
 # o2damusic nodeJS
 
-## Startup
-* `npm i && npm start`
-
 ## Setup
-* Install Atom
-* `apm install linter linter-eslint language-babel`
+Install Atom
+`apm install linter linter-eslint language-babel`
+
+## dev startup
+`npm i && npm start`
+
+## prod startup
+`NODE_ENV=production PORT=80 npm start`

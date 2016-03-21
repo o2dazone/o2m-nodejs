@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { soundManager as sm } from 'soundmanager2';
 import styles from 'styles/duration.scss';
 
 export default class Duration extends React.Component {

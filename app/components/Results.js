@@ -31,14 +31,14 @@ export default class Results extends React.Component {
 
     return (
       <div className={styles.results}>
+
         <div className={styles.head}>
-          { search.hasResults ? <span>You found {search.results.length} results for {this.makeTerm(search.query)}</span> : ''}
-          { search.query && !search.hasResults ? <span>No results for {this.makeTerm(search.query)}</span> : ''}
-          { !search.query && !search.hasResults ? <span /> : '' }
+          { search.hasResults ? <span>You found {search.results.length} results for {this.makeTerm(search.query)}</span> : '' }
+          { search.query && !search.hasResults ? <span>No results for {this.makeTerm(search.query)}</span> : '' }
         </div>
 
-        <SongLegends />
-        {search.hasResults ? <Songs results={search.results} playingTrack={player.track ? player.track.id : null} onClickTrack={this.onPlaySong} /> : ''}
+        { search.hasResults ? <SongLegends /> : ''}
+        { search.hasResults ? <Songs results={search.results} playingTrack={player.track ? player.track.id : null} onClickTrack={this.onPlaySong} /> : '' }
       </div>
     );
   }
