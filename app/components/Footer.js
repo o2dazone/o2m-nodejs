@@ -45,7 +45,8 @@ export default class Footer extends React.Component {
 
   onPercentUpdate() {
     const { updatePercentPlayed, player } = this.props;
-    const percent = Math.round(player.obj.position / player.track.durationMillis * 100);
+    const percent = Math.floor(player.obj.position / player.track.durationMillis * 100);
+
     if (percent !== player.percent) {
       updatePercentPlayed(percent);
     }

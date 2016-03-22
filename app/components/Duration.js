@@ -7,6 +7,18 @@ export default class Duration extends React.Component {
     super(props);
   }
 
+  makeTime() {
+    const { player } = this.props;
+    const t = player.obj.position * 0.001;
+    const hr =  t / 3600 >> 0;
+    const th = t % 3600;
+    const min = th / 60 >> 0;
+    const tm = t % 60;
+    const sec = tm >> 0;
+
+    return ((hr > 0 ? hr + ':' : '') + (min > 0 ? (hr > 0 && min < 10 ? '0' : '') + min + ':' : '0:') + (sec < 10 ? '0' : '') + sec);
+  }
+
   render() {
     const { player } = this.props;
     const percent = { width: `${player.percent}%` };
@@ -14,7 +26,9 @@ export default class Duration extends React.Component {
     return (
       <div className={styles.duration}>
         <div style={percent} className={styles.elapsed}>
-          {/* <div className={styles.time} />*/}
+           <div className={styles.time}>
+            {this.makeTime()}
+           </div>
         </div>
       </div>
     );

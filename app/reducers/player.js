@@ -15,7 +15,7 @@ export default function player(state = { playing: false, shuffle: false }, actio
   case actionTypes.UPDATE_PERCENT_PLAYED:
     return {...state, percent: percent };
   case actionTypes.ADD_PLAYER:
-    return {...state, obj: obj }
+    return {...state, obj: obj };
   default:
     return state;
   }
