@@ -8,7 +8,7 @@ export default class AudioModule extends React.Component {
   }
 
   componentWillMount() {
-    const { onNextTrack } = this.props;
+    const { onNextTrack, onPercentUpdate, onSoundCreated } = this.props;
 
     sm.setup({
       'useHTML5Audio': true,
@@ -21,8 +21,13 @@ export default class AudioModule extends React.Component {
       id: 'smTrack',
       onfinish: function() {
         onNextTrack();
+      },
+      whileplaying: function() {
+        onPercentUpdate();
       }
     });
+
+    onSoundCreated(sm.getSoundById('smTrack'));
   }
 
   componentWillReceiveProps(nextState) {

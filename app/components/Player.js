@@ -24,10 +24,10 @@ export default class Player extends React.Component {
   }
 
   render() {
-    const { player, onToggleShuffle, onTogglePlayPause, onNextTrack, onPreviousTrack } = this.props;
+    const { player, onToggleShuffle, onTogglePlayPause, onNextTrack, onPercentUpdate, onSoundCreated, onPreviousTrack } = this.props;
     return (
       <div className={styles.player}>
-        { player ? <AudioModule onNextTrack={onNextTrack} streamUrl={player.streamUrl} /> : ''}
+        { player ? <AudioModule onSoundCreated={onSoundCreated} onNextTrack={onNextTrack} onPercentUpdate={onPercentUpdate} streamUrl={player.streamUrl} /> : ''}
         <span className={styles.previous} onClick={onPreviousTrack}>Previous Track</span>
         { player.playing ? <span className={styles.pause} onClick={onTogglePlayPause}>Pause</span> : <span className={styles.play} onClick={onTogglePlayPause}>Play</span>}
         <span className={styles.next} onClick={onNextTrack}>Next Track</span>

@@ -2,8 +2,7 @@ import styles from 'styles/footer.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { soundManager as sm } from 'soundmanager2';
-import { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed } from 'actions/player';
+import { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer } from 'actions/player';
 import Info from './Info';
 import Player from './Player';
 import Duration from './Duration';
@@ -14,21 +13,9 @@ export default class Footer extends React.Component {
     this.onTogglePlayPause = this.onTogglePlayPause.bind(this);
     this.onToggleShuffle = this.onToggleShuffle.bind(this);
     this.onNextTrack = this.onNextTrack.bind(this);
+    this.onPercentUpdate = this.onPercentUpdate.bind(this);
     this.onPreviousTrack = this.onPreviousTrack.bind(this);
-  }
-
-  componentDidMount() {
-    const props = this.props;
-    const soundObject = sm.getSoundById('smTrack');
-    let songLength;
-
-    if (songLength !== props.player.track.durationMillis) {
-      songLength = props.player.track.durationMillis;
-    }
-
-    setInterval(function() {
-      props.updatePercentPlayed((soundObject.position / songLength * 100).toFixed(2));
-    }, 1000);
+    this.onSoundCreated = this.onSoundCreated.bind(this);
   }
 
   onTogglePlayPause() {
@@ -36,9 +23,9 @@ export default class Footer extends React.Component {
     togglePlayPause(player.playing ? false : true );
 
     if (player.playing) {
-      sm.getSoundById('smTrack').pause();
+      player.obj.pause();
     } else {
-      sm.getSoundById('smTrack').play();
+      player.obj.play();
     }
   }
 
@@ -54,6 +41,18 @@ export default class Footer extends React.Component {
         return followingTrack;
       }
     }
+  }
+
+  onPercentUpdate() {
+    const { updatePercentPlayed, player } = this.props;
+    const percent = Math.round(player.obj.position / player.track.durationMillis * 100);
+    if (percent !== player.percent) {
+      updatePercentPlayed(percent);
+    }
+  }
+
+  onSoundCreated(obj) {
+    this.props.addPlayer(obj);
   }
 
   onNextTrack() {
@@ -89,7 +88,7 @@ export default class Footer extends React.Component {
       <div className={styles.footer}>
         <Duration />
         <Info track={player.track} />
-        <Player player={player} onNextTrack={this.onNextTrack} onPreviousTrack={this.onPreviousTrack} onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} />
+        <Player player={player} onSoundCreated={this.onSoundCreated} onNextTrack={this.onNextTrack} onPercentUpdate={this.onPercentUpdate} onPreviousTrack={this.onPreviousTrack} onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} />
       </div>
     );
   }
@@ -103,4 +102,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed })(Footer);
+export default connect(mapStateToProps, { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer })(Footer);
