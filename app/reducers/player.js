@@ -5,7 +5,7 @@ export default function player(state = { playing: false, shuffle: false }, actio
 
   switch (type) {
   case actionTypes.PLAY_SONG:
-    return {...state, track, playing: true};
+    return {...state, track, percent: 0, playing: true};
   case actionTypes.RECEIVE_STREAM_URL:
     return {...state, streamUrl };
   case actionTypes.TOGGLE_PLAY_PAUSE:
