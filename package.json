@@ -25,7 +25,8 @@
     "redux-simple-router": "^2.0.4",
     "redux-thunk": "^2.0.1",
     "sass-loader": "^3.2.0",
-    "search-index": "0.7.12"
+    "search-index": "0.7.12",
+    "soundmanager2": "^2.97.20150601-a"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.3",
