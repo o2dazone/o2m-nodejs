@@ -10,10 +10,11 @@ export function playSong(track) {
   };
 }
 
-function receiveStreamUrl(streamUrl) {
+function receiveStreamUrl(streamUrl, begin) {
+  const url = begin ? `${streamUrl}&begin=${begin}` : streamUrl;
   return {
     type: RECEIVE_STREAM_URL,
-    streamUrl: streamUrl
+    streamUrl: url
   };
 }
 
@@ -45,7 +46,7 @@ export function updatePercentPlayed(percent) {
   };
 }
 
-export function fetchStreamUrl(id) {
+export function fetchStreamUrl(id, begin) {
   return function (dispatch) {
     if (id) {
       if (sm.getSoundById('smTrack')) {
@@ -56,7 +57,7 @@ export function fetchStreamUrl(id) {
       return fetch(reqUrl)
         .then(response => response.json())
         .then(response => {
-          dispatch(receiveStreamUrl(response));
+          dispatch(receiveStreamUrl(response, begin));
         });
     }
   };

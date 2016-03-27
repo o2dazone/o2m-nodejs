@@ -20,11 +20,11 @@ export default class Duration extends React.Component {
   }
 
   render() {
-    const { player } = this.props;
+    const { player, onDurationClicked } = this.props;
     const percent = { width: `${player.percent}%` };
 
     return (
-      <div className={styles.duration}>
+      <div className={styles.duration} onClick={onDurationClicked}>
         <div style={percent} className={styles.elapsed}>
            <div className={styles.time}>
             {this.makeTime()}
