@@ -11,7 +11,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const songLimit = 10000;
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
-const apiOpts = isDeveloping ? { 'limit': 1000 } : { 'limit': songLimit };
+const apiOpts = isDeveloping ? { 'limit': 100 } : { 'limit': songLimit };
 const config = isDeveloping ? require('../../webpack.config.js') : require('../../webpack.production.config.js');
 const app = express();
 
@@ -52,8 +52,7 @@ function indexTracks(tracks) {
     fieldOptions: [{
       fieldName: 'creationTimestamp',
       sortable: true
-    }],
-    fieldsToStore: ['artist', 'title', 'album', 'id', 'durationMillis', 'albumArtRef', 'genre', 'creationTimestamp']
+    }]
   };
 
   searchIndex({opts}, function(err, sind) {
