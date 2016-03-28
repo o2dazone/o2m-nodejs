@@ -29,7 +29,7 @@ export default class Duration extends React.Component {
       <div className={styles.duration} onClick={onDurationClicked}>
         <div style={percent} className={styles.elapsed}>
            <div className={styles.time}>
-            {this.makeTime()}
+            {player.percent ? this.makeTime() : ''}
            </div>
         </div>
       </div>
