@@ -16,6 +16,7 @@ export default class Footer extends React.Component {
     this.onPercentUpdate = this.onPercentUpdate.bind(this);
     this.onPreviousTrack = this.onPreviousTrack.bind(this);
     this.onSoundCreated = this.onSoundCreated.bind(this);
+    this.onDurationClicked = this.onDurationClicked.bind(this);
   }
 
   onTogglePlayPause() {
@@ -70,6 +71,10 @@ export default class Footer extends React.Component {
     }
   }
 
+  onDurationClicked(e) {
+    console.log(e.clientX / e.target.clientWidth * 100);
+  }
+
   onPreviousTrack() {
     const previousTrack = this.getTrack(-1);
     if (previousTrack) {
@@ -87,7 +92,7 @@ export default class Footer extends React.Component {
 
     return (
       <div className={styles.footer}>
-        <Duration />
+        <Duration onDurationClicked={this.onDurationClicked} />
         <Info track={player.track} />
         <Player player={player} onSoundCreated={this.onSoundCreated} onNextTrack={this.onNextTrack} onPercentUpdate={this.onPercentUpdate} onPreviousTrack={this.onPreviousTrack} onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} />
       </div>
