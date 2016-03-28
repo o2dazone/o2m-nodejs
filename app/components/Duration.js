@@ -10,7 +10,7 @@ export default class Duration extends React.Component {
   makeTime() {
     const { player } = this.props;
     if (player.obj) {
-      const t = player.obj.position * 0.001;
+      const t = (player.obj.position + player.begin) * 0.001;
       const hr =  t / 3600 >> 0;
       const th = t % 3600;
       const min = th / 60 >> 0;
@@ -27,7 +27,7 @@ export default class Duration extends React.Component {
 
     return (
       <div className={styles.duration} onClick={onDurationClicked}>
-        <div style={percent} className={styles.elapsed}>
+        <div style={percent} className={styles.elapsed} data-elapsed>
            <div className={styles.time}>
             {player.percent ? this.makeTime() : ''}
            </div>

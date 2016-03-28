@@ -11,10 +11,11 @@ export function playSong(track) {
 }
 
 function receiveStreamUrl(streamUrl, begin) {
-  const url = begin ? `${streamUrl}&begin=${begin}` : streamUrl;
+  const url = begin ? streamUrl.replace(/begin\=\d+/, 'begin=' + begin) : streamUrl;
   return {
     type: RECEIVE_STREAM_URL,
-    streamUrl: url
+    streamUrl: url,
+    begin: begin || 0
   };
 }
 

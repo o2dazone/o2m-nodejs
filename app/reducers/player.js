@@ -1,13 +1,13 @@
 import * as actionTypes from 'constants';
 
 export default function player(state = { playing: false, shuffle: false }, action) {
-  const { type, track, streamUrl, toggle, percent, obj } = action;
+  const { type, track, streamUrl, toggle, percent, obj, begin } = action;
 
   switch (type) {
   case actionTypes.PLAY_SONG:
     return {...state, track, percent: 0, playing: true};
   case actionTypes.RECEIVE_STREAM_URL:
-    return {...state, streamUrl };
+    return {...state, streamUrl, begin };
   case actionTypes.TOGGLE_PLAY_PAUSE:
     return {...state, playing: toggle };
   case actionTypes.TOGGLE_SHUFFLE:

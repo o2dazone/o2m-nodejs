@@ -9,6 +9,7 @@
     background: black;
     left: 0;
     top: -$progress-bar-height;
+    z-index: 1;
   }
 
   .elapsed {

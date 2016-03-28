@@ -2,7 +2,7 @@ import styles from 'styles/footer.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer } from 'actions/player';
+import { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer, fetchStreamUrl } from 'actions/player';
 import Info from './Info';
 import Player from './Player';
 import Duration from './Duration';
@@ -46,7 +46,7 @@ export default class Footer extends React.Component {
 
   onPercentUpdate() {
     const { updatePercentPlayed, player } = this.props;
-    const percent = Math.floor(player.obj.position / player.track.durationMillis * 100);
+    const percent = Math.floor((player.obj.position + player.begin) / player.track.durationMillis * 100);
 
     if (percent !== player.percent) {
       updatePercentPlayed(percent);
@@ -72,7 +72,14 @@ export default class Footer extends React.Component {
   }
 
   onDurationClicked(e) {
-    console.log(e.clientX / e.target.clientWidth * 100);
+    const { player, fetchStreamUrl, togglePlayPause } = this.props;
+    let target = e.target;
+    if (target.dataset.elapsed) {
+      target = target.parentNode;
+    }
+
+    togglePlayPause(true);
+    fetchStreamUrl(player.track.id, Math.round(e.clientX / target.clientWidth * player.track.durationMillis));
   }
 
   onPreviousTrack() {
@@ -108,4 +115,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer })(Footer);
+export default connect(mapStateToProps, { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer, fetchStreamUrl })(Footer);
