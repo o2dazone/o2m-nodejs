@@ -9,7 +9,7 @@
   "homepage": "",
   "scripts": {
     "test": "",
-    "start": "node app/server/server",
+    "start": "rimraf si && node app/server/server",
     "build": "rimraf dist && set NODE_ENV=production && webpack --config ./webpack.production.config.js --progress --profile --colors",
     "eslint": "eslint .",
     "jscs": "jscs ."
@@ -26,7 +26,7 @@
     "redux-simple-router": "^2.0.4",
     "redux-thunk": "^2.0.1",
     "sass-loader": "^3.2.0",
-    "search-index": "0.7.12",
+    "search-index": "0.7.13",
     "soundmanager2": "^2.97.20150601-a"
   },
   "devDependencies": {

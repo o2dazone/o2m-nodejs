@@ -8,9 +8,10 @@ const fs = require('fs');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
+const songLimit = 10000;
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
-const apiOpts = isDeveloping ? { 'limit': 5 } : {};
+const apiOpts = isDeveloping ? { 'limit': 100 } : { 'limit': songLimit };
 const config = isDeveloping ? require('../../webpack.config.js') : require('../../webpack.production.config.js');
 const app = express();
 
@@ -48,7 +49,11 @@ function indexTracks(tracks) {
   const opts = {
     deletable: false,
     fieldedSearch: false,
-    fieldsToStore: ['artist', 'title', 'album']
+    fieldOptions: [{
+      fieldName: 'lastModifiedTimestamp',
+      sortable: true
+    }],
+    fieldsToStore: ['artist', 'title', 'album', 'id', 'durationMillis', 'albumArtRef', 'genre', 'lastModifiedTimestamp']
   };
 
   searchIndex({opts}, function(err, sind) {
@@ -100,7 +105,14 @@ app.get('/stream', function(req, res) {
 // search
 app.get('/search', function(req, res) {
   const query = req.query.str.split(' ');
-  searchService.search({'query': {'*': query}, 'pageSize': 250}, function(err, results) {
+  const opts = {
+    'query': {'*': query},
+    'pageSize': songLimit,
+    'facets': {
+      lastModifiedTimestamp: { sort: 'valueDesc'}
+    }
+  };
+  searchService.search(opts, function(err, results) {
     if (err) console.log('Error executing search', err);
 
     const hits = [];
