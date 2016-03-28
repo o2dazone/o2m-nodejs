@@ -33,10 +33,8 @@ export default class Header extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    fetchSearchResults: state.fetchSearchResults
-  };
+function mapStateToProps() {
+  return { };
 }
 
 export default connect(mapStateToProps, { fetchSearchResults })(Header);

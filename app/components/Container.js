@@ -9,18 +9,12 @@ import Results from './Results';
 export default class Container extends React.Component {
   constructor(props) {
     super(props);
-    this.onShowResults = this.onShowResults.bind(this);
-  }
-
-  onShowResults(e) {
-    e.preventDefault();
-    this.props.toggleResults(true);
   }
 
   render() {
     return (
       <div className={styles.container}>
-        <Results onShowResults={this.onShowResults} />
+        <Results />
       </div>
     );
   }

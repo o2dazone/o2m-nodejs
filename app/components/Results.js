@@ -2,7 +2,6 @@ import styles from 'styles/results.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { playSong } from 'actions/player';
 import { getTrackById } from 'helpers';
 import Songs from './Songs';
@@ -16,8 +15,9 @@ export default class Results extends React.Component {
   }
 
   onPlaySong(e) {
-    const track = getTrackById(e.target.parentNode.dataset.trackid, this.props.search.results);
-    this.props.playSong(track);
+    const { playSong, search } = this.props;
+    const track = getTrackById(e.target.parentNode.dataset.trackid, search.results);
+    playSong(track);
   }
 
   makeTerm(query) {
@@ -28,7 +28,6 @@ export default class Results extends React.Component {
 
   render() {
     const { search, player } = this.props;
-
     return (
       <div className={styles.results}>
 
@@ -47,7 +46,8 @@ export default class Results extends React.Component {
 function mapStateToProps(state) {
   return {
     search: state.search,
-    player: state.player
+    player: state.player,
+    location: state.location
   };
 }
 
