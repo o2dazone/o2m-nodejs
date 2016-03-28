@@ -11,7 +11,7 @@ const webpackHotMiddleware = require('webpack-hot-middleware');
 const songLimit = 10000;
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
-const apiOpts = isDeveloping ? { 'limit': 100 } : { 'limit': songLimit };
+const apiOpts = isDeveloping ? { 'limit': 1000 } : { 'limit': songLimit };
 const config = isDeveloping ? require('../../webpack.config.js') : require('../../webpack.production.config.js');
 const app = express();
 
@@ -50,10 +50,10 @@ function indexTracks(tracks) {
     deletable: false,
     fieldedSearch: false,
     fieldOptions: [{
-      fieldName: 'lastModifiedTimestamp',
+      fieldName: 'creationTimestamp',
       sortable: true
     }],
-    fieldsToStore: ['artist', 'title', 'album', 'id', 'durationMillis', 'albumArtRef', 'genre', 'lastModifiedTimestamp']
+    fieldsToStore: ['artist', 'title', 'album', 'id', 'durationMillis', 'albumArtRef', 'genre', 'creationTimestamp']
   };
 
   searchIndex({opts}, function(err, sind) {
@@ -108,9 +108,7 @@ app.get('/search', function(req, res) {
   const opts = {
     'query': {'*': query},
     'pageSize': songLimit,
-    'facets': {
-      lastModifiedTimestamp: { sort: 'valueDesc'}
-    }
+    'sort': ['creationTimestamp', 'desc']
   };
   searchService.search(opts, function(err, results) {
     if (err) console.log('Error executing search', err);
