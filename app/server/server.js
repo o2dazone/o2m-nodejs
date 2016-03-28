@@ -101,7 +101,8 @@ app.get('/stream', function(req, res) {
 
 // search
 app.get('/search', function(req, res) {
-  searchService.search({'query': {'*': [req.query.str]}}, function(err, results) {
+  const query = req.query.str.split(' ');
+  searchService.search({'query': {'*': query}}, function(err, results) {
     if (err) {
       console.log('Error executing search', err);
     }
