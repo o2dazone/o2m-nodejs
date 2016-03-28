@@ -47,8 +47,7 @@ module.exports = {
     loaders: [
       { test: /\.js?$/, exclude: /node_modules/, loader: 'babel', query: { "presets": ["es2015", "stage-0", "react"]}},
       { test: /\.json?$/, loader: 'json' },
-      { test: /\.scss$/, loader: "style!css!sass?outputStyle=expanded&includePaths[]=" + path.resolve(__dirname, "./node_modules/compass-mixins/lib")},
-      { test: /\.css$/, loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')},
+      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?localIdentName=[hash:base64:5]&sourceMap!sass-loader?sourceMap&outputStyle=expanded')},
       { test: /\.(woff|woff2|ttf|eot|svg|gif|png|jpge?g)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?name=[name].[hash].[ext]'}
     ]
   },

@@ -8,4 +8,4 @@ Install Atom
 `npm i && npm start`
 
 ## prod startup
-`NODE_ENV=production PORT=80 npm start`
+`npm run build && NODE_ENV=production PORT=8480 npm start`

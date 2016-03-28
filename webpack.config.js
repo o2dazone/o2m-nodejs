@@ -2,7 +2,8 @@
 
 var path = require('path');
 var webpack = require('webpack');
-var srcPath = path.join(__dirname, '/../app');
+var srcPath = path.join(__dirname, '/app');
+
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
@@ -38,8 +39,7 @@ module.exports = {
     loaders: [
       { test: /\.js?$/, exclude: /node_modules/, loader: 'babel', query: {"presets": ["react", "es2015", "stage-0", "react-hmre"]}},
       { test: /\.json?$/, loader: 'json'},
-      { test: /\.scss$/, loader: "style!css!sass?outputStyle=expanded&includePaths[]=" + path.resolve(__dirname, "./node_modules/compass-mixins/lib")},
-      { test: /\.css$/,  loader: 'style!css' },
+      { test: /\.scss$/, loaders: ['style-loader','css-loader?localIdentName=[local]___[hash:base64:5]','sass-loader?outputStyle=expanded']},
       { test: /\.(woff|woff2|ttf|eot|svg|gif|png|jpge?g)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?name=[name].[hash].[ext]'}
     ]
   }

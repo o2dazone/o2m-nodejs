@@ -4,19 +4,19 @@
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
+const fs = require('fs');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const config = require('../../webpack.config.js');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
+const apiOpts = isDeveloping ? { 'limit': 5 } : {};
+const config = isDeveloping ? require('../../webpack.config.js') : require('../../webpack.production.config.js');
 const app = express();
 
 const pm = new (require('playmusic'));
-const fs = require('fs');
 const searchIndex = require('search-index');
 
-const appConfig = JSON.parse(fs.readFileSync('./app/server/config.json'));
 const credentials = JSON.parse(fs.readFileSync('./app/server/credentials.json'));
 
 if (isDeveloping) {
@@ -36,10 +36,6 @@ if (isDeveloping) {
 
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
-  // app.get('*', function response(req, res) {
-  //   res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'dist/index.html')));
-  //   res.end();
-  // });
 } else {
   app.use(express.static('./dist'));
   app.get('/', function response(req, res) {
@@ -49,24 +45,26 @@ if (isDeveloping) {
 
 let searchService;
 function indexTracks(tracks) {
-  searchIndex({}, function(err, sind) {
+  const opts = {
+    deletable: false,
+    fieldedSearch: false,
+    fieldsToStore: ['artist', 'title', 'album']
+  };
+
+  searchIndex({opts}, function(err, sind) {
     if (err) {
       console.log('Error creating searchService', err);
     } else {
       searchService = sind;
       searchService.add(tracks, {}, function(err) {
-        if (err) {
-          console.log('Error indexing tracks', err);
-        } else {
-          console.log('All tracks indexed');
-        }
+        err ? console.log('Error indexing tracks', err) : console.log('All tracks indexed');
       });
     }
   });
 }
 
 function getTracks(callback) {
-  pm.getAllTracks({'limit': appConfig.allTracks.limit}, function(err, library) {
+  pm.getAllTracks(apiOpts, function(err, library) {
     indexTracks(library.data.items);
 
     if (callback) callback();
@@ -102,10 +100,9 @@ app.get('/stream', function(req, res) {
 // search
 app.get('/search', function(req, res) {
   const query = req.query.str.split(' ');
-  searchService.search({'query': {'*': query}}, function(err, results) {
-    if (err) {
-      console.log('Error executing search', err);
-    }
+  searchService.search({'query': {'*': query}, 'pageSize': 250}, function(err, results) {
+    if (err) console.log('Error executing search', err);
+
     const hits = [];
     results.hits.forEach(function(hit) {
       hits.push(hit.document);
@@ -115,9 +112,6 @@ app.get('/search', function(req, res) {
 });
 
 app.listen(port, '0.0.0.0', function onStart(err) {
-  if (err) {
-    console.log(err);
-  }
-
+  if (err) console.log(err);
   console.info('==> Server started on port %s. Open up http://0.0.0.0:%s/ in your browser.', port, port);
 });
