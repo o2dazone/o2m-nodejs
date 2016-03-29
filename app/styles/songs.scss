@@ -10,6 +10,60 @@
     margin-bottom: $progress-bar-height;
     justify-content: flex-start;
 
+    // individual song
+    > div {
+      min-height: $song-height;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+
+      &:hover {
+        cursor: pointer;
+        background: $color-highlight;
+
+        :global(.albumart):before {
+          @extend %spriteProperties;
+          background-size: 200px;
+          content: " ";
+          background-position: -65px -126px;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      &.playing {
+        :global(.albumart):before {
+          @extend %eq;
+          content: " ";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      > span:nth-of-type(2) {
+        @extend %trackInfoSizing;
+        width: 35%;
+        text-indent: 8px;
+      }
+
+      > span:nth-of-type(3) {
+        @extend %trackInfoSizing;
+        width: 25%;
+      }
+
+      > span:last-child {
+        @extend %trackInfoSizing;
+        width: 25%;
+      }
+    }
+
     &::-webkit-scrollbar {
       width: 10px;
     }
@@ -22,43 +76,6 @@
   .playing {
     background: $color-highlight;
     color: lighten($color-primary, 20%);
-  }
-
-  .song {
-    min-height: $song-height;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-
-    &:hover {
-      cursor: pointer;
-      background: $color-highlight;
-
-      :global(.albumart):before {
-        @extend %spriteProperties;
-        background-size: 200px;
-        content: " ";
-        background-position: -65px -126px;
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-    }
-
-    &.playing {
-      :global(.albumart):before {
-        @extend %eq;
-        content: " ";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-      }
-    }
   }
 
   %trackInfoSizing {
@@ -81,22 +98,6 @@
     position: relative;
   }
 
-  .name {
-    @extend %trackInfoSizing;
-    width: 30%;
-    text-indent: 8px;
-  }
-
-  .artist {
-    @extend %trackInfoSizing;
-    width: 20%;
-  }
-
-  .album {
-    @extend %trackInfoSizing;
-    width: 35%;
-  }
-
 
   @media all and (max-width: 640px) {
     %trackInfoSizing {
@@ -108,7 +109,7 @@
       min-height: 20px;
     }
 
-    .song {
+    .songs > div {
       min-height: 50px;
       font-size: 15px;
       margin-bottom: 0px;

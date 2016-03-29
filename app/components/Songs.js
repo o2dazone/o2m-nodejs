@@ -8,11 +8,11 @@ const Songs = ({results, playingTrack, onClickTrack, onScrollSongs }) => {
     <div className={styles.songs} onScroll={onScrollSongs}>
       {results.map((track) => {
         return (
-          <div className={playingTrack === track.id ? `${styles.song} ${styles.playing}` : styles.song} onClick={onClickTrack} key={track.id} data-trackid={track.id}>
+          <div className={playingTrack === track.id ? styles.playing : null} onClick={onClickTrack} key={track.id} data-trackid={track.id}>
             <AlbumArt art={track.albumArtRef ? track.albumArtRef[0].url : null} />
-            <span className={styles.name}>{track.title}</span>
-            <span className={styles.artist}>{track.artist}</span>
-            <span className={styles.album}>{track.album}</span>
+            <span>{track.title}</span>
+            <span>{track.artist}</span>
+            <span>{track.album}</span>
           </div>
         );
       })}
