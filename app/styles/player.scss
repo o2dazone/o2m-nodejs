@@ -52,7 +52,15 @@
     background-position: -86px -170px;
   }
 
-  [active] {
-    background-color: $color-primary;
+  @media all and (max-width: 640px) {
+    .player {
+      right: auto;
+      position: static;
+      flex-direction: column;
+      justify-content: center;
+      > * {
+        float: none;
+      }
+    }
   }
 }

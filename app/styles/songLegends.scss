@@ -45,4 +45,10 @@
     @extend %legendSizing;
     width: 35%;
   }
+
+  @media all and (max-width: 640px) {
+    .songLegends {
+      display: none;
+    }
+  }
 }

@@ -33,4 +33,10 @@
     font-size: 16px;
     color: $color-leland;
   }
+
+  @media all and (max-width: 640px) {
+    .info {
+      display: none;
+    }
+  }
 }

@@ -41,4 +41,10 @@
     text-overflow: ellipsis;
     color: $color-primary;
   }
+
+  @media all and (max-width: 640px) {
+    .head {
+      display: none;
+    }
+  }
 }

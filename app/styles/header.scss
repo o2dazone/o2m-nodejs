@@ -42,4 +42,10 @@
       }
     }
   }
+
+  @media all and (max-width: 640px) {
+    .header h1 {
+      display: none;
+    }
+  }
 }

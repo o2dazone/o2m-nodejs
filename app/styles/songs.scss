@@ -21,6 +21,7 @@
 
   .playing {
     background: $color-highlight;
+    color: lighten($color-primary, 20%);
   }
 
   .song {
@@ -94,6 +95,43 @@
   .album {
     @extend %trackInfoSizing;
     width: 35%;
+  }
+
+
+  @media all and (max-width: 640px) {
+    %trackInfoSizing {
+      flex: 1 0 auto;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      line-height: 20px;
+      min-height: 20px;
+    }
+
+    .song {
+      min-height: 50px;
+      font-size: 15px;
+      margin-bottom: 0px;
+    }
+
+    .name {
+      width: 80%;
+      margin-top: -22px;
+    }
+
+    .artist {
+      width: 100%;
+      text-indent: 42px;
+      margin-top: -30px;
+    }
+
+    :global(.albumart) {
+      // display: none;
+    }
+
+    .album {
+      display: none;
+    }
   }
 }
 
