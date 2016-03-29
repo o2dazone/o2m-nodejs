@@ -47,39 +47,37 @@ if (isDeveloping) {
 
 let searchService;
 function indexTracks(tracks) {
-  const opts = {
-    deletable: false,
-    fieldedSearch: false,
-    fieldOptions: [{
-      fieldName: 'creationTimestamp',
-      sortable: true
-    }]
-  };
-
-  searchIndex({opts}, function(err, sind) {
-    if (err) {
-      console.log('Error creating searchService', err);
-    } else {
-      searchService = sind;
-      searchService.add(tracks, {}, function(err) {
-        err ? console.log('Error indexing tracks', err) : console.log('All tracks indexed');
-      });
-    }
+  searchService.add(tracks, {}, function(err) {
+    err ? console.log('Error indexing tracks', err) : console.log('All tracks indexed');
   });
 }
 
 function getTracks(callback) {
   pm.getAllTracks(apiOpts, function(err, library) {
+    if (err) console.log(err);
+
     indexTracks(library.data.items);
 
     if (callback) callback();
   });
 }
 
+function initializeSearch() {
+  searchIndex({}, function(err, sind) {
+    if (err) {
+      console.log('Error creating searchService', err);
+    } else {
+      console.log('!!!! Search service initialized !!!!');
+      searchService = sind;
+    }
+  });
+}
+
 // app initialization
 pm.init({email: credentials.email, password: credentials.password}, function(err) {
   if (err) console.error(err);
-  getTracks();
+
+  initializeSearch();
 });
 
 // main page
@@ -111,6 +109,7 @@ app.get('/search', function(req, res) {
     'pageSize': resultsPerPage,
     'sort': ['creationTimestamp', 'desc']
   };
+
   searchService.search(opts, function(err, results) {
     if (err) console.log('Error executing search', err);
 
