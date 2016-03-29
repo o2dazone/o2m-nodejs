@@ -9,9 +9,10 @@ const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const songLimit = 10000;
+const pageSize = 50;
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
-const apiOpts = isDeveloping ? { 'limit': 100 } : { 'limit': songLimit };
+const apiOpts = isDeveloping ? { 'limit': 120 } : { 'limit': songLimit };
 const config = isDeveloping ? require('../../webpack.config.js') : require('../../webpack.production.config.js');
 const app = express();
 
@@ -104,9 +105,10 @@ app.get('/stream', function(req, res) {
 // search
 app.get('/search', function(req, res) {
   const query = req.query.str.split(' ');
+  const resultsPerPage = req.query.page * pageSize;
   const opts = {
     'query': {'*': query},
-    'pageSize': songLimit,
+    'pageSize': resultsPerPage,
     'sort': ['creationTimestamp', 'desc']
   };
   searchService.search(opts, function(err, results) {

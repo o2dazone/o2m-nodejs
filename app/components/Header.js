@@ -11,23 +11,30 @@ export default class Header extends React.Component {
     this.onSearch = this.onSearch.bind(this);
   }
 
+  componentDidMount() {
+    const { query, fetchSearchResults } = this.props;
+    fetchSearchResults(query);
+  }
+
   onSearch(e) {
     // if the enter key was pressed...
     if (e.keyCode === 13) {
       e.preventDefault();
-      hashHistory.replace(`search=${e.target.value}`);
-      this.props.fetchSearchResults(e.target.value);
+      const query = e.target.value;
+      hashHistory.replace(`search=${query}`);
+      this.props.fetchSearchResults(query);
     }
   }
 
   render() {
+    const { query } = this.props;
     return (
       <div className={styles.header}>
         <h1>o2mdb</h1>
         <form action="/" method="get">
           <fieldset>
             <label>Search</label>
-            <input type="text" placeholder="Search for songs" autoComplete="off" onKeyDown={this.onSearch} />
+            <input type="text" placeholder="Search for songs" autoComplete="off" onKeyDown={this.onSearch} defaultValue={query ? query : ''} />
           </fieldset>
         </form>
       </div>
