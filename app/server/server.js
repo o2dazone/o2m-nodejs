@@ -78,6 +78,7 @@ pm.init({email: credentials.email, password: credentials.password}, function(err
   if (err) console.error(err);
 
   initializeSearch();
+  getTracks();
 });
 
 // main page
@@ -88,7 +89,7 @@ app.get('/', function(req, res) {
 // re-index all results
 app.get('/index-all', function(req, res) {
   getTracks(function() {
-    res.send('Re-indexed all tracks');
+    res.send('Indexing new tracks, they will appear in about 2 minutes...');
   });
 });
 
