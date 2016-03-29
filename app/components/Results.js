@@ -39,9 +39,8 @@ export default class Results extends React.Component {
   }
 
   onScrollSongs(e) {
-    const self = this;
-
     if (!self.scrollTimeout) {
+      const self = this;
       const { search, fetchSearchResults } = this.props;
       const srcEle = e.nativeEvent.srcElement;
       // firing scroll event
@@ -53,8 +52,19 @@ export default class Results extends React.Component {
           // it's not time to load more results, clear the timeout
           self.scrollTimeout = null;
         }
-      }, 1000);
+      }, 500);
     }
+  }
+
+  makeNoResultsHeader() {
+    const { search } = this.props;
+    return <span>No results for {this.makeTerm(search.query)}</span>;
+  }
+
+  makeResultsHeader() {
+    const { search } = this.props;
+    const results = search.results;
+    return <span>You found {results.length}{results.length === (search.page * 50) ? '+' : ''} results for {this.makeTerm(search.query)}</span>;
   }
 
   render() {
@@ -63,8 +73,8 @@ export default class Results extends React.Component {
       <div className={styles.results}>
 
         <div className={styles.head}>
-          { search.hasResults ? <span>You found {search.results.length} results for {this.makeTerm(search.query)}</span> : '' }
-          { search.query && !search.hasResults ? <span>No results for {this.makeTerm(search.query)}</span> : '' }
+          { search.hasResults ? this.makeResultsHeader() : '' }
+          { search.query && !search.hasResults ? this.makeNoResultsHeader() : '' }
         </div>
 
         { search.hasResults ? <SongLegends /> : ''}
