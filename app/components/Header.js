@@ -20,6 +20,7 @@ export default class Header extends React.Component {
     // if the enter key was pressed...
     if (e.keyCode === 13) {
       e.preventDefault();
+      e.target.blur();
       const query = e.target.value;
       hashHistory.replace(`search=${query}`);
       this.props.fetchSearchResults(query);
