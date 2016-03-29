@@ -21,10 +21,12 @@ export default class Results extends React.Component {
     // set scrollTimeout to false when new results come in
     if (nextState.search.results && results.length !== nextState.search.results.length) {
       this.scrollTimeout = null;
+      this.fetching = null;
     }
   }
 
   static scrollTimeout = null;
+  static fetching = null;
 
   onPlaySong(e) {
     const { playSong, search } = this.props;
@@ -47,7 +49,10 @@ export default class Results extends React.Component {
       self.scrollTimeout = setTimeout(function() {
         // its time to load more results
         if (srcEle.scrollTop + srcEle.clientHeight > srcEle.scrollHeight - 400) {
-          fetchSearchResults(search.query, search.page + 1);
+          if (!self.fetching) {
+            fetchSearchResults(search.query, search.page + 1);
+            self.fetching = true;
+          }
         } else {
           // it's not time to load more results, clear the timeout
           self.scrollTimeout = null;
