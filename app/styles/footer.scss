@@ -9,4 +9,10 @@
     align-items: center;
     flex: 0 0;
   }
+
+  @media all and (max-width: 640px) {
+    .footer {
+      justify-content: center;
+    }
+  }
 }

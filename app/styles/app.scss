@@ -50,4 +50,10 @@ a {
     min-width: 640px;
     overflow: hidden;
   }
+
+  @media all and (max-width: 640px) {
+    .wrap {
+      min-width: auto;
+    }
+  }
 }
