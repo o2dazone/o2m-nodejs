@@ -56,6 +56,7 @@ function getTracks(callback) {
   pm.getAllTracks(apiOpts, function(err, library) {
     if (err) console.log(err);
 
+    console.log('indexing tracks...(this will take a while)');
     indexTracks(library.data.items);
 
     if (callback) callback();
