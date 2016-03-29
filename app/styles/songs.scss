@@ -47,12 +47,14 @@
         }
       }
 
+      // title
       > span:nth-of-type(2) {
         @extend %trackInfoSizing;
         width: 35%;
         text-indent: 8px;
       }
 
+      // artist
       > span:nth-of-type(3) {
         @extend %trackInfoSizing;
         width: 25%;
@@ -113,25 +115,24 @@
       min-height: 50px;
       font-size: 15px;
       margin-bottom: 0px;
-    }
 
-    .name {
-      width: 80%;
-      margin-top: -22px;
-    }
 
-    .artist {
-      width: 100%;
-      text-indent: 42px;
-      margin-top: -30px;
-    }
+      // title
+      > span:nth-of-type(2) {
+        width: 80%;
+        margin-top: -22px;
+      }
 
-    :global(.albumart) {
-      // display: none;
-    }
+      // artist
+      > span:nth-of-type(3) {
+        width: 100%;
+        text-indent: 42px;
+        margin-top: -30px;
+      }
 
-    .album {
-      display: none;
+      > span:last-child {
+        display: none;
+      }
     }
   }
 }
