@@ -2,6 +2,7 @@ import styles from 'styles/header.scss';
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { hashHistory } from 'react-router';
 import { fetchSearchResults } from 'actions/search';
 
 export default class Header extends React.Component {
@@ -14,6 +15,7 @@ export default class Header extends React.Component {
     // if the enter key was pressed...
     if (e.keyCode === 13) {
       e.preventDefault();
+      hashHistory.replace(`search=${e.target.value}`);
       this.props.fetchSearchResults(e.target.value);
     }
   }

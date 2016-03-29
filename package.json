@@ -9,8 +9,8 @@
   "homepage": "",
   "scripts": {
     "test": "",
-    "start": "node app/server/server",
-    "build": "rimraf dist && set NODE_ENV=production && webpack --config ./webpack.production.config.js --progress --profile --colors",
+    "start": "rimraf si && node app/server/server",
+    "build": "rimraf dist && rimraf si && set NODE_ENV=production && webpack --config ./webpack.production.config.js --progress --profile --colors",
     "eslint": "eslint .",
     "jscs": "jscs ."
   },

@@ -2,7 +2,7 @@
 
 var path = require('path');
 var webpack = require('webpack');
-var srcPath = path.join(__dirname, '/../app');
+var srcPath = path.join(__dirname, '/app');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var StatsPlugin = require('stats-webpack-plugin');
