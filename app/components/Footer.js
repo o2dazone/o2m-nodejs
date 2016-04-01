@@ -2,6 +2,7 @@ import styles from 'styles/footer.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import throttle from 'lodash.throttle';
 import { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer, fetchStreamUrl } from 'actions/player';
 import Info from './Info';
 import Player from './Player';
@@ -13,7 +14,7 @@ class Footer extends Component {
     this.onTogglePlayPause = this.onTogglePlayPause.bind(this);
     this.onToggleShuffle = this.onToggleShuffle.bind(this);
     this.onNextTrack = this.onNextTrack.bind(this);
-    this.onPercentUpdate = this.onPercentUpdate.bind(this);
+    this.onPercentUpdate = throttle(this.onPercentUpdate.bind(this), 1000);
     this.onPreviousTrack = this.onPreviousTrack.bind(this);
     this.onSoundCreated = this.onSoundCreated.bind(this);
     this.onDurationClicked = this.onDurationClicked.bind(this);
@@ -46,11 +47,7 @@ class Footer extends Component {
 
   onPercentUpdate() {
     const { updatePercentPlayed, player } = this.props;
-    const percent = Math.floor((player.obj.position + player.begin) / player.track.durationMillis * 100);
-
-    if (percent !== player.percent) {
-      updatePercentPlayed(percent);
-    }
+    updatePercentPlayed((player.obj.position + player.begin) / player.track.durationMillis * 100);
   }
 
   onSoundCreated(obj) {

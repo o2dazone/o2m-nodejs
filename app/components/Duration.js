@@ -1,6 +1,7 @@
+import styles from 'styles/duration.scss';
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import styles from 'styles/duration.scss';
 
 class Duration extends Component {
   makeTime() {
@@ -11,7 +12,7 @@ class Duration extends Component {
       const min = (t % 3600) / 60 >> 0;
       const sec = (t % 60) >> 0;
 
-      return ((hr ? hr + ':' : '') + (min ? min + ':' : '') + (sec < 10 ? '0' : '') + sec);
+      return ((hr ? hr + ':' : '') + (min ? min + ':' : '0:') + (sec < 10 ? '0' : '') + sec);
     }
   }
 
