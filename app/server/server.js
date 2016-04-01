@@ -8,12 +8,11 @@ const fs = require('fs');
 const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const songLimit = 10000;
 const pageSize = 50;
 const isDeveloping = process.env.NODE_ENV !== 'production';
-const port = isDeveloping ? 3000 : process.env.PORT;
-const apiOpts = isDeveloping ? { 'limit': 120 } : { 'limit': songLimit };
+const cfg = isDeveloping ? require('./dev.json') : require('./prod.json');
 const config = isDeveloping ? require('../../webpack.config.js') : require('../../webpack.production.config.js');
+const port = process.env.PORT || cfg.port;
 const app = express();
 
 const pm = new (require('playmusic'));
@@ -53,7 +52,7 @@ function indexTracks(tracks) {
 }
 
 function getTracks(callback) {
-  pm.getAllTracks(apiOpts, function(err, library) {
+  pm.getAllTracks(cfg.apiOpts, function(err, library) {
     if (err) console.log(err);
 
     console.log('indexing tracks...(this will take a while)');
