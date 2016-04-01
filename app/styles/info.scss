@@ -17,9 +17,8 @@
   }
 
   .name, .artistalbum {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    @extend %ellipsisOverflow;
+    width: 75%;
     display: block;
   }
 

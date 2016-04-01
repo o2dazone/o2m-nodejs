@@ -1,15 +1,11 @@
 import styles from 'styles/player.scss';
 
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchStreamUrl } from 'actions/player';
 import AudioModule from './AudioModule';
 
-export default class Player extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+class Player extends Component {
   componentWillMount() {
     const { fetchStreamUrl, player } = this.props;
     // make an initial fetch on mount

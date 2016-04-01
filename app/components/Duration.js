@@ -1,23 +1,17 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styles from 'styles/duration.scss';
 
-export default class Duration extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+class Duration extends Component {
   makeTime() {
     const { player } = this.props;
     if (player.obj) {
       const t = (player.obj.position + player.begin) * 0.001;
       const hr =  t / 3600 >> 0;
-      const th = t % 3600;
-      const min = th / 60 >> 0;
-      const tm = t % 60;
-      const sec = tm >> 0;
+      const min = (t % 3600) / 60 >> 0;
+      const sec = (t % 60) >> 0;
 
-      return ((hr > 0 ? hr + ':' : '') + (min > 0 ? (hr > 0 && min < 10 ? '0' : '') + min + ':' : '0:') + (sec < 10 ? '0' : '') + sec);
+      return ((hr ? hr + ':' : '') + (min ? min + ':' : '') + (sec < 10 ? '0' : '') + sec);
     }
   }
 
@@ -28,7 +22,7 @@ export default class Duration extends React.Component {
     return (
       <div className={styles.duration} onClick={onDurationClicked}>
         <div style={percent} className={styles.elapsed} data-elapsed>
-           <div className={styles.time}>
+           <div className={styles.time} data-timer>
             {player.percent ? this.makeTime() : ''}
            </div>
         </div>
@@ -44,4 +38,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { })(Duration);
+export default connect(mapStateToProps)(Duration);

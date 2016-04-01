@@ -1,11 +1,11 @@
 import styles from 'styles/header.scss';
 
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import { fetchSearchResults } from 'actions/search';
 
-export default class Header extends React.Component {
+class Header extends Component {
   constructor(props) {
     super(props);
     this.onSearch = this.onSearch.bind(this);

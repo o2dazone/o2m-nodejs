@@ -1,6 +1,6 @@
 import styles from 'styles/results.scss';
 
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { playSong } from 'actions/player';
 import { fetchSearchResults } from 'actions/search';
@@ -8,11 +8,10 @@ import { getTrackById } from 'helpers';
 import Songs from './Songs';
 import SongLegends from './SongLegends';
 
-export default class Results extends React.Component {
+class Results extends Component {
   constructor(props) {
     super(props);
     this.onPlaySong = this.onPlaySong.bind(this);
-    this.makeTerm = this.makeTerm.bind(this);
     this.onScrollSongs = this.onScrollSongs.bind(this);
   }
 
@@ -32,12 +31,6 @@ export default class Results extends React.Component {
     const { playSong, search } = this.props;
     const track = getTrackById(e.target.parentNode.dataset.trackid, search.results);
     playSong(track);
-  }
-
-  makeTerm(query) {
-    return (
-      <span className={styles.term}>{query}</span>
-    );
   }
 
   onScrollSongs(e) {
@@ -61,15 +54,26 @@ export default class Results extends React.Component {
     }
   }
 
-  makeNoResultsHeader() {
-    const { search } = this.props;
-    return <span>No results for {this.makeTerm(search.query)}</span>;
-  }
-
   makeResultsHeader() {
     const { search } = this.props;
-    const results = search.results;
-    return <span>You found {results.length}{results.length === (search.page * 50) ? '+' : ''} results for {this.makeTerm(search.query)}</span>;
+
+    if (search.hasResults) {
+      const resultsLength = search.results.length;
+
+      return (
+        <span>You found {resultsLength}{resultsLength === (search.page * 50) ? '+' : ''} results for
+          <span className={styles.term}>{search.query}</span>
+        </span>
+      );
+    }
+
+    if (search.query) {
+      return (
+        <span>No results for
+          <span className={styles.term}>{search.query}</span>
+        </span>
+      );
+    }
   }
 
   render() {
@@ -78,8 +82,7 @@ export default class Results extends React.Component {
       <div className={styles.results}>
 
         <div className={styles.head}>
-          { search.hasResults ? this.makeResultsHeader() : '' }
-          { search.query && !search.hasResults ? this.makeNoResultsHeader() : '' }
+          {this.makeResultsHeader()}
         </div>
 
         { search.hasResults ? <SongLegends /> : ''}

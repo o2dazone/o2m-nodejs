@@ -1,13 +1,13 @@
 import styles from 'styles/footer.scss';
 
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer, fetchStreamUrl } from 'actions/player';
 import Info from './Info';
 import Player from './Player';
 import Duration from './Duration';
 
-export default class Footer extends React.Component {
+class Footer extends Component {
   constructor(props) {
     super(props);
     this.onTogglePlayPause = this.onTogglePlayPause.bind(this);
@@ -74,6 +74,11 @@ export default class Footer extends React.Component {
   onDurationClicked(e) {
     const { player, fetchStreamUrl, togglePlayPause } = this.props;
     let target = e.target;
+
+    if (target.dataset.timer) {
+      target = target.parentNode;
+    }
+
     if (target.dataset.elapsed) {
       target = target.parentNode;
     }
@@ -106,7 +111,6 @@ export default class Footer extends React.Component {
     );
   }
 }
-
 
 function mapStateToProps(state) {
   return {

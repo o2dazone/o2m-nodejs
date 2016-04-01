@@ -44,3 +44,9 @@ $sidebar-menu-height: 36px;
   overflow: hidden;
   display: inline-block;
 }
+
+%ellipsisOverflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

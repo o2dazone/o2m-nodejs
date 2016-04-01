@@ -15,15 +15,13 @@
 
   %legendSizing {
     flex: 1 0 auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     line-height: $song-height;
     min-height: $song-height;
   }
 
   .artSpacer {
     @extend %legendSizing;
+    width: 10px;
   }
 
   .name {

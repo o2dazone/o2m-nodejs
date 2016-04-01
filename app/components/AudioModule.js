@@ -1,12 +1,8 @@
-import React from 'react';
+import { Component } from 'react';
 import { connect } from 'react-redux';
 import { soundManager as sm } from 'soundmanager2';
 
-export default class AudioModule extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+class AudioModule extends Component {
   componentWillMount() {
     const { onNextTrack, onPercentUpdate, onSoundCreated } = this.props;
 
@@ -41,8 +37,4 @@ export default class AudioModule extends React.Component {
   }
 }
 
-function mapStateToProps() {
-  return { };
-}
-
-export default connect(mapStateToProps, { })(AudioModule);
+export default connect()(AudioModule);

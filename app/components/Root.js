@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 
 import styles from 'styles/app.scss';
@@ -7,11 +7,7 @@ import Header from './Header';
 import Container from './Container';
 import Footer from './Footer';
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
+class App extends Component {
   render() {
     const { player, store } = this.props;
 
@@ -37,4 +33,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { })(App);
+export default connect(mapStateToProps)(App);

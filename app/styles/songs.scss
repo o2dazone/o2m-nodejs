@@ -47,21 +47,22 @@
         }
       }
 
+      > span {
+        @extend %ellipsisOverflow;
+        @extend %trackInfoSizing;
+      }
+
       // title
       > span:nth-of-type(2) {
-        @extend %trackInfoSizing;
         width: 35%;
-        text-indent: 8px;
       }
 
       // artist
       > span:nth-of-type(3) {
-        @extend %trackInfoSizing;
         width: 25%;
       }
 
       > span:last-child {
-        @extend %trackInfoSizing;
         width: 25%;
       }
     }
@@ -82,9 +83,7 @@
 
   %trackInfoSizing {
     flex: 1 0 auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    text-indent: 10px;
     line-height: $song-height;
     min-height: $song-height;
   }
@@ -103,10 +102,6 @@
 
   @media all and (max-width: 640px) {
     %trackInfoSizing {
-      flex: 1 0 auto;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
       line-height: 20px;
       min-height: 20px;
     }
