@@ -2,6 +2,7 @@ import styles from 'styles/results.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import throttle from 'lodash.throttle';
 import { playSong } from 'actions/player';
 import { fetchSearchResults } from 'actions/search';
 import { getTrackById } from 'helpers';
@@ -13,19 +14,17 @@ class Results extends Component {
     super(props);
     this.onPlaySong = this.onPlaySong.bind(this);
     this.onScrollSongs = this.onScrollSongs.bind(this);
+    this.loadMoreSongs = throttle(this.loadMoreSongs, 1000);
+    this.fetching = null;
   }
 
   componentDidUpdate(nextState) {
     const { results } = this.props.search;
     // set scrollTimeout to false when new results come in
     if (nextState.search.results && results.length !== nextState.search.results.length) {
-      this.scrollTimeout = null;
       this.fetching = null;
     }
   }
-
-  static scrollTimeout = null;
-  static fetching = null;
 
   onPlaySong(e) {
     const { playSong, search } = this.props;
@@ -33,25 +32,23 @@ class Results extends Component {
     playSong(track);
   }
 
-  onScrollSongs(e) {
-    if (!self.scrollTimeout) {
-      const self = this;
-      const { search, fetchSearchResults } = this.props;
+  loadMoreSongs(e) {
+    if (e) {
       const srcEle = e.nativeEvent.srcElement;
-      // firing scroll event
-      self.scrollTimeout = setTimeout(function() {
-        // its time to load more results
-        if (srcEle.scrollTop + srcEle.clientHeight > srcEle.scrollHeight - 400) {
-          if (!self.fetching) {
-            fetchSearchResults(search.query, search.page + 1);
-            self.fetching = true;
-          }
-        } else {
-          // it's not time to load more results, clear the timeout
-          self.scrollTimeout = null;
+
+      if (srcEle.scrollTop + srcEle.clientHeight > srcEle.scrollHeight - 400) {
+        const { search, fetchSearchResults } = this.props;
+        if (!this.fetching) {
+          fetchSearchResults(search.query, search.page + 1);
+          this.fetching = true;
         }
-      }, 500);
+      }
     }
+  }
+
+  onScrollSongs(e) {
+    e.persist();
+    this.loadMoreSongs(e);
   }
 
   makeResultsHeader() {
