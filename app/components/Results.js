@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import throttle from 'lodash.throttle';
 import { playSong } from 'actions/player';
-import { fetchSearchResults } from 'actions/search';
+import { appendSearchResults } from 'actions/search';
 import { getTrackById } from 'helpers';
 import Songs from './Songs';
 import SongLegends from './SongLegends';
@@ -18,12 +18,9 @@ class Results extends Component {
     this.fetching = null;
   }
 
-  componentDidUpdate(nextState) {
-    const { results } = this.props.search;
-    // set scrollTimeout to false when new results come in
-    if (nextState.search.results && results.length !== nextState.search.results.length) {
-      this.fetching = null;
-    }
+  componentDidUpdate() {
+    // reset fetch event on component update
+    this.fetching = null;
   }
 
   onPlaySong(e) {
@@ -35,11 +32,10 @@ class Results extends Component {
   loadMoreSongs(e) {
     if (e) {
       const srcEle = e.nativeEvent.srcElement;
-
-      if (srcEle.scrollTop + srcEle.clientHeight > srcEle.scrollHeight - 400) {
-        const { search, fetchSearchResults } = this.props;
+      if (srcEle.scrollTop + srcEle.clientHeight > srcEle.scrollHeight - 250) {
+        const { search, appendSearchResults } = this.props;
         if (!this.fetching) {
-          fetchSearchResults(search.query, search.page + 1);
+          appendSearchResults(search.query, search.page + 1);
           this.fetching = true;
         }
       }
@@ -96,4 +92,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { playSong, fetchSearchResults })(Results);
+export default connect(mapStateToProps, { playSong, appendSearchResults })(Results);

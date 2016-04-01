@@ -96,18 +96,22 @@ app.get('/index-all', function(req, res) {
 // get stream url
 app.get('/stream', function(req, res) {
   pm.getStreamUrl(req.query.id, function(err, streamUrl) {
-    if (err) console.error(err);
-    res.json(streamUrl);
+    if (err) {
+      console.error(err);
+    } else {
+      res.json(streamUrl);
+    }
   });
 });
 
 // search
 app.get('/search', function(req, res) {
   const query = req.query.str.split(' ');
-  const resultsPerPage = req.query.page * pageSize;
+  // const resultsPerPage = req.query.page * pageSize;
   const opts = {
     'query': {'*': query},
-    'pageSize': resultsPerPage,
+    'offset': (req.query.page - 1) * pageSize,
+    'pageSize': pageSize,
     'sort': ['creationTimestamp', 'desc']
   };
 
