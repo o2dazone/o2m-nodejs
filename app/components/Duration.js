@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 
 class Duration extends Component {
   makeTime() {
-    const { player } = this.props;
-    if (player.obj) {
-      const t = (player.obj.position + player.begin) * 0.001;
+    const { player, audioModule } = this.props;
+    if (audioModule) {
+      const t = (audioModule.position + player.begin) * 0.001;
       const hr =  t / 3600 >> 0;
       const min = (t % 3600) / 60 >> 0;
       const sec = (t % 60) >> 0;

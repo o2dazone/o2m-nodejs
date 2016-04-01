@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { soundManager as sm } from 'soundmanager2';
-import { TOGGLE_PLAY_PAUSE, TOGGLE_SHUFFLE, PLAY_SONG, RECEIVE_STREAM_URL, UPDATE_PERCENT_PLAYED, ADD_PLAYER } from 'constants';
+import { TOGGLE_PLAY_PAUSE, TOGGLE_SHUFFLE, PLAY_SONG, RECEIVE_STREAM_URL, UPDATE_PERCENT_PLAYED } from 'constants';
 
 
 export function playSong(track) {
@@ -23,13 +23,6 @@ export function togglePlayPause(toggle) {
   return {
     type: TOGGLE_PLAY_PAUSE,
     toggle: toggle
-  };
-}
-
-export function addPlayer(player) {
-  return {
-    type: ADD_PLAYER,
-    obj: player
   };
 }
 

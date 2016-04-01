@@ -18,6 +18,7 @@ class Footer extends Component {
     this.onPreviousTrack = this.onPreviousTrack.bind(this);
     this.onSoundCreated = this.onSoundCreated.bind(this);
     this.onDurationClicked = this.onDurationClicked.bind(this);
+    this.audioModule = null;
   }
 
   onTogglePlayPause() {
@@ -25,9 +26,9 @@ class Footer extends Component {
     togglePlayPause(player.playing ? false : true );
 
     if (player.playing) {
-      player.obj.pause();
+      this.audioModule.pause();
     } else {
-      player.obj.play();
+      this.audioModule.play();
     }
   }
 
@@ -47,11 +48,11 @@ class Footer extends Component {
 
   onPercentUpdate() {
     const { updatePercentPlayed, player } = this.props;
-    updatePercentPlayed((player.obj.position + player.begin) / player.track.durationMillis * 100);
+    updatePercentPlayed((this.audioModule.position + player.begin) / player.track.durationMillis * 100);
   }
 
   onSoundCreated(obj) {
-    this.props.addPlayer(obj);
+    this.audioModule = obj;
   }
 
   onNextTrack() {
@@ -101,7 +102,7 @@ class Footer extends Component {
 
     return (
       <div className={styles.footer}>
-        <Duration onDurationClicked={this.onDurationClicked} />
+        <Duration audioModule={this.audioModule} onDurationClicked={this.onDurationClicked} />
         <Info track={player.track} />
         <Player player={player} onSoundCreated={this.onSoundCreated} onNextTrack={this.onNextTrack} onPercentUpdate={this.onPercentUpdate} onPreviousTrack={this.onPreviousTrack} onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} />
       </div>
