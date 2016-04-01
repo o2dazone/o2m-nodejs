@@ -106,8 +106,8 @@ app.get('/stream', function(req, res) {
 
 // search
 app.get('/search', function(req, res) {
-  const query = req.query.str.split(' ');
-  // const resultsPerPage = req.query.page * pageSize;
+  const query = req.query.str.split(/\-|\s/);
+
   const opts = {
     'query': {'*': query},
     'offset': (req.query.page - 1) * pageSize,
