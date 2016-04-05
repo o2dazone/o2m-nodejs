@@ -84,7 +84,6 @@ pm.init({email: credentials.email, password: credentials.password}, function(err
   if (err) console.error(err);
 
   initializeSearch();
-  getTracks();
 });
 
 // main page
