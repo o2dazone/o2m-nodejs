@@ -26,10 +26,12 @@ if (isDeveloping) {
     publicPath: config.output.publicPath,
     contentBase: 'src',
     stats: {
+      version: false,
+      assets: false,
       colors: true,
       hash: false,
-      timings: true,
-      chunks: false,
+      timings: false,
+      chunks: true,
       chunkModules: false,
       modules: false
     }
