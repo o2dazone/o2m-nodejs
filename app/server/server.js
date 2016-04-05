@@ -63,7 +63,13 @@ function getTracks(callback) {
 }
 
 function initializeSearch() {
-  searchIndex({}, function(err, sind) {
+  const opts = {
+    deletable: false,
+    fieldedSearch: false,
+    fieldsToStore: ['title', 'artist', 'album', 'id', 'albumArtRef', 'durationMillis', 'creationTimestamp']
+  };
+
+  searchIndex(opts, function(err, sind) {
     if (err) {
       console.log('Error creating searchService', err);
     } else {
