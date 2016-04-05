@@ -73,7 +73,6 @@ function rmDir(dirPath) {
     for (let i = 0; i < files.length; i++) {
       const filePath = dirPath + '/' + files[i];
       if (fs.statSync(filePath).isFile()) {
-        console.log(filePath);
         fs.unlinkSync(filePath);
       } else {
         rmDir(filePath);
@@ -128,13 +127,17 @@ app.get('/index-all', function(req, res) {
 
 // get stream url
 app.get('/stream', function(req, res) {
-  pm.getStreamUrl(req.query.id, function(err, streamUrl) {
-    if (err) {
-      console.error(err);
-    } else {
-      res.json(streamUrl);
-    }
-  });
+  try {
+    pm.getStreamUrl(req.query.id, function(err, streamUrl) {
+      if (err) {
+        console.error(err);
+      } else {
+        res.json(streamUrl);
+      }
+    });
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 // search
