@@ -62,6 +62,27 @@ function getTracks(callback) {
   });
 }
 
+function rmDir(dirPath) {
+  let files;
+  try { files = fs.readdirSync(dirPath); } catch (e) {
+    console.log(e);
+    return;
+  }
+
+  if (files.length > 0) {
+    for (let i = 0; i < files.length; i++) {
+      const filePath = dirPath + '/' + files[i];
+      if (fs.statSync(filePath).isFile()) {
+        console.log(filePath);
+        fs.unlinkSync(filePath);
+      } else {
+        rmDir(filePath);
+      }
+    }
+  }
+  fs.rmdirSync(dirPath);
+}
+
 function initializeSearch() {
   const opts = {
     deletable: false,
@@ -82,8 +103,9 @@ function initializeSearch() {
 // app initialization
 pm.init({email: credentials.email, password: credentials.password}, function(err) {
   if (err) console.error(err);
-
+  rmDir(path.join(__dirname, '../../si'));
   initializeSearch();
+  getTracks();
 });
 
 // main page
@@ -93,6 +115,12 @@ app.get('/', function(req, res) {
 
 // re-index all results
 app.get('/index-all', function(req, res) {
+  searchService.flush(function(err) {
+    if (err) {
+      console.log(err);
+    }
+  });
+
   getTracks(function() {
     res.send('Indexing new tracks, they will appear in about 2 minutes...');
   });
@@ -123,11 +151,15 @@ app.get('/search', function(req, res) {
   searchService.search(opts, function(err, results) {
     if (err) console.log('Error executing search', err);
 
-    const hits = [];
-    results.hits.forEach(function(hit) {
-      hits.push(hit.document);
-    });
-    res.json(hits);
+    try {
+      const hits = [];
+      results.hits.forEach(function(hit) {
+        hits.push(hit.document);
+      });
+      res.json(hits);
+    } catch (err) {
+      console.log(err);
+    }
   });
 });
 
