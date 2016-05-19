@@ -17,12 +17,14 @@ class Header extends Component {
   }
 
   onSearch(e) {
+    const { player } = this.props;
+
     // if the enter key was pressed...
     if (e.keyCode === 13) {
       e.preventDefault();
       e.target.blur();
       const query = e.target.value;
-      hashHistory.replace(`search=${query}`);
+      hashHistory.replace(`search=${query}&${player.playing ? `track=${player.track.id}` : ''}`);
       this.props.fetchSearchResults(query);
     }
   }
@@ -43,8 +45,10 @@ class Header extends Component {
   }
 }
 
-function mapStateToProps() {
-  return { };
+function mapStateToProps(state) {
+  return {
+    player: state.player
+  };
 }
 
 export default connect(mapStateToProps, { fetchSearchResults })(Header);

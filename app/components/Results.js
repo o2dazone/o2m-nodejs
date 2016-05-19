@@ -3,6 +3,7 @@ import styles from 'styles/results.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import throttle from 'lodash.throttle';
+import { hashHistory } from 'react-router';
 import { playSong } from 'actions/player';
 import { appendSearchResults } from 'actions/search';
 import { getTrackById } from 'helpers';
@@ -25,7 +26,9 @@ class Results extends Component {
 
   onPlaySong(e) {
     const { playSong, search } = this.props;
-    const track = getTrackById(e.target.parentNode.dataset.trackid, search.results);
+    const trackId = e.target.parentNode.dataset.trackid;
+    const track = getTrackById(trackId, search.results);
+    hashHistory.replace(`search=${search.query}&track=${trackId}`);
     playSong(track);
   }
 

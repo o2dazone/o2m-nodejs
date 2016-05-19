@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import { RECEIVE_SEARCH_RESULTS, RECEIVE_APPENDED_SEARCH_RESULTS } from 'constants';
+import { RECEIVE_SEARCH_RESULTS, RECEIVE_APPENDED_SEARCH_RESULTS, PLAY_SONG } from 'constants';
 
 function receiveSearchResults(results, query, page) {
   return {
@@ -7,6 +7,13 @@ function receiveSearchResults(results, query, page) {
     results: results,
     query: query,
     page: page
+  };
+}
+
+function receiveAutoplayTrack(track) {
+  return {
+    type: PLAY_SONG,
+    track: track
   };
 }
 
@@ -27,6 +34,19 @@ export function fetchSearchResults(query, page = 1) {
         .then(response => response.json())
         .then(response => {
           dispatch(receiveSearchResults(response, query, page));
+        });
+    }
+  };
+}
+
+export function fetchAutoplayTrack(trackId) {
+  return function (dispatch) {
+    if (trackId) {
+      const reqUrl = `/search?str=${trackId}&page=1`;
+      return fetch(reqUrl)
+        .then(response => response.json())
+        .then(response => {
+          dispatch(receiveAutoplayTrack(response[0]));
         });
     }
   };
