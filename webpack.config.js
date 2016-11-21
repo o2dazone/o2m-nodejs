@@ -5,9 +5,11 @@ var webpack = require('webpack');
 var srcPath = path.join(__dirname, '/app');
 var HappyPack = require('happypack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 module.exports = {
-  devtool: 'eval-source-map',
+  devtool: 'eval',
+  cache: true,
   entry: [
     'webpack-hot-middleware/client?reload=true',
     path.join(__dirname, 'app/main.js')
@@ -23,11 +25,16 @@ module.exports = {
     modulesDirectories: ['node_modules', 'app']
   },
   plugins: [
+    new webpack.DllReferencePlugin({
+      context: '.',
+      manifest: require('./dist/vendor-manifest.json')
+    }),
     new HtmlWebpackPlugin({
       template: 'app/index.tpl.html',
       inject: 'body',
       filename: 'index.html'
     }),
+    new AddAssetHtmlPlugin({ filepath: require.resolve('./dist/vendor.bundle.js'), includeSourcemap: false }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),

@@ -10,7 +10,9 @@
   "scripts": {
     "test": "",
     "start": "node app/server/server",
+    "postinstall": "npm run build:dll",
     "build": "rimraf dist && set NODE_ENV=production && webpack --config ./webpack.production.config.js --progress --profile --colors",
+    "build:dll": "webpack --config vendor.webpack.config.js",
     "eslint": "eslint ."
   },
   "dependencies": {
@@ -32,6 +34,7 @@
     "soundmanager2": "^2.97.20150601-a"
   },
   "devDependencies": {
+    "add-asset-html-webpack-plugin": "^1.0.2",
     "autoprefixer": "^6.0.3",
     "babel-core": "^6.18.2",
     "babel-eslint": "^7.1.1",
@@ -48,7 +51,7 @@
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.5",
-    "html-webpack-plugin": "^1.6.1",
+    "html-webpack-plugin": "^2.10.0",
     "jsdom": "^6.5.1",
     "json-loader": "^0.5.3",
     "node-sass": "^3.4.2",
