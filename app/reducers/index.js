@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { routeReducer as router } from 'redux-simple-router';
+import { routerReducer } from 'react-router-redux';
 
 import { isResultsVisible } from './results';
 import search from './search';
@@ -9,7 +9,7 @@ const rootReducer = combineReducers({
   isResultsVisible,
   player,
   search,
-  router
+  routerReducer
 });
 
 export default rootReducer;

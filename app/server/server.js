@@ -31,7 +31,7 @@ if (isDeveloping) {
       colors: true,
       hash: false,
       timings: false,
-      chunks: true,
+      chunks: false,
       chunkModules: false,
       modules: false
     }
@@ -47,22 +47,6 @@ if (isDeveloping) {
 }
 
 let searchService;
-function indexTracks(tracks) {
-  searchService.add(tracks, {}, function(err) {
-    err ? console.log('Error indexing tracks', err) : console.log('All tracks indexed');
-  });
-}
-
-function getTracks(callback) {
-  pm.getAllTracks(cfg.apiOpts, function(err, library) {
-    if (err) console.log(err);
-
-    console.log('indexing tracks...(this will take a while)');
-    indexTracks(library.data.items);
-
-    if (callback) callback();
-  });
-}
 
 function rmDir(dirPath) {
   let files;
@@ -84,47 +68,38 @@ function rmDir(dirPath) {
   fs.rmdirSync(dirPath);
 }
 
-function initializeSearch() {
+// app initialization
+pm.init({email: credentials.email, password: credentials.password}, function(err) {
+  if (err) console.error(err);
+
+  rmDir(path.join(__dirname, '../../si'));
+
   const opts = {
-    deletable: false,
-    fieldedSearch: false,
-    fieldsToStore: ['title', 'artist', 'album', 'id', 'albumArtRef', 'durationMillis', 'creationTimestamp']
+    fieldedSearch: false
   };
 
   searchIndex(opts, function(err, sind) {
     if (err) {
       console.log('Error creating searchService', err);
     } else {
-      console.log('!!!! Search service initialized !!!!');
       searchService = sind;
+
+      pm.getAllTracks(cfg.apiOpts, function(err, library) {
+        if (err) console.log(err);
+
+        console.log('indexing tracks...(this will take a while)');
+
+        searchService.callbackyAdd({}, library.data.items, function(err) {
+          err ? console.log('Error indexing tracks', err) : console.log('All tracks indexed');
+        });
+      });
     }
   });
-}
-
-// app initialization
-pm.init({email: credentials.email, password: credentials.password}, function(err) {
-  if (err) console.error(err);
-  rmDir(path.join(__dirname, '../../si'));
-  initializeSearch();
-  getTracks();
 });
 
 // main page
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'views/index.html'));
-});
-
-// re-index all results
-app.get('/index-all', function(req, res) {
-  searchService.flush(function(err) {
-    if (err) {
-      console.log(err);
-    }
-  });
-
-  getTracks(function() {
-    res.send('Indexing new tracks, they will appear in about 2 minutes...');
-  });
 });
 
 // get stream url
@@ -145,27 +120,22 @@ app.get('/stream', function(req, res) {
 // search
 app.get('/search', function(req, res) {
   const query = req.query.str.split(/\-|\s/);
-
   const opts = {
-    'query': {'*': query},
+    'query': { AND: {'*': query}},
     'offset': (req.query.page - 1) * pageSize,
-    'pageSize': pageSize,
-    'sort': ['creationTimestamp', 'desc']
+    'pageSize': pageSize
   };
 
-  searchService.search(opts, function(err, results) {
-    if (err) console.log('Error executing search', err);
+  const allResults = [];
 
-    try {
-      const hits = [];
-      results.hits.forEach(function(hit) {
-        hits.push(hit.document);
-      });
-      res.json(hits);
-    } catch (err) {
-      console.log(err);
-    }
-  });
+  searchService
+    .search(opts)
+    .on('data', function(results) {
+      allResults.push(results.document);
+    })
+    .on('end', function() {
+      res.json(allResults);
+    });
 });
 
 app.listen(port, '0.0.0.0', function onStart(err) {

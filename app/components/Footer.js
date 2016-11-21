@@ -48,7 +48,7 @@ class Footer extends Component {
 
   onPercentUpdate() {
     const { updatePercentPlayed, player } = this.props;
-    updatePercentPlayed((this.audioModule.position + player.begin) / player.track.durationMillis * 100);
+    updatePercentPlayed(((this.audioModule.position + player.begin) / player.track.durationMillis * 100).toFixed(1));
   }
 
   onSoundCreated(obj) {
