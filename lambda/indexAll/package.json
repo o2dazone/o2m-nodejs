@@ -5,7 +5,7 @@
   "main": "index.js",
   "author": "Bryce Murry",
   "scripts": {
-    "test": "set istanbul cover _mocha -- -R spec",
+    "test": "istanbul cover _mocha -- -R spec",
     "build": "npm i && zip -r o2m-indexAll index.js node_modules"
   },
   "dependencies": {

@@ -94,3 +94,8 @@ exports.setPlayCredentials = (email, password) => {
 exports.setAWSCredentials = (access, secret) => {
   s3.config.credentials = new AWS.Credentials(access, secret);
 }
+
+exports.extraExports = () => {
+  exports.getWords = getWords;
+}
+
