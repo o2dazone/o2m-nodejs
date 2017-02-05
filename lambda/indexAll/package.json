@@ -1,0 +1,17 @@
+{
+  "name": "o2m-indexAll",
+  "version": "1.0.0",
+  "description": "o2 music player lambda to get all tracks, index, store in s3",
+  "main": "index.js",
+  "author": "Bryce Murry",
+  "scripts": {
+    "test": "set istanbul cover _mocha -- -R spec",
+    "build": "npm i && zip -r o2m-indexAll index.js node_modules"
+  },
+  "dependencies": {
+    "playmusic": "^2.2.0",
+    "aws-sdk" : "2.7.13"
+  },
+  "devDependencies": {
+  }
+}
