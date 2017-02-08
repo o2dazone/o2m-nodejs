@@ -2,6 +2,7 @@
 'use strict';
 
 const path = require('path');
+const proxy = require('express-request-proxy');
 const express = require('express');
 const webpack = require('webpack');
 const fs = require('fs');
@@ -9,7 +10,8 @@ const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
-const cfg = isDeveloping ? require('./dev.json') : require('./prod.json');
+const envConfig = isDeveloping ? require('./dev.json') : require('./prod.json');
+const cfg = Object.assign(envConfig, require('./base.json'));
 const config = isDeveloping ? require('../../webpack.config.js') : require('../../webpack.production.config.js');
 const port = process.env.PORT || cfg.port;
 const app = express();
@@ -52,6 +54,10 @@ pm.init({email: credentials.email, password: credentials.password}, function(err
 app.get('/', function(req, res) {
   res.sendFile(path.join(__dirname, 'views/index.html'));
 });
+
+app.get('/getIndex', proxy({
+  url: cfg.indexData
+}));
 
 // get stream url
 app.get('/stream', function(req, res) {

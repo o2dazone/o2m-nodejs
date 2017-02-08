@@ -1,5 +1,16 @@
 import fetch from 'isomorphic-fetch';
-import { RECEIVE_SEARCH_RESULTS, PLAY_SONG } from 'constants';
+
+import {
+  getWords,
+  intersection
+} from 'helpers';
+
+import {
+  RECEIVE_SEARCH_RESULTS,
+  PLAY_SONG
+} from 'constants';
+
+let searchData;
 
 function receiveSearchResults(results, query) {
   return {
@@ -14,33 +25,6 @@ function receiveAutoplayTrack(track) {
     type: PLAY_SONG,
     track: track
   };
-}
-// ==================================
-const SEARCH_DATA_URL = 'https://s3-us-west-1.amazonaws.com/o2dazone.com/api/musicIndex.json';
-const STOP_WORDS = ['a', 'the', 'of', 'is'];
-let searchData;
-
-function getWords(title) {
-  const rval = [];
-  const words = title.toLowerCase().replace(/-|&|\//g, ' ').replace(/'|\(|\)|\.|!/g, '').split(/ +/);
-  words.forEach(w => {
-    if (STOP_WORDS.indexOf(w) === -1 && rval.indexOf(w) === -1) {
-      rval.push(w);
-    }
-  });
-  return rval;
-}
-
-function intersection(set1, set2) {
-  const rval = [];
-  if ( set1 && set2 ) {
-    set1.forEach(e => {
-      if (set2.indexOf(e) !== -1) {
-        rval.push(e);
-      }
-    });
-  }
-  return rval;
 }
 
 function search(query) {
@@ -67,7 +51,7 @@ function getSearchData(callback) {
   if (searchData) {
     callback();
   } else {
-    return fetch(SEARCH_DATA_URL)
+    return fetch('/getIndex')
       .then(response => response.json())
       .then(response => {
         searchData = response;
@@ -75,7 +59,7 @@ function getSearchData(callback) {
       });
   }
 }
-// ==================================
+
 export function fetchSearchResults(query) {
   return function (dispatch) {
     if (query) {
