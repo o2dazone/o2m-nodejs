@@ -18,44 +18,24 @@ function receiveAutoplayTrack(track) {
 // ==================================
 const SEARCH_DATA_URL = 'https://s3-us-west-1.amazonaws.com/o2dazone.com/api/musicIndex.json';
 const STOP_WORDS = ['a', 'the', 'of', 'is'];
-var searchData;
+let searchData;
 
 function getWords(title) {
-  var rval = [];
-  var words = title.toLowerCase().replace(/-|&|\//g, ' ').replace(/'|\(|\)|\.|!/g, '').split(/ +/);
+  const rval = [];
+  const words = title.toLowerCase().replace(/-|&|\//g, ' ').replace(/'|\(|\)|\.|!/g, '').split(/ +/);
   words.forEach(w => {
-    if( STOP_WORDS.indexOf(w) == -1 && rval.indexOf(w) == -1 ) {
+    if (STOP_WORDS.indexOf(w) === -1 && rval.indexOf(w) === -1) {
       rval.push(w);
     }
   });
   return rval;
 }
 
-function search(query) {
-  var words = getWords(query);
-  var ids;
-  words.forEach(word => {
-    if( !ids ) {
-      ids = searchData.words[word];
-    } else {
-      ids = intersection(ids, searchData.words[word]);
-    }
-  });
-
-  var rval = [];
-  if( ids ) {
-    ids.forEach( id => {
-      rval.push(searchData.tracks[id]);
-    });
-  }
-  return rval;
-}
-
 function intersection(set1, set2) {
-  var rval = [];
+  const rval = [];
   if ( set1 && set2 ) {
     set1.forEach(e => {
-      if( set2.indexOf(e) != -1 ) {
+      if (set2.indexOf(e) !== -1) {
         rval.push(e);
       }
     });
@@ -63,16 +43,36 @@ function intersection(set1, set2) {
   return rval;
 }
 
+function search(query) {
+  const words = getWords(query);
+  let ids;
+  words.forEach(word => {
+    if (!ids) {
+      ids = searchData.words[word];
+    } else {
+      ids = intersection(ids, searchData.words[word]);
+    }
+  });
+
+  const rval = [];
+  if (ids) {
+    ids.forEach( id => {
+      rval.push(searchData.tracks[id]);
+    });
+  }
+  return rval;
+}
+
 function getSearchData(callback) {
-  if( !searchData ) {
+  if (searchData) {
+    callback();
+  } else {
     return fetch(SEARCH_DATA_URL)
       .then(response => response.json())
       .then(response => {
         searchData = response;
         callback();
       });
-  } else {
-    callback();
   }
 }
 // ==================================
