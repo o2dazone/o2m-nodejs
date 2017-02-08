@@ -1,4 +1,5 @@
 // action/reducers
+export const RECEIVE_INDEX = 'RECEIVE_INDEX';
 export const TOGGLE_RESULTS = 'TOGGLE_RESULTS';
 export const RECEIVE_SEARCH_RESULTS = 'RECEIVE_SEARCH_RESULTS';
 export const PLAY_SONG = 'PLAY_SONG';

@@ -8,15 +8,23 @@ import Header from './Header';
 import Container from './Container';
 import Footer from './Footer';
 
+import { receiveIndex, getSearchData } from 'actions/app';
 import { fetchAutoplayTrack } from 'actions/search';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.searchQuery = null;
+    this.getAutoPlayTrack = this.getAutoPlayTrack.bind(this);
+    this.getSearchIndex = this.getSearchIndex.bind(this);
   }
 
   componentWillMount() {
+    this.getSearchIndex();
+    this.getAutoPlayTrack();
+  }
+
+  getAutoPlayTrack() {
     const splitter = /\&|\=|\?\_k=\w+/;
     const locQuery = window.location.hash.replace(/^#\/?|\/$/g, '').split('/')[0].split(splitter);
 
@@ -25,6 +33,16 @@ class App extends Component {
 
     if (trackId) {
       this.props.fetchAutoplayTrack(trackId);
+    }
+  }
+
+  getSearchIndex() {
+    const { receiveIndex, getSearchData } = this.props;
+    const { index } = window.localStorage;
+    if (index) {
+      receiveIndex(JSON.parse(index));
+    } else {
+      getSearchData();
     }
   }
 
@@ -54,4 +72,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchAutoplayTrack })(App);
+export default connect(mapStateToProps, { fetchAutoplayTrack, receiveIndex, getSearchData })(App);

@@ -10,8 +10,6 @@ import {
   PLAY_SONG
 } from 'constants';
 
-let searchData;
-
 function receiveSearchResults(results, query) {
   return {
     type: RECEIVE_SEARCH_RESULTS,
@@ -27,48 +25,32 @@ function receiveAutoplayTrack(track) {
   };
 }
 
-function search(query) {
-  const words = getWords(query);
-  let ids;
-  words.forEach(word => {
-    if (!ids) {
-      ids = searchData.words[word];
-    } else {
-      ids = intersection(ids, searchData.words[word]);
-    }
-  });
-
-  const rval = [];
-  if (ids) {
-    ids.forEach( id => {
-      rval.push(searchData.tracks[id]);
-    });
-  }
-  return rval;
-}
-
-function getSearchData(callback) {
-  if (searchData) {
-    callback();
-  } else {
-    return fetch('/getIndex')
-      .then(response => response.json())
-      .then(response => {
-        searchData = response;
-        callback();
-      });
-  }
-}
-
 export function fetchSearchResults(query) {
-  return function (dispatch) {
-    if (query) {
-      getSearchData(function() {
-        const results = search(query);
-        dispatch(receiveSearchResults(results, query));
+  if (query) {
+    return function(dispatch, getState) {
+      const { index } = getState();
+      const words = getWords(query);
+      let ids;
+
+      words.forEach(word => {
+        if (!ids) {
+          ids = index.words[word];
+        } else {
+          ids = intersection(ids, index.words[word]);
+        }
       });
-    }
-  };
+
+      const results = [];
+      if (ids) {
+        ids.forEach( id => {
+          index.tracks[id].id = id;
+          results.push(index.tracks[id]);
+        });
+      }
+
+      dispatch(receiveSearchResults(results, query));
+    };
+  }
 }
 
 export function fetchAutoplayTrack(trackId) {
