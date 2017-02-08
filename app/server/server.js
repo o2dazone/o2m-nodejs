@@ -10,19 +10,23 @@ const webpackMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
-const envConfig = isDeveloping ? require('./dev.json') : require('./prod.json');
-const cfg = Object.assign(envConfig, require('./base.json'));
-const config = isDeveloping ? require('../../webpack.config.js') : require('../../webpack.production.config.js');
-const port = process.env.PORT || cfg.port;
-const app = express();
 
+const cfg = Object.assign(
+  isDeveloping ? require('./dev.json') : require('./prod.json'),
+  require('./base.json')
+);
+
+const webpackConfig = isDeveloping ? require('../../webpack.config.js') : require('../../webpack.production.config.js');
+const port = process.env.PORT || cfg.port;
+
+const app = express();
 const pm = new (require('playmusic'));
 const credentials = JSON.parse(fs.readFileSync('./app/server/credentials.json'));
 
 if (isDeveloping) {
-  const compiler = webpack(config);
+  const compiler = webpack(webpackConfig);
   const middleware = webpackMiddleware(compiler, {
-    publicPath: config.output.publicPath,
+    publicPath: webpackConfig.output.publicPath,
     contentBase: 'src',
     stats: {
       version: false,
