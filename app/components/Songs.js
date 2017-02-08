@@ -3,9 +3,9 @@ import React from 'react';
 
 import AlbumArt from './AlbumArt';
 
-const Songs = ({results, playingTrack, onClickTrack, onScrollSongs }) => {
+const Songs = ({results, playingTrack, onClickTrack }) => {
   return (
-    <div className={styles.songs} onScroll={onScrollSongs}>
+    <div className={styles.songs}>
       {results.map((track) => {
         return (
           <div className={playingTrack === track.id ? styles.playing : null} onClick={onClickTrack} key={track.id} data-trackid={track.id}>

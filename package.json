@@ -30,7 +30,6 @@
     "redux": "^3.3.1",
     "redux-thunk": "^2.0.1",
     "sass-loader": "^3.2.0",
-    "search-index": "^0.9.6",
     "soundmanager2": "^2.97.20150601-a"
   },
   "devDependencies": {

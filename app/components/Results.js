@@ -2,10 +2,8 @@ import styles from 'styles/results.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import throttle from 'lodash.throttle';
 import { hashHistory } from 'react-router';
 import { playSong } from 'actions/player';
-import { appendSearchResults } from 'actions/search';
 import { getTrackById } from 'helpers';
 import Songs from './Songs';
 import SongLegends from './SongLegends';
@@ -14,8 +12,6 @@ class Results extends Component {
   constructor(props) {
     super(props);
     this.onPlaySong = this.onPlaySong.bind(this);
-    this.onScrollSongs = this.onScrollSongs.bind(this);
-    this.loadMoreSongs = throttle(this.loadMoreSongs, 1000);
     this.fetching = null;
   }
 
@@ -30,24 +26,6 @@ class Results extends Component {
     const track = getTrackById(trackId, search.results);
     hashHistory.replace(`search=${search.query}&track=${trackId}`);
     playSong(track);
-  }
-
-  loadMoreSongs(e) {
-    if (e) {
-      const srcEle = e.nativeEvent.srcElement;
-      if (srcEle.scrollTop + srcEle.clientHeight > srcEle.scrollHeight - 250) {
-        const { search, appendSearchResults } = this.props;
-        if (!this.fetching) {
-          appendSearchResults(search.query, search.page + 1);
-          this.fetching = true;
-        }
-      }
-    }
-  }
-
-  onScrollSongs(e) {
-    e.persist();
-    this.loadMoreSongs(e);
   }
 
   makeResultsHeader() {
@@ -82,7 +60,7 @@ class Results extends Component {
         </div>
 
         { search.hasResults ? <SongLegends /> : ''}
-        { search.hasResults ? <Songs results={search.results} onScrollSongs={this.onScrollSongs} playingTrack={player.track ? player.track.id : null} onClickTrack={this.onPlaySong} /> : '' }
+        { search.hasResults ? <Songs results={search.results} playingTrack={player.track ? player.track.id : null} onClickTrack={this.onPlaySong} /> : '' }
       </div>
     );
   }
@@ -95,4 +73,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { playSong, appendSearchResults })(Results);
+export default connect(mapStateToProps, { playSong })(Results);
