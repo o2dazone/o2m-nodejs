@@ -1,5 +1,3 @@
-import fetch from 'isomorphic-fetch';
-
 import {
   getWords,
   intersection
@@ -26,8 +24,8 @@ function receiveAutoplayTrack(track) {
 }
 
 export function fetchSearchResults(query) {
-  if (query) {
-    return function(dispatch, getState) {
+  return function(dispatch, getState) {
+    if (query) {
       const { index } = getState();
       const words = getWords(query);
       let ids;
@@ -49,19 +47,19 @@ export function fetchSearchResults(query) {
       }
 
       dispatch(receiveSearchResults(results, query));
-    };
-  }
+    }
+  };
 }
 
 export function fetchAutoplayTrack(trackId) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     if (trackId) {
-      const reqUrl = `/search?str=${trackId}`;
-      return fetch(reqUrl)
-        .then(response => response.json())
-        .then(response => {
-          dispatch(receiveAutoplayTrack(response[0]));
-        });
+      const { index } = getState();
+      dispatch(function() {
+        setTimeout(function() {
+          receiveAutoplayTrack(index.tracks[trackId]); // dirty-ass settimeout to put event at the end (waiting for soundManager to initialize)
+        }, 0);
+      });
     }
   };
 }

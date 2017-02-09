@@ -21,7 +21,7 @@ class App extends Component {
 
   componentWillMount() {
     this.getSearchIndex();
-    this.getAutoPlayTrack();
+    // this.getAutoPlayTrack();
   }
 
   getAutoPlayTrack() {
@@ -38,7 +38,7 @@ class App extends Component {
 
   getSearchIndex() {
     const { receiveIndex, getSearchData } = this.props;
-    const { index } = window.localStorage;
+    const { localStorage: { index } } = window;
     if (index) {
       receiveIndex(JSON.parse(index));
     } else {
