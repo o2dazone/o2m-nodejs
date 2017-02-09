@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "babel-cli": "^6.4.0",
-    "express-request-proxy": "^2.0.0",
     "happypack": "^3.0.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash.debounce": "^4.0.3",
