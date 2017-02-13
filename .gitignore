@@ -6,3 +6,5 @@ coverage
 credentials.json
 todo
 .happypack/
+si/
+lambda/*/*.zip
