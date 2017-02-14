@@ -1,0 +1,16 @@
+{
+  "name": "o2m-getStreamUrl",
+  "version": "1.0.0",
+  "description": "o2 music player lambda to get a stream url from google play by id",
+  "main": "index.js",
+  "author": "Bryce Murry",
+  "scripts": {
+    "test": "istanbul cover _mocha -- -R spec",
+    "preinstall": "zip -r o2m-getStreamUrl index.js node_modules"
+  },
+  "dependencies": {
+    "playmusic": "^2.2.0"
+  },
+  "devDependencies": {
+  }
+}
