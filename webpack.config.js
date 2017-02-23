@@ -51,7 +51,7 @@ module.exports = {
   ],
   module: {
     loaders: [
-      { test: /\.js?$/, exclude: /node_modules/, loader: 'babel' },
+      { test: /\.js?$/, exclude: /node_modules/, loader: 'babel', query: { "presets": ["react", "es2015", "stage-0", "react-hmre"] } },
       { test: /\.json?$/, loader: 'json'},
       { test: /\.scss$/, loaders: ['happypack/loader?id=css-loaders'] },
       { test: /\.(woff|woff2|ttf|eot|svg|gif|png|jpge?g)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?name=[name].[hash].[ext]'}
