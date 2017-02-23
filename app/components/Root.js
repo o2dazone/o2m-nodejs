@@ -16,11 +16,10 @@ class App extends Component {
     super(props);
     this.searchQuery = null;
     this.getAutoPlayTrack = this.getAutoPlayTrack.bind(this);
-    this.getSearchIndex = this.getSearchIndex.bind(this);
   }
 
   componentWillMount() {
-    this.getSearchIndex();
+    this.props.getSearchData();
     // this.getAutoPlayTrack();
   }
 
@@ -33,16 +32,6 @@ class App extends Component {
 
     if (trackId) {
       this.props.fetchAutoplayTrack(trackId);
-    }
-  }
-
-  getSearchIndex() {
-    const { receiveIndex, getSearchData } = this.props;
-    const { localStorage: { index } } = window;
-    if (index) {
-      receiveIndex(JSON.parse(index));
-    } else {
-      getSearchData();
     }
   }
 

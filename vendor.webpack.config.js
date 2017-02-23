@@ -9,7 +9,6 @@ module.exports = {
       'chai',
       'eslint-plugin-react',
       'isomorphic-fetch',
-      'lodash.debounce',
       'lodash.throttle',
       'react',
       'react-dom',

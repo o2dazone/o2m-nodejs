@@ -13,4 +13,5 @@ export const RECEIVE_STREAM_URL = 'RECEIVE_STREAM_URL';
 export const STOP_WORDS = ['a', 'the', 'of', 'is'];
 export const REPLACE_WEIRD_CHARACTERS = /-|&|\//g;
 export const REPLACE_MORE_WEIRD_CHARACTERS = /'|\(|\)|\.|!/g;
+export const INDEX_URL = 'https://s3-us-west-1.amazonaws.com/o2dazone.com/api/musicIndex.json';
 export const STREAM_URL = 'https://xkjifuezph.execute-api.us-east-1.amazonaws.com/prod/o2m-getStreamUrl?id=';

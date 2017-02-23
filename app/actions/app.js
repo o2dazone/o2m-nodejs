@@ -1,5 +1,5 @@
 import fetch from 'isomorphic-fetch';
-import urls from 'server/urls.json';
+import { INDEX_URL } from 'constants';
 
 import {
   RECEIVE_INDEX
@@ -14,10 +14,9 @@ export function receiveIndex(index) {
 
 export function getSearchData() {
   return function (dispatch) {
-    return fetch(urls.index)
+    return fetch(INDEX_URL)
       .then(response => response.json())
       .then(response => {
-        window.localStorage.index = JSON.stringify(response);
         dispatch(receiveIndex(response));
       });
   };
