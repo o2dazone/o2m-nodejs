@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 
 import styles from 'styles/app.scss';
-import 'roboto-fontface/css/roboto-fontface.scss';
 
 import Header from './Header';
 import Container from './Container';

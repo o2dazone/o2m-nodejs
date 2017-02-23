@@ -4216,10 +4216,6 @@ ripemd160@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-0.2.0.tgz#2bf198bde167cacfa51c0a928e84b68bbe171fce"
 
-roboto-fontface@^0.4.5:
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/roboto-fontface/-/roboto-fontface-0.4.5.tgz#44d52f2e33a990b196a88f6676d8c47ecb6beb0a"
-
 run-async@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/run-async/-/run-async-0.1.0.tgz#c8ad4a5e110661e402a7d21b530e009f25f8e389"
