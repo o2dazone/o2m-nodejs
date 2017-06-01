@@ -24,7 +24,7 @@ class Header extends Component {
       e.preventDefault();
       e.target.blur();
       const query = e.target.value;
-      hashHistory.replace(`search=${query}&${player.playing ? `track=${player.track.id}` : ''}`);
+      hashHistory.replace(`search=${encodeURI(query)}&${player.playing ? `track=${player.track.id}` : ''}`);
       this.props.fetchSearchResults(query);
     }
   }

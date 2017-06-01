@@ -40,7 +40,11 @@ class App extends Component {
   getQueryParams() {
     const splitter = /\&|\=|\?\_k=\w+/;
     this.locQuery = window.location.hash.replace(/^#\/?|\/$/g, '').split('/')[0].split(splitter);
-    this.searchQuery = (this.isInArray('search', this.locQuery)) ? this.locQuery[this.locQuery.indexOf('search') + 1] : null;
+    const searchQuery = (this.isInArray('search', this.locQuery)) ? this.locQuery[this.locQuery.indexOf('search') + 1] : null;
+
+    if (searchQuery) {
+      this.searchQuery = decodeURI(searchQuery);
+    }
   }
 
   isInArray(value, array) {
