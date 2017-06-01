@@ -3,7 +3,6 @@ import styles from 'styles/footer.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import throttle from 'lodash.throttle';
-import { makeHistory } from 'helpers';
 import { fetchAutoplayTrack } from 'actions/search';
 import { togglePlayPause, receiveAutoplayTrackId, toggleShuffle, playSong, updatePercentPlayed, addPlayer, fetchStreamUrl } from 'actions/player';
 import Info from './Info';
@@ -73,12 +72,10 @@ class Footer extends Component {
       const randomTrackId = Math.round(Math.random() * (search.results.length - 1));
       const randomTrack = search.results[randomTrackId];
       playSong(randomTrack);
-      makeHistory(search.query, randomTrack.id);
     } else {
       const nextTrack = this.getTrack(+1);
       if (nextTrack) {
         playSong(nextTrack);
-        makeHistory(search.query, nextTrack.id);
       }
     }
   }

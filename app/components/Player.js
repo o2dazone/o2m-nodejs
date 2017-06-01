@@ -2,20 +2,23 @@ import styles from 'styles/player.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { makeHistory } from 'helpers';
 import { fetchStreamUrl } from 'actions/player';
 import AudioModule from './AudioModule';
 
 class Player extends Component {
   componentWillMount() {
-    const { fetchStreamUrl, player } = this.props;
+    const { fetchStreamUrl, player, search: { query } } = this.props;
     // make an initial fetch on mount
+    makeHistory(query, player.track.id);
     fetchStreamUrl(player.track.id);
   }
 
   componentWillReceiveProps(nextState) {
-    const { fetchStreamUrl, player } = this.props;
+    const { fetchStreamUrl, player, search: { query } } = this.props;
     if (nextState.player.track.id !== player.track.id) {
       fetchStreamUrl(nextState.player.track.id);
+      makeHistory(query, nextState.player.track.id);
     }
   }
 
@@ -33,8 +36,10 @@ class Player extends Component {
   }
 }
 
-function mapStateToProps() {
-  return { };
+function mapStateToProps(state) {
+  return {
+    search: state.search
+  };
 }
 
 

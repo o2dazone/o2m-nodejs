@@ -3,7 +3,7 @@ import styles from 'styles/results.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { playSong } from 'actions/player';
-import { getTrackById, makeHistory } from 'helpers';
+import { getTrackById } from 'helpers';
 import Songs from './Songs';
 import SongLegends from './SongLegends';
 
@@ -23,7 +23,6 @@ class Results extends Component {
     const { playSong, search } = this.props;
     const trackId = e.target.parentNode.dataset.trackid;
     const track = getTrackById(trackId, search.results);
-    makeHistory(search.query, trackId);
     playSong(track);
   }
 
