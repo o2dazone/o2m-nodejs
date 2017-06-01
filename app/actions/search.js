@@ -55,11 +55,7 @@ export function fetchAutoplayTrack(trackId) {
   return function (dispatch, getState) {
     if (trackId) {
       const { index } = getState();
-      dispatch(function() {
-        setTimeout(function() {
-          receiveAutoplayTrack(index.tracks[trackId]); // dirty-ass settimeout to put event at the end (waiting for soundManager to initialize)
-        }, 0);
-      });
+      dispatch(receiveAutoplayTrack(index.tracks[trackId]));
     }
   };
 }

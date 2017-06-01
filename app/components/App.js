@@ -6,6 +6,7 @@ import styles from 'styles/app.scss';
 import Header from './Header';
 import Container from './Container';
 import Footer from './Footer';
+import LoadingIcon from './LoadingIcon';
 
 import { receiveIndex, getSearchData } from 'actions/app';
 import { fetchAutoplayTrack } from 'actions/search';
@@ -14,24 +15,32 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.searchQuery = null;
-    this.getAutoPlayTrack = this.getAutoPlayTrack.bind(this);
+    this.locQuery = null;
+    this.getQueryParams = this.getQueryParams.bind(this);
   }
 
   componentWillMount() {
     this.props.getSearchData();
-    // this.getAutoPlayTrack();
   }
 
-  getAutoPlayTrack() {
-    const splitter = /\&|\=|\?\_k=\w+/;
-    const locQuery = window.location.hash.replace(/^#\/?|\/$/g, '').split('/')[0].split(splitter);
+  componentDidMount() {
+    this.getQueryParams();
+  }
 
-    const trackId = (this.isInArray('track', locQuery)) ? locQuery[locQuery.indexOf('track') + 1] : null;
-    this.searchQuery = (this.isInArray('search', locQuery)) ? locQuery[locQuery.indexOf('search') + 1] : null;
+  componentWillReceiveProps(nextProps) {
+    if (Object.keys(nextProps.index).length !== Object.keys(this.props.index).length) {
+      const trackId = (this.isInArray('track', this.locQuery)) ? this.locQuery[this.locQuery.indexOf('track') + 1] : null;
 
-    if (trackId) {
-      this.props.fetchAutoplayTrack(trackId);
+      if (trackId) {
+        this.props.fetchAutoplayTrack(trackId);
+      }
     }
+  }
+
+  getQueryParams() {
+    const splitter = /\&|\=|\?\_k=\w+/;
+    this.locQuery = window.location.hash.replace(/^#\/?|\/$/g, '').split('/')[0].split(splitter);
+    this.searchQuery = (this.isInArray('search', this.locQuery)) ? this.locQuery[this.locQuery.indexOf('search') + 1] : null;
   }
 
   isInArray(value, array) {
@@ -39,7 +48,11 @@ class App extends Component {
   }
 
   render() {
-    const { player, store } = this.props;
+    const { player, store, index } = this.props;
+
+    if (!Object.keys(index).length) {
+      return <LoadingIcon />;
+    }
 
     return (
       <Provider store={store}>
@@ -56,7 +69,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    player: state.player
+    player: state.player,
+    index: state.index
   };
 }
 

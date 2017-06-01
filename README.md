@@ -7,5 +7,5 @@ Install Atom
 ## dev startup
 `yarn && npm start`
 
-## prod startup
-`npm run build && NODE_ENV=production PORT=8480 npm start`
+## prod
+`npm run build`
