@@ -2,9 +2,8 @@ import styles from 'styles/results.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { hashHistory } from 'react-router';
 import { playSong } from 'actions/player';
-import { getTrackById } from 'helpers';
+import { getTrackById, makeHistory } from 'helpers';
 import Songs from './Songs';
 import SongLegends from './SongLegends';
 
@@ -24,7 +23,7 @@ class Results extends Component {
     const { playSong, search } = this.props;
     const trackId = e.target.parentNode.dataset.trackid;
     const track = getTrackById(trackId, search.results);
-    hashHistory.replace(`search=${encodeURI(search.query)}&track=${trackId}`);
+    makeHistory(search.query, trackId);
     playSong(track);
   }
 

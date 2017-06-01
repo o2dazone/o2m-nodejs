@@ -2,8 +2,8 @@ import styles from 'styles/header.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { hashHistory } from 'react-router';
 import { fetchSearchResults } from 'actions/search';
+import { makeHistory } from 'helpers';
 
 class Header extends Component {
   constructor(props) {
@@ -17,14 +17,14 @@ class Header extends Component {
   }
 
   onSearch(e) {
-    const { player } = this.props;
+    const { player: { playing, track } } = this.props;
 
     // if the enter key was pressed...
     if (e.keyCode === 13) {
       e.preventDefault();
       e.target.blur();
       const query = e.target.value;
-      hashHistory.replace(`search=${encodeURI(query)}&${player.playing ? `track=${player.track.id}` : ''}`);
+      makeHistory(query, playing ? track.id : null);
       this.props.fetchSearchResults(query);
     }
   }
