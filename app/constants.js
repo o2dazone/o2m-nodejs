@@ -7,7 +7,7 @@ export const UPDATE_PERCENT_PLAYED = 'UPDATE_PERCENT_PLAYED';
 export const TOGGLE_PLAY_PAUSE = 'TOGGLE_PLAY_PAUSE';
 export const TOGGLE_SHUFFLE = 'TOGGLE_SHUFFLE';
 export const RECEIVE_STREAM_URL = 'RECEIVE_STREAM_URL';
-
+export const RECEIVE_AUTOPLAY_TRACK = 'RECEIVE_AUTOPLAY_TRACK';
 
 // local search regex stuff
 export const STOP_WORDS = ['a', 'the', 'of', 'is'];

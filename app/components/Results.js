@@ -24,7 +24,7 @@ class Results extends Component {
     const { playSong, search } = this.props;
     const trackId = e.target.parentNode.dataset.trackid;
     const track = getTrackById(trackId, search.results);
-    hashHistory.replace(`search=${search.query}&track=${trackId}`);
+    hashHistory.replace(`search=${encodeURI(search.query)}&track=${trackId}`);
     playSong(track);
   }
 

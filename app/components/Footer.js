@@ -3,7 +3,8 @@ import styles from 'styles/footer.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import throttle from 'lodash.throttle';
-import { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer, fetchStreamUrl } from 'actions/player';
+import { fetchAutoplayTrack } from 'actions/search';
+import { togglePlayPause, receiveAutoplayTrackId, toggleShuffle, playSong, updatePercentPlayed, addPlayer, fetchStreamUrl } from 'actions/player';
 import Info from './Info';
 import Player from './Player';
 import Duration from './Duration';
@@ -19,6 +20,15 @@ class Footer extends Component {
     this.onSoundCreated = this.onSoundCreated.bind(this);
     this.onDurationClicked = this.onDurationClicked.bind(this);
     this.audioModule = null;
+  }
+
+  componentDidMount() {
+    const { player, fetchAutoplayTrack, receiveAutoplayTrackId } = this.props;
+
+    if (player.autoplay) {
+      fetchAutoplayTrack(player.autoplay);
+      receiveAutoplayTrackId(null);
+    }
   }
 
   onTogglePlayPause() {
@@ -100,6 +110,12 @@ class Footer extends Component {
   render() {
     const { player } = this.props;
 
+    if (!player.track) {
+      return (
+        <div />
+      );
+    }
+
     return (
       <div className={styles.footer}>
         <Duration audioModule={this.audioModule} onDurationClicked={this.onDurationClicked} />
@@ -117,4 +133,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer, fetchStreamUrl })(Footer);
+export default connect(mapStateToProps, { receiveAutoplayTrackId, fetchAutoplayTrack, togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer, fetchStreamUrl })(Footer);

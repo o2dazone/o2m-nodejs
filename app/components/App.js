@@ -9,46 +9,42 @@ import Footer from './Footer';
 import LoadingIcon from './LoadingIcon';
 
 import { receiveIndex, getSearchData } from 'actions/app';
-import { fetchAutoplayTrack } from 'actions/search';
+import { receiveAutoplayTrackId } from 'actions/player';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.searchQuery = null;
     this.locQuery = null;
-    this.getQueryParams = this.getQueryParams.bind(this);
+    this.getParam = this.getParam.bind(this);
   }
 
   componentWillMount() {
     this.props.getSearchData();
+    this.locQuery = window.location.hash.replace(/^#\/?|\/$/g, '').split('/')[0].split(/\&|\=|\?\_k=\w+/);
   }
 
   componentDidMount() {
-    this.getQueryParams();
-  }
+    const { getParam, props: { receiveAutoplayTrackId } } = this;
+    const searchParam = getParam('search');
+    const trackIdParam = getParam('track');
 
-  componentWillReceiveProps(nextProps) {
-    if (Object.keys(nextProps.index).length !== Object.keys(this.props.index).length) {
-      const trackId = (this.isInArray('track', this.locQuery)) ? this.locQuery[this.locQuery.indexOf('track') + 1] : null;
-
-      if (trackId) {
-        this.props.fetchAutoplayTrack(trackId);
-      }
+    if (searchParam) {
+      this.searchQuery = decodeURI(searchParam);
     }
-  }
 
-  getQueryParams() {
-    const splitter = /\&|\=|\?\_k=\w+/;
-    this.locQuery = window.location.hash.replace(/^#\/?|\/$/g, '').split('/')[0].split(splitter);
-    const searchQuery = (this.isInArray('search', this.locQuery)) ? this.locQuery[this.locQuery.indexOf('search') + 1] : null;
-
-    if (searchQuery) {
-      this.searchQuery = decodeURI(searchQuery);
+    if (trackIdParam) {
+      receiveAutoplayTrackId(trackIdParam);
     }
   }
 
   isInArray(value, array) {
     return array.indexOf(value) > -1;
+  }
+
+  getParam(key) {
+    const { isInArray, locQuery } = this;
+    return isInArray(key, locQuery) ? locQuery[locQuery.indexOf(key) + 1] : null;
   }
 
   render() {
@@ -63,7 +59,7 @@ class App extends Component {
         <div className={styles.wrap}>
           <Header query={this.searchQuery} />
           <Container />
-          { player.track ? <Footer /> : '' }
+          { player.track || player.autoplay ? <Footer /> : '' }
         </div>
       </Provider>
     );
@@ -78,4 +74,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchAutoplayTrack, receiveIndex, getSearchData })(App);
+export default connect(mapStateToProps, { receiveAutoplayTrackId, receiveIndex, getSearchData })(App);
