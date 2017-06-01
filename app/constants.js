@@ -9,9 +9,14 @@ export const TOGGLE_SHUFFLE = 'TOGGLE_SHUFFLE';
 export const RECEIVE_STREAM_URL = 'RECEIVE_STREAM_URL';
 export const RECEIVE_AUTOPLAY_TRACK = 'RECEIVE_AUTOPLAY_TRACK';
 
-// local search regex stuff
+// local search stuff
 export const STOP_WORDS = ['a', 'the', 'of', 'is'];
-export const REPLACE_WEIRD_CHARACTERS = /-|&|\//g;
-export const REPLACE_MORE_WEIRD_CHARACTERS = /'|\(|\)|\.|!/g;
 export const INDEX_URL = 'https://s3-us-west-1.amazonaws.com/o2dazone.com/api/musicIndex.json';
 export const STREAM_URL = 'https://xkjifuezph.execute-api.us-east-1.amazonaws.com/prod/o2m-getStreamUrl?id=';
+
+
+// regexes
+export const REPLACE_WEIRD_CHARACTERS = /-|&|\//g;
+export const REPLACE_MORE_WEIRD_CHARACTERS = /'|\(|\)|\.|!/g;
+export const MATCH_HASH = /^#\/?|\/$/g;
+export const SPLIT_URL_PARAM = /\&|\=|\?\_k=\w+/;

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 
+import { MATCH_HASH, SPLIT_URL_PARAM } from 'constants';
+
 import styles from 'styles/app.scss';
 
 import Header from './Header';
@@ -21,7 +23,7 @@ class App extends Component {
 
   componentWillMount() {
     this.props.getSearchData();
-    this.locQuery = window.location.hash.replace(/^#\/?|\/$/g, '').split('/')[0].split(/\&|\=|\?\_k=\w+/);
+    this.locQuery = window.location.hash.replace(MATCH_HASH, '').split('/')[0].split(SPLIT_URL_PARAM);
   }
 
   componentDidMount() {
