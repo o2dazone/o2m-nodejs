@@ -1,57 +1,110 @@
 'use strict';
 
-var path = require('path');
-var webpack = require('webpack');
-var srcPath = path.join(__dirname, '/app');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var StatsPlugin = require('stats-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const srcPath = path.join(__dirname, './app');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
-    path.join(__dirname, 'app/main.js')
+    path.join(__dirname, './app/main.js')
   ],
   output: {
-    path: path.join(__dirname, '/dist/'),
+    path: path.join(__dirname, './dist/'),
     filename: '[name]-[hash].min.js',
     publicPath: ''
   },
   resolve: {
-    root: srcPath,
-    extensions: ['', '.js'],
-    modulesDirectories: ['node_modules', 'app']
+    modules: [
+      srcPath,
+      'node_modules',
+      'app'
+    ],
+    extensions: ['.js']
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     new HtmlWebpackPlugin({
       template: 'app/index.tpl.html',
       inject: 'body',
       filename: 'index.html'
     }),
-    new ExtractTextPlugin('[name]-[hash].min.css'),
+    new ExtractTextPlugin({
+      filename: '[name]-[hash].min.css',
+      disable: false,
+      allChunks: true
+    }),
     new webpack.optimize.UglifyJsPlugin({
+      output: {
+        comments: false,
+      },
+      sourceMap: false,
       compressor: {
         warnings: false,
         screw_ie8: true
       }
-    }),
-    new StatsPlugin('webpack.stats.json', {
-      source: false,
-      modules: false
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     })
   ],
   module: {
-    loaders: [
-      { test: /\.js?$/, exclude: /node_modules/, loader: 'babel', query: { "presets": ["es2015", "stage-0", "react"]}},
-      { test: /\.json?$/, loader: 'json' },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?localIdentName=[hash:base64:5]&sourceMap!sass-loader?sourceMap&outputStyle=expanded')},
-      { test: /\.(woff|woff2|ttf|eot|svg|gif|png|jpge?g)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?name=[name].[hash].[ext]'}
+    rules: [
+      { test: /\.js?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          query: {
+            cacheDirectory: true,
+            presets: [
+              'react',
+              'es2015',
+              'stage-0'
+            ]
+          }
+        }
+      },
+      { test: /\.json?$/,
+        loader: 'json-loader'
+      },
+      { test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: true,
+                localIdentName: '[hash:base64:5]',
+                sourceMap: true
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                minimize: true,
+                debug: false,
+                plugins: function () {
+                  return [
+                    require('autoprefixer')
+                  ];
+                }
+              }
+            },
+            {
+              loader: 'sass-loader',
+              options: {
+                importLoaders: true,
+                sourceMap: true,
+                outputStyle: 'compressed'
+              }
+            }
+          ]
+        })
+      },
+      { test: /\.(woff|woff2|ttf|eot|svg|gif|png|jpge?g)(\?v=\d+\.\d+\.\d+)?$/,
+        use: 'file-loader?name=[name].[hash].[ext]'
+      }
     ]
-  },
-  postcss: [
-    require('autoprefixer')
-  ]
+  }
 };

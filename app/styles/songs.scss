@@ -6,7 +6,7 @@
     color: $color-leland;
     display: flex;
     flex-flow: column;
-    font-size: 14px;
+    font-size: 18px;
     margin-bottom: $progress-bar-height;
     justify-content: flex-start;
 
@@ -24,9 +24,9 @@
 
         :global(.albumart):before {
           @extend %spriteProperties;
-          background-size: 200px;
+          background-size: 225px;
           content: " ";
-          background-position: -65px -126px;
+          background-position: -68px -132px;
           position: absolute;
           top: 0;
           left: 0;
@@ -39,6 +39,7 @@
         :global(.albumart):before {
           @extend %eq;
           content: " ";
+          background: 59px !important;
           position: absolute;
           top: 0;
           left: 0;
