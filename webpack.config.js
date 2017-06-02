@@ -10,7 +10,7 @@ module.exports = {
   devtool: 'eval',
   cache: true,
   entry: [
-    'webpack-hot-middleware/client?timeout=2000&reload=tre&overlay=false',
+    'webpack-hot-middleware/client?reload=true',
     path.join(__dirname, 'app/main.js')
   ],
   output: {
@@ -36,7 +36,10 @@ module.exports = {
       inject: 'body',
       filename: 'index.html'
     }),
-    new AddAssetHtmlPlugin({ filepath: require.resolve('./dist/vendor.bundle.js'), includeSourcemap: false }),
+    new AddAssetHtmlPlugin({
+      filepath: require.resolve('./dist/vendor.bundle.js'),
+      includeSourcemap: false
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
