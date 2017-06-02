@@ -11,7 +11,7 @@
     "test": "",
     "start": "node app/server/server",
     "postinstall": "npm run build:dll",
-    "build": "rimraf dist && set NODE_ENV=production && webpack --config ./webpack.production.config.js --progress --profile --colors",
+    "build": "rimraf dist && set NODE_ENV=production && webpack --config ./webpack.production.config.js --progress",
     "build:dll": "webpack --config vendor.webpack.config.js",
     "eslint": "eslint ."
   },
@@ -47,7 +47,7 @@
     "eslint": "^1.5.0",
     "eslint-plugin-react": "^3.4.2",
     "express": "^4.13.3",
-    "extract-text-webpack-plugin": "^0.8.2",
+    "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "^0.8.5",
     "html-webpack-plugin": "^2.10.0",
     "jsdom": "^6.5.1",
@@ -60,9 +60,8 @@
     "sass-loader": "^3.2.0",
     "sinon": "^1.16.1",
     "sinon-chai": "^2.8.0",
-    "stats-webpack-plugin": "^0.2.1",
     "style-loader": "^0.13.0",
-    "webpack": "^1.13.0",
+    "webpack": "^2.6.1",
     "webpack-dev-middleware": "^1.2.0",
     "webpack-hot-middleware": "^2.2.0"
   }

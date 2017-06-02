@@ -5,7 +5,6 @@ var webpack = require('webpack');
 var srcPath = path.join(__dirname, '/app');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var StatsPlugin = require('stats-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -17,41 +16,51 @@ module.exports = {
     publicPath: ''
   },
   resolve: {
-    root: srcPath,
-    extensions: ['', '.js'],
-    modulesDirectories: ['node_modules', 'app']
+    modules: [
+      srcPath,
+      'node_modules',
+      'app'
+    ],
+    extensions: ['.js']
   },
   plugins: [
-    new webpack.optimize.OccurenceOrderPlugin(),
     new HtmlWebpackPlugin({
       template: 'app/index.tpl.html',
       inject: 'body',
       filename: 'index.html'
     }),
-    new ExtractTextPlugin('[name]-[hash].min.css'),
+    new ExtractTextPlugin({
+      filename: '[name]-[hash].min.css',
+      disable: false,
+      allChunks: true
+    }),
     new webpack.optimize.UglifyJsPlugin({
+      output: {
+        comments: false,
+      },
+      sourceMap: false,
       compressor: {
         warnings: false,
         screw_ie8: true
       }
     }),
-    new StatsPlugin('webpack.stats.json', {
-      source: false,
-      modules: false
-    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false,
+      options: {
+        postcss: [ require('autoprefixer') ]
+      }
     })
   ],
   module: {
-    loaders: [
-      { test: /\.js?$/, exclude: /node_modules/, loader: 'babel', query: { "presets": ["es2015", "stage-0", "react"]}},
-      { test: /\.json?$/, loader: 'json' },
-      { test: /\.scss$/, loader: ExtractTextPlugin.extract('style-loader', 'css-loader?localIdentName=[hash:base64:5]&sourceMap!sass-loader?sourceMap&outputStyle=expanded')},
-      { test: /\.(woff|woff2|ttf|eot|svg|gif|png|jpge?g)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?name=[name].[hash].[ext]'}
+    rules: [
+      { test: /\.js?$/, exclude: /node_modules/, use: 'babel-loader?cacheDirectory'},
+      { test: /\.json?$/, loader: 'json-loader' },
+      { test: /\.scss$/, use: ExtractTextPlugin.extract({fallback: 'style-loader', use: 'css-loader?localIdentName=[hash:base64:5]&sourceMap!sass-loader?sourceMap&outputStyle=expanded'})},
+      { test: /\.(woff|woff2|ttf|eot|svg|gif|png|jpge?g)(\?v=\d+\.\d+\.\d+)?$/, use: 'file-loader?name=[name].[hash].[ext]'}
     ]
-  },
-  postcss: [
-    require('autoprefixer')
-  ]
+  }
 };
