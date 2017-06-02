@@ -24,14 +24,15 @@ module.exports = {
 
   output: {
     filename: '[name].bundle.js',
-    path: path.join(__dirname, '/../dist'),
+    path: path.join(__dirname, './dist'),
     library: '[name]_lib'
   },
 
   plugins: [
     new webpack.DllPlugin({
-      path: path.join(__dirname, '/../dist/[name]-manifest.json'),
+      path: path.join(__dirname, './dist/[name]-manifest.json'),
       name: '[name]_lib'
     })
   ]
 };
+

@@ -4,7 +4,7 @@
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
-const webpackMiddleware = require('webpack-dev-middleware');
+const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
@@ -15,7 +15,7 @@ const port = 3000;
 
 if (isDeveloping) {
   const compiler = webpack(webpackConfig);
-  const middleware = webpackMiddleware(compiler, {
+  const middleware = webpackDevMiddleware(compiler, {
     publicPath: webpackConfig.output.publicPath,
     contentBase: 'src',
     stats: {

@@ -11,7 +11,7 @@ module.exports = {
   devtool: 'eval',
   cache: true,
   entry: [
-    'webpack-hot-middleware/client?reload=true',
+    'webpack-hot-middleware/client?timeout=2000&reload=tre&overlay=false',
     path.join(__dirname, 'app/main.js')
   ],
   output: {
@@ -20,9 +20,12 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    root: srcPath,
-    extensions: ['', '.js'],
-    modulesDirectories: ['node_modules', 'app']
+    modules: [
+      srcPath,
+      'node_modules',
+      'app'
+    ],
+    extensions: ['.js']
   },
   plugins: [
     new webpack.DllReferencePlugin({
@@ -35,26 +38,53 @@ module.exports = {
       filename: 'index.html'
     }),
     new AddAssetHtmlPlugin({ filepath: require.resolve('./dist/vendor.bundle.js'), includeSourcemap: false }),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new HappyPack({
-      id: 'css-loaders',
-      loaders: [
-        'style-loader','css-loader?localIdentName=[local]___[hash:base64:5]',
-        'sass-loader?outputStyle=expanded'
-      ]
-    }),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
     })
   ],
   module: {
-    loaders: [
-      { test: /\.js?$/, exclude: /node_modules/, loader: 'babel', query: { "presets": ["react", "es2015", "stage-0", "react-hmre"] } },
-      { test: /\.json?$/, loader: 'json'},
-      { test: /\.scss$/, loaders: ['happypack/loader?id=css-loaders'] },
-      { test: /\.(woff|woff2|ttf|eot|svg|gif|png|jpge?g)(\?v=\d+\.\d+\.\d+)?$/, loader: 'file-loader?name=[name].[hash].[ext]'}
+    rules: [
+      { test: /\.js?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          query: {
+            presets: [
+              "react",
+              "es2015",
+              "stage-0",
+              "react-hmre"
+            ]
+          }
+        }
+      },
+      { test: /\.json?$/,
+        use: 'json-loader'
+      },
+      { test: /\.scss$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              localIdentName: '[local]___[hash:base64:5]'
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              outputStyle: 'expanded'
+            }
+          }
+        ]
+      },
+      { test: /\.(woff|woff2|ttf|eot|svg|gif|png|jpge?g)(\?v=\d+\.\d+\.\d+)?$/,
+        use: 'file-loader?name=[name].[hash].[ext]'
+      }
     ]
   }
 };

@@ -20,7 +20,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.props.getSearchData();
+    // this.props.getSearchData();
     this.locQuery = window.location.hash.replace(/^#\/?|\/$/g, '').split('/')[0].split(/\&|\=|\?\_k=\w+/);
   }
 
