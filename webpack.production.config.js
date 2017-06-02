@@ -1,10 +1,10 @@
 'use strict';
 
-var path = require('path');
-var webpack = require('webpack');
-var srcPath = path.join(__dirname, './app');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const srcPath = path.join(__dirname, './app');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -57,10 +57,9 @@ module.exports = {
           query: {
             cacheDirectory: true,
             presets: [
-              "react",
-              "es2015",
-              "stage-0",
-              "react-hmre"
+              'react',
+              'es2015',
+              'stage-0'
             ]
           }
         }
@@ -81,16 +80,16 @@ module.exports = {
               }
             },
             {
-              loader: "postcss-loader",
-                options: {
-                    minimize: true,
-                    debug: false,
-                    plugins: function () {
-                        return [
-                            require("autoprefixer")
-                        ];
-                    }
+              loader: 'postcss-loader',
+              options: {
+                minimize: true,
+                debug: false,
+                plugins: function () {
+                  return [
+                    require('autoprefixer')
+                  ];
                 }
+              }
             },
             {
               loader: 'sass-loader',

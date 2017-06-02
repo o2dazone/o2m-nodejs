@@ -1,11 +1,10 @@
 'use strict';
 
-var path = require('path');
-var webpack = require('webpack');
-var srcPath = path.join(__dirname, '/app');
-var HappyPack = require('happypack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const srcPath = path.join(__dirname, '/app');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 module.exports = {
   devtool: 'eval',
@@ -52,10 +51,10 @@ module.exports = {
           loader: 'babel-loader',
           query: {
             presets: [
-              "react",
-              "es2015",
-              "stage-0",
-              "react-hmre"
+              'react',
+              'es2015',
+              'stage-0',
+              'react-hmre'
             ]
           }
         }
