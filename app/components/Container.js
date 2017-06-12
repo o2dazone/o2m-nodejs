@@ -17,11 +17,12 @@ class Container extends Component {
 }
 
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
+  const { isResultsVisible, search } = state;
   return {
-    isResultsVisible: state.isResultsVisible,
-    search: state.search
+    isResultsVisible,
+    search
   };
-}
+};
 
 export default connect(mapStateToProps, { isResultsVisible, toggleResults })(Container);

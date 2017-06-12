@@ -33,10 +33,11 @@ class Duration extends Component {
 }
 
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
+  const { player } = state;
   return {
-    player: state.player
+    player
   };
-}
+};
 
 export default connect(mapStateToProps)(Duration);

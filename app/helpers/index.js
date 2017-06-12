@@ -6,15 +6,15 @@ import {
 
 import { hashHistory } from 'react-router';
 
-export function getTrackById(id, results) {
+export const getTrackById = (id, results) => {
   for (let i = 0; i < results.length; i++) {
     if (results[i].id === id) {
       return results[i];
     }
   }
-}
+};
 
-export function getWords(str) {
+export const getWords = str => {
   const rval = [];
   const words = str.toLowerCase().replace(REPLACE_WEIRD_CHARACTERS, ' ').replace(REPLACE_MORE_WEIRD_CHARACTERS, '').split(/ +/);
   words.forEach(w => {
@@ -23,9 +23,9 @@ export function getWords(str) {
     }
   });
   return rval;
-}
+};
 
-export function intersection(set1, set2) {
+export const intersection = (set1, set2) => {
   const rval = [];
   if ( set1 && set2 ) {
     set1.forEach(e => {
@@ -35,8 +35,8 @@ export function intersection(set1, set2) {
     });
   }
   return rval;
-}
+};
 
-export function makeHistory(searchTerm, track) {
+export const makeHistory = (searchTerm, track) => {
   hashHistory.replace(`search=${encodeURI(searchTerm)}${track ? `&track=${track}` : ''}`);
-}
+};

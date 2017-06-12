@@ -127,11 +127,12 @@ class Footer extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
+  const { player, search } = state;
   return {
-    player: state.player,
-    search: state.search
+    player,
+    search
   };
-}
+};
 
 export default connect(mapStateToProps, { receiveAutoplayTrackId, fetchAutoplayTrack, togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer, fetchStreamUrl })(Footer);

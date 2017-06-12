@@ -3,8 +3,10 @@ import styles from 'styles/player.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { makeHistory } from 'helpers';
+import { PLAYER_ICON_SIZE } from 'constants';
 import { fetchStreamUrl } from 'actions/player';
 import AudioModule from './AudioModule';
+import { Previous, Next, Shuffle, Play, Pause } from 'icons';
 
 class Player extends Component {
   componentWillMount() {
@@ -27,20 +29,26 @@ class Player extends Component {
     return (
       <div className={styles.player}>
         { player ? <AudioModule onSoundCreated={onSoundCreated} onNextTrack={onNextTrack} onPercentUpdate={onPercentUpdate} streamUrl={player.streamUrl} /> : ''}
-        <span className={styles.previous} onClick={onPreviousTrack}>Previous Track</span>
-        { player.playing ? <span className={styles.pause} onClick={onTogglePlayPause}>Pause</span> : <span className={styles.play} onClick={onTogglePlayPause}>Play</span>}
-        <span className={styles.next} onClick={onNextTrack}>Next Track</span>
-        { player.shuffle ? <span className={`${styles.shuffle} ${styles.on}`} onClick={onToggleShuffle}>Shuffle On</span> : <span className={styles.shuffle} onClick={onToggleShuffle}>Shuffle Off</span>}
+        <Previous size={PLAYER_ICON_SIZE + 8} className={styles.prevNext} onClick={onPreviousTrack} />
+
+        { player.playing ?
+          <Pause size={PLAYER_ICON_SIZE} onClick={onTogglePlayPause} /> :
+          <Play size={PLAYER_ICON_SIZE} onClick={onTogglePlayPause} />
+        }
+
+        <Next size={PLAYER_ICON_SIZE + 8} className={styles.prevNext} onClick={onNextTrack} />
+        <Shuffle size={PLAYER_ICON_SIZE} onClick={onToggleShuffle} color={player.shuffle ? '#3179a1' : '#fff'} />
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
+  const { search } = state;
   return {
-    search: state.search
+    search
   };
-}
+};
 
 
 export default connect(mapStateToProps, { fetchStreamUrl })(Player);

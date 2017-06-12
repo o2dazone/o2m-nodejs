@@ -15,10 +15,10 @@ class AudioModule extends Component {
 
     sm.createSound({
       id: 'smTrack',
-      onfinish: function() {
+      onfinish: () => {
         onNextTrack();
       },
-      whileplaying: function() {
+      whileplaying: () => {
         onPercentUpdate();
       }
     });

@@ -64,11 +64,12 @@ class Results extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
+  const { search, player } = state;
   return {
-    search: state.search,
-    player: state.player
+    search,
+    player
   };
-}
+};
 
 export default connect(mapStateToProps, { playSong })(Results);

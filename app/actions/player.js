@@ -3,52 +3,52 @@ import { soundManager as sm } from 'soundmanager2';
 import { TOGGLE_PLAY_PAUSE, RECEIVE_AUTOPLAY_TRACK, TOGGLE_SHUFFLE, PLAY_SONG, RECEIVE_STREAM_URL, UPDATE_PERCENT_PLAYED, STREAM_URL } from 'constants';
 
 
-export function playSong(track) {
+export const playSong = track => {
   return {
     type: PLAY_SONG,
-    track: track
+    track
   };
-}
+};
 
-function receiveStreamUrl(streamUrl, begin) {
-  const url = begin ? streamUrl.replace(/begin\=\d+/, 'begin=' + begin) : streamUrl;
+const receiveStreamUrl = (url, begin) => {
+  const streamUrl = begin ? url.replace(/begin\=\d+/, 'begin=' + begin) : url;
   return {
     type: RECEIVE_STREAM_URL,
-    streamUrl: url,
+    streamUrl,
     begin: begin || 0
   };
-}
+};
 
-export function togglePlayPause(toggle) {
+export const togglePlayPause = toggle => {
   return {
     type: TOGGLE_PLAY_PAUSE,
-    toggle: toggle
+    toggle
   };
-}
+};
 
-export function toggleShuffle(toggle) {
+export const toggleShuffle = toggle => {
   return {
     type: TOGGLE_SHUFFLE,
-    toggle: toggle
+    toggle
   };
-}
+};
 
-export function receiveAutoplayTrackId(trackId) {
+export const receiveAutoplayTrackId = trackId => {
   return {
     type: RECEIVE_AUTOPLAY_TRACK,
     trackId
   };
-}
+};
 
-export function updatePercentPlayed(percent) {
+export const updatePercentPlayed = percent => {
   return {
     type: UPDATE_PERCENT_PLAYED,
-    percent: percent
+    percent
   };
-}
+};
 
-export function fetchStreamUrl(id, begin) {
-  return function (dispatch) {
+export const fetchStreamUrl = (id, begin) => {
+  return dispatch => {
     if (id) {
       if (sm.getSoundById('smTrack')) {
         sm.getSoundById('smTrack').pause();
@@ -62,4 +62,4 @@ export function fetchStreamUrl(id, begin) {
         });
     }
   };
-}
+};

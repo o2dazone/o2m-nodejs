@@ -23,7 +23,6 @@
         background: $color-highlight;
 
         :global(.albumart):before {
-          @extend %spriteProperties;
           background-size: 225px;
           content: " ";
           background-position: -68px -132px;
@@ -35,36 +34,9 @@
         }
       }
 
-      &.playing {
-        :global(.albumart):before {
-          @extend %eq;
-          content: " ";
-          background: 59px !important;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-      > span {
+      > span, svg {
         @extend %ellipsisOverflow;
         @extend %trackInfoSizing;
-      }
-
-      // title
-      > span:nth-of-type(2) {
-        width: 35%;
-      }
-
-      // artist
-      > span:nth-of-type(3) {
-        width: 25%;
-      }
-
-      > span:last-child {
-        width: 25%;
       }
     }
 
@@ -77,9 +49,32 @@
     }
   }
 
+  .title {
+    width: 35%;
+  }
+
+  .artist {
+    width: 25%;
+  }
+
+  .album {
+    width: 25%;
+  }
+
   .playing {
     background: $color-highlight;
     color: lighten($color-primary, 20%);
+    position: relative;
+    > .eq {
+      @extend %eq;
+      background-size: 59px !important;
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      left: 0;
+      width: $song-height;
+      height: $song-height;
+    }
   }
 
   %trackInfoSizing {
@@ -90,7 +85,6 @@
   }
 
   :global(.albumart) {
-    @extend %cover;
     @extend %trackInfoSizing;
     display: inline-block;
     max-width: $song-height;

@@ -8,23 +8,23 @@ import {
   PLAY_SONG
 } from 'constants';
 
-function receiveSearchResults(results, query) {
+const receiveSearchResults = (results, query) => {
   return {
     type: RECEIVE_SEARCH_RESULTS,
-    results: results,
-    query: query
+    results,
+    query
   };
-}
+};
 
-function receiveAutoplayTrack(track) {
+const receiveAutoplayTrack = track => {
   return {
     type: PLAY_SONG,
-    track: track
+    track
   };
-}
+};
 
-export function fetchSearchResults(query) {
-  return function(dispatch, getState) {
+export const fetchSearchResults = query => {
+  return (dispatch, getState) => {
     if (query) {
       const { index } = getState();
       const words = getWords(query);
@@ -49,13 +49,13 @@ export function fetchSearchResults(query) {
       dispatch(receiveSearchResults(results, query));
     }
   };
-}
+};
 
-export function fetchAutoplayTrack(trackId) {
-  return function (dispatch, getState) {
+export const fetchAutoplayTrack = trackId => {
+  return (dispatch, getState) => {
     if (trackId) {
       const { index } = getState();
       dispatch(receiveAutoplayTrack(index.tracks[trackId]));
     }
   };
-}
+};

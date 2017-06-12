@@ -9,10 +9,11 @@ const Songs = ({results, playingTrack, onClickTrack }) => {
       {results.map((track) => {
         return (
           <div className={playingTrack === track.id ? styles.playing : null} onClick={onClickTrack} key={track.id} data-trackid={track.id}>
+            <div className={styles.eq} />
             <AlbumArt art={track.albumArtRef ? track.albumArtRef[0].url : null} />
-            <span>{track.title}</span>
-            <span>{track.artist}</span>
-            <span>{track.album}</span>
+            <span className={styles.title}>{track.title}</span>
+            <span className={styles.artist}>{track.artist}</span>
+            <span className={styles.album}>{track.album}</span>
           </div>
         );
       })}
