@@ -1,11 +1,12 @@
 # o2damusic nodeJS
 
 ## Setup
-Install Atom
-`apm install linter linter-eslint language-babel`
+clone repo
+`pnpm i`
 
 ## dev startup
-`yarn && npm start`
+`npm start`
 
 ## prod
 `npm run build`
+(builds serverless assets)
