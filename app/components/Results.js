@@ -4,12 +4,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { playSong } from 'actions/player';
 import { getTrackById } from 'helpers';
-import Songs from './Songs';
+import AlbumArt from './AlbumArt';
 
-class Results extends Component {
+class Songs extends Component {
   constructor(props) {
     super(props);
     this.onPlaySong = this.onPlaySong.bind(this);
+    this.makeSongs = this.makeSongs.bind(this);
+    this.makeTime = this.makeTime.bind(this);
     this.fetching = null;
   }
 
@@ -25,16 +27,37 @@ class Results extends Component {
     playSong(track);
   }
 
+  makeTime(ms) {
+    const minutes = Math.floor(ms / 60000);
+    const seconds = ((ms % 60000) / 1000).toFixed(0);
+    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+  }
+
+  makeSongs() {
+    const { player, search: { results } } = this.props;
+    const playingTrack = player.track ? player.track.id : null;
+    return (
+      results.map((track) => {
+        return (
+          <div className={playingTrack === track.id ? styles.playing : null} onClick={this.onPlaySong} key={track.id} data-trackid={track.id}>
+            <AlbumArt art={track.albumArtRef ? track.albumArtRef[0].url : null} />
+            <div>
+              <div>{track.title}</div>
+              <div>{`${track.artist}${track.album ? ' · ' + track.album : ''}`}</div>
+              <div>{this.makeTime(track.durationMillis)}</div>
+            </div>
+          </div>
+        );
+      })
+    );
+  }
+
   render() {
-    const { search, player } = this.props;
+    const { search } = this.props;
     return (
       <div className={styles.container}>
         {
-          search.hasResults ?
-            <Songs
-              results={search.results}
-              playingTrack={player.track ? player.track.id : null}
-              onClickTrack={this.onPlaySong} /> : ''
+          search.hasResults ? <div className={styles.songs}>{this.makeSongs()}</div> : ''
         }
       </div>
     );
@@ -49,4 +72,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { playSong })(Results);
+export default connect(mapStateToProps, { playSong })(Songs);

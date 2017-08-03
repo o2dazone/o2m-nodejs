@@ -1,9 +1,124 @@
 @import 'variables';
 
 .container {
-  flex: 1 0 auto;
-  order: 2;
   display: flex;
-  flex-direction: column;
+  flex: 1;
+  flex-direction: row;
   width: 100%;
 }
+
+.songs {
+  overflow: auto;
+  display: flex;
+  flex: 1 0 100%;
+  flex-flow: column;
+  margin-bottom: $progress-bar-height;
+  justify-content: flex-start;
+
+  // individual song, including album
+  > div {
+    @extend %individualSongWrapper
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:vertical {
+    background: $color-primary;
+  }
+}
+
+%individualSongWrapper {
+  min-height: $song-height + 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 5px 0;
+  transition: background .15s;
+
+  &:hover {
+    cursor: pointer;
+    background: $color-highlight
+
+    :global(.albumart) {
+      opacity: .6;
+    }
+  }
+
+  // song information
+  > div {
+    @extend %songInfo;
+  }
+}
+
+%songInfo {
+  flex: 1 0;
+  font-size: 16px;
+  color: $color-wht;
+  overflow: hidden;
+  margin-left: 12px;
+
+  div {
+    @extend %ellipsisOverflow;
+    line-height: 20px;
+    // title
+    &:nth-of-type(1) {
+      @include desktop {
+        padding-right: 50px;
+      }
+    }
+
+    // info
+    &:nth-of-type(2) {
+      font-size: 13px;
+      color: $color-leland;
+
+      @include desktop {
+        padding-right: 50px;
+      }
+    }
+
+    // time
+    &:nth-of-type(3) {
+      font-size: 12px;
+      margin-top: -30px;
+      float: right;
+
+      @include mobile {
+        display: none;
+      }
+    }
+  }
+}
+
+.playing {
+  background: $color-highlight;
+  color: lighten($color-primary, 20%);
+  position: relative;
+}
+
+%trackInfoSizing {
+  flex: 1 0 auto;
+  line-height: $song-height;
+  min-height: $song-height;
+}
+
+:global(.albumart) {
+  @extend %trackInfoSizing;
+  transition: opacity .15s;
+  display: inline-block;
+  margin-left: 5px;
+  max-width: $song-height;
+  width: $song-height;
+  height: $song-height;
+  background-size: $song-height;
+  position: relative;
+
+  @include mobile {
+    background: none !important;
+    display: none;
+  }
+}
+

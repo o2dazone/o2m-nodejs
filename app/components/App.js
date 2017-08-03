@@ -6,7 +6,7 @@ import { MATCH_HASH, SPLIT_URL_PARAM } from 'constants';
 import styles from 'styles/app.scss';
 
 import Header from './Header';
-import Container from './Container';
+import Results from './Results';
 import Footer from './Footer';
 import LoadingIcon from './LoadingIcon';
 
@@ -60,7 +60,7 @@ class App extends Component {
       <Provider store={store}>
         <div className={styles.container}>
           <Header query={this.searchQuery} />
-          <Container />
+          <Results />
           { player.track || player.autoplay ? <Footer /> : '' }
         </div>
       </Provider>
