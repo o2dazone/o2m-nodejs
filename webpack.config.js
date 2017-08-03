@@ -5,7 +5,7 @@ const webpack = require('webpack');
 const srcPath = path.join(__dirname, '/app');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
-
+process.noDeprecation = true;
 module.exports = {
   devtool: 'eval',
   cache: true,
