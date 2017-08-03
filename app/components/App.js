@@ -58,7 +58,7 @@ class App extends Component {
 
     return (
       <Provider store={store}>
-        <div className={styles.wrap}>
+        <div className={styles.container}>
           <Header query={this.searchQuery} />
           <Container />
           { player.track || player.autoplay ? <Footer /> : '' }

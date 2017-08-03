@@ -55,7 +55,6 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           query: {
-            cacheDirectory: true,
             presets: [
               'react',
               'es2015',
@@ -74,9 +73,10 @@ module.exports = {
             {
               loader: 'css-loader',
               options: {
+                modules: true,
                 importLoaders: true,
                 localIdentName: '[hash:base64:5]',
-                sourceMap: true
+                sourceMap: false
               }
             },
             {
@@ -95,7 +95,7 @@ module.exports = {
               loader: 'sass-loader',
               options: {
                 importLoaders: true,
-                sourceMap: true,
+                sourceMap: false,
                 outputStyle: 'compressed'
               }
             }

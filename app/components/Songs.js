@@ -11,15 +11,15 @@ function makeTime(ms) {
 
 const Songs = ({results, playingTrack, onClickTrack }) => {
   return (
-    <div className={styles.songs}>
+    <div className={styles.container}>
       {results.map((track) => {
         return (
           <div className={playingTrack === track.id ? styles.playing : null} onClick={onClickTrack} key={track.id} data-trackid={track.id}>
             <AlbumArt art={track.albumArtRef ? track.albumArtRef[0].url : null} />
-            <div className={styles.song}>
-              {track.title}
-              <div className={styles.info}>{`${track.artist}${track.album ? ' · ' + track.album : ''}`}</div>
-              <div className={styles.time}>{makeTime(track.durationMillis)}</div>
+            <div>
+              <div>{track.title}</div>
+              <div>{`${track.artist}${track.album ? ' · ' + track.album : ''}`}</div>
+              <div>{makeTime(track.durationMillis)}</div>
             </div>
           </div>
         );

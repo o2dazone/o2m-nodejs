@@ -21,7 +21,7 @@ class Duration extends Component {
     const percent = { width: `${player.percent}%` };
 
     return (
-      <div className={styles.duration} onClick={onDurationClicked}>
+      <div className={styles.container} onClick={onDurationClicked}>
         <div style={percent} className={styles.elapsed} data-elapsed>
           <div className={styles.time} data-timer>
             {player.percent ? this.makeTime() : ''}

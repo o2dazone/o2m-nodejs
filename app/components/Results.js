@@ -28,7 +28,7 @@ class Results extends Component {
   render() {
     const { search, player } = this.props;
     return (
-      <div className={styles.results}>
+      <div className={styles.container}>
         {
           search.hasResults ?
             <Songs

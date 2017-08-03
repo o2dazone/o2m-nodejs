@@ -9,10 +9,6 @@
     "browser": true,
     "node": true
   },
-  "globals": {
-    "expect": true,
-    "__DEV__": true
-  },
   "rules": {
     "no-var": 1,                     // http://eslint.org/docs/rules/no-var
     "prefer-const": 1,               // http://eslint.org/docs/rules/prefer-const
@@ -41,7 +37,7 @@
     "no-duplicate-case": 1,          // http://eslint.org/docs/rules/no-duplicate-case
     "no-empty": 1,                   // http://eslint.org/docs/rules/no-empty
     "no-ex-assign": 1,               // http://eslint.org/docs/rules/no-ex-assign
-    "no-extra-boolean-cast": 0,      // http://eslint.org/docs/rules/no-extra-boolean-cast
+    "no-extra-boolean-cast": 1,      // http://eslint.org/docs/rules/no-extra-boolean-cast
     "no-extra-semi": 1,              // http://eslint.org/docs/rules/no-extra-semi
     "no-func-assign": 1,             // http://eslint.org/docs/rules/no-func-assign
     "no-inner-declarations": 1,      // http://eslint.org/docs/rules/no-inner-declarations
@@ -122,7 +118,7 @@
       "beforeColon": false,
       "afterColon": true
     }],
-    "new-cap": [0, {                 // http://eslint.org/docs/rules/new-cap
+    "new-cap": [1, {                 // http://eslint.org/docs/rules/new-cap
       "newIsCap": true
     }],
     "no-multiple-empty-lines": [1, { // http://eslint.org/docs/rules/no-multiple-empty-lines

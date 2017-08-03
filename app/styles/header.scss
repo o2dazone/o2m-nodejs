@@ -1,56 +1,56 @@
 @import 'variables';
 
-:local {
-  .header {
-    display: flex;
-    align-items: center;
-    flex: 0 0;
-    min-height: $header-height;
-    padding-right:20px;
+.container {
+  display: flex;
+  align-items: center;
+  flex: 0 0;
+  min-height: $header-height;
+  padding-right:20px;
 
-    form {
-      width: 100%;
+  form {
+    width: 100%;
+  }
+
+  label {
+    float: left;
+    text-indent: -999em;
+  }
+
+  input {
+    margin-left: 15px;
+    border-radius: 3px;
+    background: black;
+    width: 300px;
+    color: $color-gauss;
+    font-size: 18px;
+    line-height: $input-height;
+    height: $input-height;
+    text-indent: 8px;
+    &:focus {
+      box-shadow: 0px 0px 5px 2px $color-primary inset;
     }
+    &::-webkit-input-placeholder {
+      color: $color-kinsey;
+    }
+  }
 
-    label {
-      float: left;
-      text-indent: -999em;
+  @include mobile {
+    padding: 0 10px;
+    min-height: $header-height - 25px;
+    svg {
+      display: none;
     }
 
     input {
-      margin-left: 15px;
-      border-radius: 3px;
-      background: black;
-      width: 300px;
-      color: $color-gauss;
-      font-size: 18px;
-      line-height: $input-height;
-      height: $input-height;
-      text-indent: 8px;
-      &:focus {
-        box-shadow: 0px 0px 5px 2px $color-primary inset;
-      }
-      &::-webkit-input-placeholder {
-        color: $color-kinsey;
-      }
+      width: 100%;
+      margin-left: auto;
+      line-height: $input-height - 10px;
+      height: $input-height - 10px;
     }
   }
+}
 
-  .logo {
-    margin-left: 5px;
-    fill: $color-primary;
-  }
-
-  @media all and (max-width: 640px) {
-    .header {
-      padding: 0 20px;
-
-      input {
-        width: 100%;
-      }
-    }
-    .header svg {
-      display: none;
-    }
-  }
+.logo {
+  margin-left: 5px;
+  fill: $color-primary;
 }

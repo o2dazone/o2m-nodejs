@@ -27,7 +27,7 @@ class Player extends Component {
   render() {
     const { player, onToggleShuffle, onTogglePlayPause, onNextTrack, onPercentUpdate, onSoundCreated, onPreviousTrack } = this.props;
     return (
-      <div className={styles.player}>
+      <div className={styles.container}>
         { player ? <AudioModule onSoundCreated={onSoundCreated} onNextTrack={onNextTrack} onPercentUpdate={onPercentUpdate} streamUrl={player.streamUrl} /> : ''}
         <Previous size={PLAYER_ICON_SIZE + 8} className={styles.prevNext} onClick={onPreviousTrack} />
 

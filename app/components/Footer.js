@@ -131,7 +131,7 @@ class Footer extends Component {
     }
 
     return (
-      <div className={styles.footer}>
+      <div className={styles.container}>
         <Duration audioModule={this.audioModule} onDurationClicked={this.onDurationClicked} />
         <Info track={player.track} />
         <Player player={player} onSoundCreated={this.onSoundCreated} onNextTrack={this.onNextTrack} onPercentUpdate={this.onPercentUpdate} onPreviousTrack={this.onPreviousTrack} onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} />

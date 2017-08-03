@@ -1,37 +1,33 @@
 @import 'variables';
 
-:local {
-  .player {
-    right: 15px;
-    position: fixed;
-    white-space: nowrap;
-    overflow: hidden;
 
-    > * {
-      float: left;
-    }
+.container {
+  svg {
+    float: left;
   }
 
   svg {
     &:hover {
       cursor: pointer;
-      background-color: $color-highlight;
+      fill: $color-primary;
     }
   }
 
-  .prevNext {
-    margin-top: -3px;
+  @include desktop {
+    right: 15px;
+    position: fixed;
   }
 
-  @media all and (max-width: 640px) {
-    .player {
-      right: auto;
-      position: static;
-      flex-direction: column;
-      justify-content: center;
-      > * {
-        float: none;
-      }
+  @include mobile {
+    right: auto;
+    flex-direction: column;
+    justify-content: center;
+    > svg {
+      transform: scale(.8);
     }
   }
+}
+
+.prevNext {
+  margin-top: -3px;
 }

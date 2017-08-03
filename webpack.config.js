@@ -55,7 +55,16 @@ module.exports = {
       },
       { test: /\.js?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true,
+          presets: [
+            'react',
+            'es2015',
+            'stage-0',
+            'react-hmre'
+          ]
+        }
       },
       { test: /\.json?$/,
         use: 'json-loader'
@@ -68,7 +77,8 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              localIdentName: '[local]___[hash:base64:5]'
+              modules: true,
+              localIdentName: '[name]__[local]__[hash:base64:5]'
             }
           },
           {

@@ -9,6 +9,18 @@
   }
 }
 
+@mixin desktop {
+  @media all and (min-width: 550px) {
+    @content
+  }
+}
+
+@mixin mobile {
+  @media all and (max-width: 550px) {
+    @content
+  }
+}
+
 $color-wht: #ddd;
 $color-blk: #111;
 $color-gauss: darkgrey;
@@ -20,7 +32,6 @@ $color-primary: #00e7f5;
 $color-highlight: rgba(0, 0, 0, 0.5);
 
 $font-sans: "Roboto", Helvetica, Arial, sans-serif;
-$font-serif: "Georgia", serif;
 
 $info-album-height: 65px;
 $song-height: 50px;

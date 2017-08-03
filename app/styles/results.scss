@@ -1,29 +1,9 @@
 @import 'variables';
 
-:local {
-  .results {
-    flex: 1 0 auto;
-    order: 2;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  .noResults {
-    color: $color-gauss;
-    font-size: 20px;
-    font-weight: 300;
-    padding: 10px 0 0 15px;
-  }
-
-  .term {
-    margin-left: 5px;
-    color: $color-primary;
-  }
-
-  @media all and (max-width: 640px) {
-    .head {
-      display: none;
-    }
-  }
+.container {
+  flex: 1 0 auto;
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }

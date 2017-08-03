@@ -1,5 +1,5 @@
 /* eslint no-console: 0 */
-'use strict';
+const webpackConfig = require('../../webpack.config.js');
 
 const path = require('path');
 const express = require('express');
@@ -7,32 +7,26 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const isDeveloping = process.env.NODE_ENV !== 'production';
-const webpackConfig = isDeveloping ? require('../../webpack.config.js') : require('../../webpack.production.config.js');
-
 const app = express();
 const port = 3000;
+const compiler = webpack(webpackConfig);
+const middleware = webpackDevMiddleware(compiler, {
+  publicPath: webpackConfig.output.publicPath,
+  contentBase: 'src',
+  stats: {
+    version: false,
+    assets: false,
+    colors: true,
+    hash: false,
+    timings: false,
+    chunks: false,
+    chunkModules: false,
+    modules: false
+  }
+});
 
-if (isDeveloping) {
-  const compiler = webpack(webpackConfig);
-  const middleware = webpackDevMiddleware(compiler, {
-    publicPath: webpackConfig.output.publicPath,
-    contentBase: 'src',
-    stats: {
-      version: false,
-      assets: false,
-      colors: true,
-      hash: false,
-      timings: false,
-      chunks: false,
-      chunkModules: false,
-      modules: false
-    }
-  });
-
-  app.use(middleware);
-  app.use(webpackHotMiddleware(compiler));
-}
+app.use(middleware);
+app.use(webpackHotMiddleware(compiler));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/index.html'));

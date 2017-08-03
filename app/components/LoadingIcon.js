@@ -3,7 +3,7 @@ import styles from 'styles/loadingIcon.scss';
 
 const LoadingIcon = () => {
   return (
-    <div className={styles.spinner}>
+    <div className={styles.container}>
       <div className={styles.rect1} />
       <div className={styles.rect2} />
       <div className={styles.rect3} />

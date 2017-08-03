@@ -33,7 +33,7 @@ class Header extends Component {
   render() {
     const { query } = this.props;
     return (
-      <div className={styles.header}>
+      <div className={styles.container}>
         <Logo size={150} className={styles.logo} />
         <form action="/" method="get">
           <fieldset>

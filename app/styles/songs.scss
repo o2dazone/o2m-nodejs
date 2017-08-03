@@ -1,103 +1,115 @@
 @import 'variables';
 
-:local {
-  .songs {
-    overflow: auto;
-    display: flex;
-    flex-flow: column;
-    margin-bottom: $progress-bar-height;
-    justify-content: flex-start;
+.container {
+  overflow: auto;
+  display: flex;
+  flex-flow: column;
+  margin-bottom: $progress-bar-height;
+  justify-content: flex-start;
 
-    // individual song
-    > div {
-      min-height: $song-height + 10px;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: center;
-      padding: 5px 0;
+  // individual song, including album
+  > div {
+    @extend %individualSongWrapper
+  }
 
-      transition: background .25s;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
 
-      &:hover {
-        cursor: pointer;
-        background: $color-highlight
+  &::-webkit-scrollbar-thumb:vertical {
+    background: $color-primary;
+  }
+}
 
-        :global(.albumart):before {
-          background-size: 225px;
-          content: " ";
-          background-position: -68px -132px;
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-        }
+%individualSongWrapper {
+  min-height: $song-height + 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 5px 0;
+  transition: background .15s;
 
-        :global(.albumart):after {
-          content: " ";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: $color-highlight;
-        }
+  &:hover {
+    cursor: pointer;
+    background: $color-highlight
+
+    :global(.albumart) {
+      opacity: .6;
+    }
+  }
+
+  // song information
+  > div {
+    @extend %songInfo;
+  }
+}
+
+%songInfo {
+  flex: 1 0;
+  font-size: 16px;
+  color: $color-wht;
+  overflow: hidden;
+  margin-left: 12px;
+
+  div {
+    @extend %ellipsisOverflow;
+    line-height: 20px;
+    // title
+    &:nth-of-type(1) {
+      @include desktop {
+        padding-right: 50px;
       }
+    }
 
-      > span {
-        @extend %ellipsisOverflow;
-        @extend %trackInfoSizing;
+    // info
+    &:nth-of-type(2) {
+      font-size: 13px;
+      color: $color-leland;
+
+      @include desktop {
+        padding-right: 50px;
       }
     }
 
-    &::-webkit-scrollbar {
-      width: 10px;
+    // time
+    &:nth-of-type(3) {
+      font-size: 12px;
+      margin-top: -30px;
+      float: right;
+
+      @include mobile {
+        display: none;
+      }
     }
-
-    &::-webkit-scrollbar-thumb:vertical {
-      background: $color-primary;
-    }
   }
+}
 
-  .song {
-    flex: 1 0;
-    font-size: 16px;
-    color: $color-wht;
-    margin: 0 12px;
-  }
+.playing {
+  background: $color-highlight;
+  color: lighten($color-primary, 20%);
+  position: relative;
+}
 
-  .info {
-    font-size: 13px;
-    color: $color-leland;
-  }
+%trackInfoSizing {
+  flex: 1 0 auto;
+  line-height: $song-height;
+  min-height: $song-height;
+}
 
-  .time {
-    font-size: 12px;
-    margin-top: -23px;
-    float: right;
-  }
+:global(.albumart) {
+  @extend %trackInfoSizing;
+  transition: opacity .15s;
+  display: inline-block;
+  margin-left: 5px;
+  max-width: $song-height;
+  width: $song-height;
+  height: $song-height;
+  background-size: $song-height;
+  position: relative;
 
-  .playing {
-    background: $color-highlight;
-    color: lighten($color-primary, 20%);
-    position: relative;
-  }
-
-  %trackInfoSizing {
-    flex: 1 0 auto;
-    line-height: $song-height;
-    min-height: $song-height;
-  }
-
-  :global(.albumart) {
-    @extend %trackInfoSizing;
-    display: inline-block;
-    max-width: $song-height;
-    width: $song-height;
-    height: $song-height;
-    background-size: $song-height;
-    position: relative;
+  @include mobile {
+    display: none;
   }
 }
 

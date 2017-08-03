@@ -1,18 +1,16 @@
 @import 'variables';
 
-:local {
-  .footer {
-    background: #111;
-    position: relative;
-    min-height: $info-album-height;
-    display: flex;
-    align-items: center;
-    flex: 0 0;
-  }
 
-  @media all and (max-width: 640px) {
-    .footer {
-      justify-content: center;
-    }
+.container {
+  background: $color-blk;
+  position: relative;
+  min-height: $info-album-height;
+  display: flex;
+  align-items: center;
+  flex: 0 0;
+
+  @include mobile {
+    justify-content: center;
+    min-height: $info-album-height - 20px;
   }
 }

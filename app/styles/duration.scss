@@ -1,39 +1,41 @@
 @import 'variables';
 
-:local {
-  .duration {
-    position: absolute;
-    right: 0;
-    height: $progress-bar-height;
-    cursor: pointer;
-    background: black;
-    left: 0;
-    top: -$progress-bar-height;
-    z-index: 1;
-  }
+%durationBar {
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: $progress-bar-height;
+  cursor: pointer;
+}
 
-  .elapsed {
-    position: absolute;
-    right: 0;
-    height: $progress-bar-height;
-    cursor: pointer;
-    background: $color-primary;
-    left: 0;
-    width: 0%;
-  }
+.container {
+  @extend %durationBar;
+  background: $color-blk;
+  top: -$progress-bar-height;
+  z-index: 1;
+}
 
-  .time {
-    color: $color-wht;
-    font-size: 10px;
-    background: inherit;
-    position: absolute;
-    right: -17px;
-    height: $progress-bar-height + 6px;
-    width: 35px;
-    text-align: center;
-    line-height: $progress-bar-height + 6px;
-    top: -3px;
-    background: $color-primary;
-    border-radius: 3px;
+.elapsed {
+  @extend %durationBar;
+  background: $color-primary;
+  width: 0%;
+}
+
+.time {
+  color: $color-wht;
+  font-size: 10px;
+  background: inherit;
+  position: absolute;
+  right: -17px;
+  height: $progress-bar-height + 6px;
+  width: 35px;
+  text-align: center;
+  line-height: $progress-bar-height + 6px;
+  top: -3px;
+  background: $color-primary;
+  border-radius: 3px;
+
+  @include mobile {
+    display: none;
   }
 }
