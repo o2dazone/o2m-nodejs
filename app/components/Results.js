@@ -31,10 +31,10 @@ class Results extends Component {
       <div className={styles.results}>
         {
           search.hasResults ?
-          <Songs
-            results={search.results}
-            playingTrack={player.track ? player.track.id : null}
-            onClickTrack={this.onPlaySong} /> : ''
+            <Songs
+              results={search.results}
+              playingTrack={player.track ? player.track.id : null}
+              onClickTrack={this.onPlaySong} /> : ''
         }
       </div>
     );
