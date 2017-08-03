@@ -20,7 +20,7 @@ class Results extends Component {
 
   onPlaySong(e) {
     const { playSong, search } = this.props;
-    const trackId = e.target.parentNode.dataset.trackid;
+    const trackId = e.currentTarget.dataset.trackid;
     const track = getTrackById(trackId, search.results);
     playSong(track);
   }

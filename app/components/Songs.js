@@ -15,12 +15,11 @@ const Songs = ({results, playingTrack, onClickTrack }) => {
       {results.map((track) => {
         return (
           <div className={playingTrack === track.id ? styles.playing : null} onClick={onClickTrack} key={track.id} data-trackid={track.id}>
-            <div className={styles.eq} />
             <AlbumArt art={track.albumArtRef ? track.albumArtRef[0].url : null} />
-            <div className={styles.title}>
+            <div className={styles.song}>
               {track.title}
-              <div className={styles.time}>{makeTime(track.durationMillis)}</div>
               <div className={styles.info}>{`${track.artist}${track.album ? ' · ' + track.album : ''}`}</div>
+              <div className={styles.time}>{makeTime(track.durationMillis)}</div>
             </div>
           </div>
         );

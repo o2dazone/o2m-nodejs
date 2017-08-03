@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSearchResults } from 'actions/search';
 import { makeHistory } from 'helpers';
+import { Logo } from 'icons';
 
 class Header extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class Header extends Component {
     const { query } = this.props;
     return (
       <div className={styles.header}>
-        <h1>o2mdb</h1>
+        <Logo size={150} className={styles.logo} />
         <form action="/" method="get">
           <fieldset>
             <label>Search</label>

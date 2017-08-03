@@ -4,6 +4,7 @@ const path = require('path');
 module.exports = {
   entry: {
     vendor: [
+      'add-asset-html-webpack-plugin',
       'babel-cli',
       'babel-preset-react',
       'babel-preset-react-hmre',

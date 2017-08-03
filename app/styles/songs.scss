@@ -3,24 +3,25 @@
 :local {
   .songs {
     overflow: auto;
-    color: $color-leland;
     display: flex;
     flex-flow: column;
-    font-size: 18px;
     margin-bottom: $progress-bar-height;
     justify-content: flex-start;
 
     // individual song
     > div {
-      min-height: $song-height;
+      min-height: $song-height + 10px;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       align-items: center;
+      padding: 5px 0;
+
+      transition: background .25s;
 
       &:hover {
         cursor: pointer;
-        background: $color-highlight;
+        background: $color-highlight
 
         :global(.albumart):before {
           background-size: 225px;
@@ -44,7 +45,7 @@
         }
       }
 
-      > span, svg {
+      > span {
         @extend %ellipsisOverflow;
         @extend %trackInfoSizing;
       }
@@ -59,16 +60,21 @@
     }
   }
 
-  .title {
+  .song {
     flex: 1 0;
+    font-size: 16px;
+    color: $color-wht;
     margin: 0 12px;
   }
 
   .info {
-    font-size: 14px;
+    font-size: 13px;
+    color: $color-leland;
   }
 
   .time {
+    font-size: 12px;
+    margin-top: -23px;
     float: right;
   }
 
@@ -76,16 +82,6 @@
     background: $color-highlight;
     color: lighten($color-primary, 20%);
     position: relative;
-    > .eq {
-      @extend %eq;
-      background-size: 59px !important;
-      position: absolute;
-      z-index: 2;
-      top: 0;
-      left: 0;
-      width: $song-height;
-      height: $song-height;
-    }
   }
 
   %trackInfoSizing {

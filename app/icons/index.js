@@ -4,3 +4,4 @@ export Shuffle from './Shuffle';
 export Play from './Play';
 export Pause from './Pause';
 export Album from './Album';
+export Logo from './Logo';
