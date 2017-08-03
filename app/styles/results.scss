@@ -8,7 +8,8 @@
 }
 
 .songs {
-  overflow: auto;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
   display: flex;
   flex: 1 0 100%;
   flex-flow: column;
@@ -22,6 +23,10 @@
 
   &::-webkit-scrollbar {
     width: 10px;
+  }
+
+  &::-webkit-scrollbar-corner {
+    display: none;
   }
 
   &::-webkit-scrollbar-thumb:vertical {
