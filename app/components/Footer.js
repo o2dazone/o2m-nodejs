@@ -47,11 +47,10 @@ class Footer extends Component {
 
     const trackid = player.track.id;
     const results = search.results;
-    let followingTrack;
 
     for (let i = 0; i < results.length; i++) {
-      if (results[i].id === trackid && (followingTrack = results[i + itr])) {
-        return followingTrack;
+      if (results[i].id === trackid) {
+        return results[i + itr];
       }
     }
   }

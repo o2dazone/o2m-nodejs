@@ -46,18 +46,13 @@ module.exports = {
   module: {
     rules: [
       { test: /\.js?$/,
+        enforce: 'pre',
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          query: {
-            presets: [
-              'react',
-              'es2015',
-              'stage-0',
-              'react-hmre'
-            ]
-          }
-        }
+        loader: 'eslint-loader'
+      },
+      { test: /\.js?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       },
       { test: /\.json?$/,
         use: 'json-loader'

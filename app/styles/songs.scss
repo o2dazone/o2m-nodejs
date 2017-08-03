@@ -33,6 +33,16 @@
           width: 100%;
           height: 100%;
         }
+
+        :global(.albumart):after {
+          content: " ";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: $color-highlight;
+        }
       }
 
       &.playing {
@@ -56,6 +66,7 @@
       // title
       > span:nth-of-type(2) {
         width: 35%;
+        text-indent: 10px;
       }
 
       // artist
@@ -84,7 +95,6 @@
 
   %trackInfoSizing {
     flex: 1 0 auto;
-    text-indent: 10px;
     line-height: $song-height;
     min-height: $song-height;
   }

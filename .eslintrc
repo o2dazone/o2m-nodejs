@@ -1,5 +1,10 @@
 {
   "parser": "babel-eslint", // https://github.com/babel/babel-eslint
+  "parserOptions": {
+    "sourceType": "module",
+    "allowImportExportEverywhere": false,
+    "codeFrame": false
+  },
   "env": {
     "browser": true,
     "node": true
@@ -8,24 +13,6 @@
     "expect": true,
     "sinon": true,
     "__DEV__": true
-  },
-  "ecmaFeatures": {
-    "arrowFunctions": true,
-    "blockBindings": true,
-    "classes": true,
-    "defaultParams": true,
-    "destructuring": true,
-    "forOf": true,
-    "generators": false,
-    "modules": true,
-    "objectLiteralComputedProperties": true,
-    "objectLiteralDuplicateProperties": false,
-    "objectLiteralShorthandMethods": true,
-    "objectLiteralShorthandProperties": true,
-    "spread": true,
-    "superInFunctions": true,
-    "templateStrings": true,
-    "jsx": true
   },
   "rules": {
     "no-var": 1,                     // http://eslint.org/docs/rules/no-var
@@ -70,7 +57,7 @@
     /**
      * Best practices
      */
-    "consistent-return": 1,          // http://eslint.org/docs/rules/consistent-return
+    "consistent-return": 0,          // http://eslint.org/docs/rules/consistent-return
     "curly": [1, "multi-line"],      // http://eslint.org/docs/rules/curly
     "default-case": 1,               // http://eslint.org/docs/rules/default-case
     "dot-notation": [1, {            // http://eslint.org/docs/rules/dot-notation
@@ -130,7 +117,7 @@
       "after": true
     }],
     "comma-style": [1, "last"],      // http://eslint.org/docs/rules/comma-style
-    "eol-last": 1,                   // http://eslint.org/docs/rules/eol-last
+    "eol-last": 0,                   // http://eslint.org/docs/rules/eol-last
     "func-names": 0,                 // http://eslint.org/docs/rules/func-names
     "key-spacing": [1, {             // http://eslint.org/docs/rules/key-spacing
       "beforeColon": false,
@@ -155,11 +142,10 @@
       "before": false,
       "after": true
     }],
-    "space-after-keywords": 1,       // http://eslint.org/docs/rules/space-after-keywords
+    "keyword-spacing": 1,       // http://eslint.org/docs/rules/space-after-keywords
     "space-before-blocks": 1,        // http://eslint.org/docs/rules/space-before-blocks
     "space-before-function-paren": [0, "never"], // http://eslint.org/docs/rules/space-before-function-paren
     "space-infix-ops": 1,            // http://eslint.org/docs/rules/space-infix-ops
-    "space-return-throw-case": 1,    // http://eslint.org/docs/rules/space-return-throw-case
     "spaced-comment": [1, "always",  {// http://eslint.org/docs/rules/spaced-comment
       "exceptions": ["-", "+"],
       "markers": ["=", "!"]           // space here to support sprockets directives
@@ -173,15 +159,14 @@
     "react/jsx-sort-props": 0,
     "react/jsx-uses-react": 1,
     "react/jsx-uses-vars": 1,
-    "react/no-did-mount-set-state": [1, "allow-in-func"],
+    "react/no-did-mount-set-state": [1, "disallow-in-func"],
     "react/no-did-update-set-state": 1,
     "react/no-multi-comp": 0,
     "react/no-unknown-property": 1,
     "react/prop-types": 0,
     "react/react-in-jsx-scope": 1,
     "react/self-closing-comp": 1,
-    "react/sort-comp": 1,
-    "react/wrap-multilines": 1
+    "react/sort-comp": 1
   },
   "plugins": [
     "react"

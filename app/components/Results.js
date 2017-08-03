@@ -57,8 +57,16 @@ class Results extends Component {
           {this.makeResultsHeader()}
         </div>
 
-        { search.hasResults ? <SongLegends /> : ''}
-        { search.hasResults ? <Songs results={search.results} playingTrack={player.track ? player.track.id : null} onClickTrack={this.onPlaySong} /> : '' }
+        { search.hasResults ?
+          <SongLegends /> : ''
+        }
+
+        { search.hasResults ?
+          <Songs
+            results={search.results}
+            playingTrack={player.track ? player.track.id : null}
+            onClickTrack={this.onPlaySong} /> : ''
+        }
       </div>
     );
   }
