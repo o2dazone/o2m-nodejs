@@ -1,9 +1,17 @@
 {
-  "parser": "babel-eslint", // https://github.com/babel/babel-eslint
+  "parser": "babel-eslint", // https://github.com/babel/babel-eslint,
+  "plugins": [
+    "react"
+  ],
   "parserOptions": {
     "sourceType": "module",
     "allowImportExportEverywhere": false,
-    "codeFrame": false
+    "codeFrame": false,
+    "ecmaFeatures": {
+      "jsx": true,
+      "classes": true,
+      "modules": true
+    }
   },
   "env": {
     "browser": true,
@@ -19,10 +27,7 @@
     "no-shadow": 0,                  // http://eslint.org/docs/rules/no-shadow
     "no-shadow-restricted-names": 1, // http://eslint.org/docs/rules/no-shadow-restricted-names
     "no-undef": 1,                   // http://eslint.org/docs/rules/no-undef
-    "no-unused-vars": [1, {          // http://eslint.org/docs/rules/no-unused-vars
-      "vars": "local",
-      "args": "after-used"
-    }],
+    "no-unused-vars": [2, {"varsIgnorePattern": "React"}],
     "no-use-before-define": 1,       // http://eslint.org/docs/rules/no-use-before-define
 
     /**
@@ -162,8 +167,5 @@
     "react/react-in-jsx-scope": 1,
     "react/self-closing-comp": 1,
     "react/sort-comp": 1
-  },
-  "plugins": [
-    "react"
-  ]
+  }
 }

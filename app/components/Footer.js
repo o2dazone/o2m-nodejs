@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import throttle from 'lodash.throttle';
 import { fetchAutoplayTrack } from 'actions/search';
-import { togglePlayPause, receiveAutoplayTrackId, toggleShuffle, playSong, updatePercentPlayed, addPlayer, fetchStreamUrl } from 'actions/player';
+import { togglePlayPause, receiveAutoplayTrackId, toggleShuffle, playSong, addPlayer, fetchStreamUrl } from 'actions/player';
 import Info from './Info';
 import Player from './Player';
 import Duration from './Duration';
@@ -15,11 +15,14 @@ class Footer extends Component {
     this.onTogglePlayPause = this.onTogglePlayPause.bind(this);
     this.onToggleShuffle = this.onToggleShuffle.bind(this);
     this.onNextTrack = this.onNextTrack.bind(this);
-    this.onPercentUpdate = throttle(this.onPercentUpdate.bind(this), 1000);
+    this.onPercentUpdate = throttle(this.onPercentUpdate.bind(this), 250);
     this.onPreviousTrack = this.onPreviousTrack.bind(this);
     this.onSoundCreated = this.onSoundCreated.bind(this);
     this.onDurationClicked = this.onDurationClicked.bind(this);
     this.audioModule = null;
+    this.state = {
+      playerPercent: 0
+    };
   }
 
   componentDidMount() {
@@ -70,8 +73,10 @@ class Footer extends Component {
   }
 
   onPercentUpdate() {
-    const { updatePercentPlayed, player } = this.props;
-    updatePercentPlayed(((this.audioModule.position + player.begin) / player.track.durationMillis * 100).toFixed(1));
+    const { player } = this.props;
+    this.setState({
+      playerPercent: ((this.audioModule.position + player.begin) / player.track.durationMillis * 100).toFixed(2)
+    });
   }
 
   onSoundCreated(obj) {
@@ -132,7 +137,7 @@ class Footer extends Component {
 
     return (
       <div className={styles.container}>
-        <Duration audioModule={this.audioModule} onDurationClicked={this.onDurationClicked} />
+        <Duration playerPercent={this.state.playerPercent} audioModule={this.audioModule} onDurationClicked={this.onDurationClicked} />
         <Info track={player.track} />
         <Player player={player} onSoundCreated={this.onSoundCreated} onNextTrack={this.onNextTrack} onPercentUpdate={this.onPercentUpdate} onPreviousTrack={this.onPreviousTrack} onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} />
       </div>
@@ -148,4 +153,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { receiveAutoplayTrackId, fetchAutoplayTrack, togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer, fetchStreamUrl })(Footer);
+export default connect(mapStateToProps, { receiveAutoplayTrackId, fetchAutoplayTrack, togglePlayPause, toggleShuffle, playSong, addPlayer, fetchStreamUrl })(Footer);

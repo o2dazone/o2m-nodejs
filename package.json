@@ -12,7 +12,7 @@
     "postinstall": "node scripts/postinstall.js",
     "build": "rimraf dist && NODE_ENV=production webpack --config ./webpack.production.config.js",
     "build:dll": "webpack --config vendor.webpack.config.js",
-    "eslint": "eslint ."
+    "eslint": "eslint ./app"
   },
   "dependencies": {
     "babel-cli": "^6.4.0",

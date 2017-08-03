@@ -17,21 +17,20 @@ class Duration extends Component {
   }
 
   render() {
-    const { player, onDurationClicked } = this.props;
-    const percent = { width: `${player.percent}%` };
+    const { onDurationClicked, playerPercent } = this.props;
+    const percent = { width: `${playerPercent}%` };
 
     return (
       <div className={styles.container} onClick={onDurationClicked}>
         <div style={percent} className={styles.elapsed} data-elapsed>
           <div className={styles.time} data-timer>
-            {player.percent ? this.makeTime() : ''}
+            {percent ? this.makeTime() : ''}
           </div>
         </div>
       </div>
     );
   }
 }
-
 
 const mapStateToProps = state => {
   const { player } = state;
