@@ -50,15 +50,16 @@
   }
 
   .title {
-    width: 35%;
+    flex: 1 0;
+    margin: 0 12px;
   }
 
-  .artist {
-    width: 25%;
+  .info {
+    font-size: 14px;
   }
 
-  .album {
-    width: 25%;
+  .time {
+    float: right;
   }
 
   .playing {
@@ -92,38 +93,6 @@
     height: $song-height;
     background-size: $song-height;
     position: relative;
-  }
-
-
-  @media all and (max-width: 640px) {
-    %trackInfoSizing {
-      line-height: 20px;
-      min-height: 20px;
-    }
-
-    .songs > div {
-      min-height: 50px;
-      font-size: 15px;
-      margin-bottom: 0px;
-
-
-      // title
-      > span:nth-of-type(2) {
-        width: 80%;
-        margin-top: -22px;
-      }
-
-      // artist
-      > span:nth-of-type(3) {
-        width: 100%;
-        text-indent: 42px;
-        margin-top: -30px;
-      }
-
-      > span:last-child {
-        display: none;
-      }
-    }
   }
 }
 
