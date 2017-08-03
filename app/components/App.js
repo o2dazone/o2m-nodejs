@@ -69,11 +69,12 @@ class App extends Component {
 }
 
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
+  const { player, index } = state;
   return {
-    player: state.player,
-    index: state.index
+    player,
+    index
   };
-}
+};
 
 export default connect(mapStateToProps, { receiveAutoplayTrackId, receiveIndex, getSearchData })(App);

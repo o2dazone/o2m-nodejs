@@ -34,7 +34,7 @@ if (isDeveloping) {
   app.use(webpackHotMiddleware(compiler));
 }
 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/index.html'));
 });
 

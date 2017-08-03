@@ -24,10 +24,24 @@ class Footer extends Component {
 
   componentDidMount() {
     const { player, fetchAutoplayTrack, receiveAutoplayTrackId } = this.props;
+    document.addEventListener('keydown', this.handleKeyDown.bind(this));
 
     if (player.autoplay) {
       fetchAutoplayTrack(player.autoplay);
       receiveAutoplayTrackId(null);
+    }
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyDown.bind(this));
+  }
+
+  handleKeyDown(e) {
+    if (e.target.tagName !== 'INPUT') {
+      if (e.key === ' ') {
+        e.preventDefault();
+        this.onTogglePlayPause();
+      }
     }
   }
 
@@ -126,11 +140,12 @@ class Footer extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
+  const { player, search } = state;
   return {
-    player: state.player,
-    search: state.search
+    player,
+    search
   };
-}
+};
 
 export default connect(mapStateToProps, { receiveAutoplayTrackId, fetchAutoplayTrack, togglePlayPause, toggleShuffle, playSong, updatePercentPlayed, addPlayer, fetchStreamUrl })(Footer);

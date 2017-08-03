@@ -1,23 +1,23 @@
 import fetch from 'isomorphic-fetch';
-import { INDEX_URL } from 'constants';
 
 import {
+  INDEX_URL,
   RECEIVE_INDEX
 } from 'constants';
 
-export function receiveIndex(index) {
+export const receiveIndex = index => {
   return {
     type: RECEIVE_INDEX,
     index
   };
-}
+};
 
-export function getSearchData() {
-  return function (dispatch) {
+export const getSearchData = () => {
+  return dispatch => {
     return fetch(INDEX_URL)
       .then(response => response.json())
       .then(response => {
         dispatch(receiveIndex(response));
       });
   };
-}
+};
