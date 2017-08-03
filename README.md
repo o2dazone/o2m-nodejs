@@ -1,7 +1,6 @@
 # o2damusic nodeJS
 
 ## Setup
-clone repo
 `pnpm i`
 
 ## dev startup
@@ -9,4 +8,4 @@ clone repo
 
 ## prod
 `npm run build`
-(builds serverless assets)
+
