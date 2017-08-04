@@ -4,12 +4,16 @@
 .container {
   svg {
     float: left;
-  }
 
-  svg {
-    &:hover {
-      cursor: pointer;
-      fill: $color-primary;
+    @include mobile {
+      transform: scale(.8);
+    }
+
+    @include desktop {
+      &:hover {
+        cursor: pointer;
+        fill: $color-primary;
+      }
     }
   }
 
@@ -22,9 +26,6 @@
     right: auto;
     flex-direction: column;
     justify-content: center;
-    > svg {
-      transform: scale(.8);
-    }
   }
 }
 

@@ -5,7 +5,6 @@
   align-items: center;
   flex: 0 0;
   min-height: $header-height;
-  padding-right:20px;
 
   form {
     width: 100%;
@@ -26,12 +25,20 @@
     line-height: $input-height;
     height: $input-height;
     text-indent: 8px;
+    transition: box-shadow .35s;
+
     &:focus {
       box-shadow: 0px 0px 5px 2px $color-primary inset;
     }
     &::-webkit-input-placeholder {
       color: $color-kinsey;
     }
+  }
+
+  @include desktop {
+    padding-right:20px;
+    margin: 0 25%;
+    transition: min-height 1s, margin-left 1s;
   }
 
   @include mobile {
@@ -53,4 +60,18 @@
 .logo {
   margin-left: 5px;
   fill: $color-primary;
+  transition: width 1s;
+}
+
+.small {
+  @include desktop {
+    .logo {
+      width: 80px;
+    }
+
+    &.container {
+      margin: 0;
+    }
+  }
+
 }

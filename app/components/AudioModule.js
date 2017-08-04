@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import { connect } from 'react-redux';
 import { soundManager as sm } from 'soundmanager2';
+import { connect } from 'react-redux';
 
 class AudioModule extends Component {
   componentWillMount() {

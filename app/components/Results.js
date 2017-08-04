@@ -10,8 +10,6 @@ class Songs extends Component {
   constructor(props) {
     super(props);
     this.onPlaySong = this.onPlaySong.bind(this);
-    this.makeSongs = this.makeSongs.bind(this);
-    this.makeTime = this.makeTime.bind(this);
     this.fetching = null;
   }
 
@@ -42,9 +40,9 @@ class Songs extends Component {
           <div className={playingTrack === track.id ? styles.playing : null} onClick={this.onPlaySong} key={track.id} data-trackid={track.id}>
             <AlbumArt art={track.albumArtRef ? track.albumArtRef[0].url : null} />
             <div>
-              <div>{track.title}</div>
-              <div>{`${track.artist}${track.album ? ' · ' + track.album : ''}`}</div>
-              <div>{this.makeTime(track.durationMillis)}</div>
+              <p>{track.title}</p>
+              <p>{`${track.artist}${track.album ? ' · ' + track.album : ''}`}</p>
+              <p>{this.makeTime(track.durationMillis)}</p>
             </div>
           </div>
         );
@@ -53,12 +51,10 @@ class Songs extends Component {
   }
 
   render() {
-    const { search } = this.props;
+    const { search: { hasResults } } = this.props;
     return (
-      <div className={styles.container}>
-        {
-          search.hasResults ? <div className={styles.songs}>{this.makeSongs()}</div> : ''
-        }
+      <div className={`${styles.container} ${hasResults ? styles.show : '' }`}>
+        { hasResults ? this.makeSongs() : '' }
       </div>
     );
   }

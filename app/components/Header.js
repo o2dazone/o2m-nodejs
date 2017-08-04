@@ -31,9 +31,9 @@ class Header extends Component {
   }
 
   render() {
-    const { query } = this.props;
+    const { query, search } = this.props;
     return (
-      <div className={styles.container}>
+      <div className={`${styles.container} ${search.query ? styles.small : ''}`}>
         <Logo size={150} className={styles.logo} />
         <form action="/" method="get">
           <fieldset>
@@ -47,9 +47,10 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => {
-  const { player } = state;
+  const { player, search } = state;
   return {
-    player
+    player,
+    search
   };
 };
 

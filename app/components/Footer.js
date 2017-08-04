@@ -137,9 +137,21 @@ class Footer extends Component {
 
     return (
       <div className={styles.container}>
-        <Duration playerPercent={this.state.playerPercent} audioModule={this.audioModule} onDurationClicked={this.onDurationClicked} />
+        <Duration
+          playerPercent={this.state.playerPercent}
+          audioModule={this.audioModule}
+          onDurationClicked={this.onDurationClicked} />
+
         <Info track={player.track} />
-        <Player player={player} onSoundCreated={this.onSoundCreated} onNextTrack={this.onNextTrack} onPercentUpdate={this.onPercentUpdate} onPreviousTrack={this.onPreviousTrack} onTogglePlayPause={this.onTogglePlayPause} onToggleShuffle={this.onToggleShuffle} />
+
+        <Player
+          player={player}
+          onSoundCreated={this.onSoundCreated}
+          onNextTrack={this.onNextTrack}
+          onPercentUpdate={this.onPercentUpdate}
+          onPreviousTrack={this.onPreviousTrack}
+          onTogglePlayPause={this.onTogglePlayPause}
+          onToggleShuffle={this.onToggleShuffle} />
       </div>
     );
   }

@@ -1,17 +1,13 @@
 @import 'variables';
 
 .container {
-  display: flex;
-  flex: 1;
+  opacity: 0;
+  transition: opacity 1s;
   flex-direction: row;
-  width: 100%;
-}
-
-.songs {
   overflow: scroll;
   -webkit-overflow-scrolling: touch;
   display: flex;
-  flex: 1 0 100%;
+  flex: 1;
   flex-flow: column;
   margin-bottom: $progress-bar-height;
   justify-content: flex-start;
@@ -34,6 +30,10 @@
   }
 }
 
+.show {
+  opacity: 1;
+}
+
 %individualSongWrapper {
   min-height: $song-height + 10px;
   display: flex;
@@ -42,18 +42,19 @@
   align-items: center;
   padding: 5px 0;
   transition: background .15s;
+  @include desktop {
+    &:hover {
+      cursor: pointer;
+      background: $color-highlight
 
-  &:hover {
-    cursor: pointer;
-    background: $color-highlight
-
-    :global(.albumart) {
-      opacity: .6;
+      :global(.albumart) {
+        opacity: .6;
+      }
     }
   }
 
-  // song information
-  > div {
+  // song information, without album
+  div {
     @extend %songInfo;
   }
 }
@@ -65,7 +66,7 @@
   overflow: hidden;
   margin-left: 12px;
 
-  div {
+  p {
     @extend %ellipsisOverflow;
     line-height: 20px;
     // title
@@ -104,17 +105,13 @@
   position: relative;
 }
 
-%trackInfoSizing {
-  flex: 1 0 auto;
-  line-height: $song-height;
-  min-height: $song-height;
-}
-
 :global(.albumart) {
-  @extend %trackInfoSizing;
+  flex: 1 0 auto;
   transition: opacity .15s;
   display: inline-block;
   margin-left: 5px;
+  line-height: $song-height;
+  min-height: $song-height;
   max-width: $song-height;
   width: $song-height;
   height: $song-height;
