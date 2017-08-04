@@ -35,12 +35,7 @@ class Header extends Component {
     return (
       <div className={`${styles.container} ${search.query ? styles.small : ''}`}>
         <Logo size={150} className={styles.logo} />
-        <form action="/" method="get">
-          <fieldset>
-            <label>Search</label>
-            <input type="text" placeholder="Search for songs" autoComplete="off" onKeyDown={this.onSearch} defaultValue={query ? query : ''} />
-          </fieldset>
-        </form>
+        <input type="text" placeholder="Search for songs" autoComplete="off" onKeyDown={this.onSearch} defaultValue={query ? query : ''} />
       </div>
     );
   }

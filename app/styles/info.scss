@@ -3,7 +3,7 @@
 
 .container {
   color: $color-leland;
-  width: 70%;
+  width: 100%;
   font-weight: 300;
 
   :global(.albumart) {
@@ -22,7 +22,7 @@
 
 .name, .artistalbum {
   @extend %ellipsisOverflow;
-  width: 75%;
+  width: 80%;
   display: block;
 }
 
