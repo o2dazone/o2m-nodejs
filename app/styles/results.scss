@@ -14,7 +14,16 @@
 
   // individual song, including album
   > div {
-    @extend %individualSongWrapper
+    @extend %individualSongWrapper;
+
+    &.playing {
+      background: $color-highlight;
+
+      > div > p {
+        position: relative;
+        color: lighten($color-primary, 20%);
+      }
+    }
   }
 
   &::-webkit-scrollbar {
@@ -47,19 +56,14 @@
       cursor: pointer;
       background: $color-highlight
 
-      :global(.albumart) {
+      :global(.aa) {
         opacity: .6;
       }
     }
   }
-
-  // song information, without album
-  div {
-    @extend %songInfo;
-  }
 }
 
-%songInfo {
+.track > div {
   flex: 1 0;
   font-size: 16px;
   color: $color-wht;
@@ -99,13 +103,7 @@
   }
 }
 
-.playing {
-  background: $color-highlight;
-  color: lighten($color-primary, 20%);
-  position: relative;
-}
-
-:global(.albumart) {
+:global(.aa) {
   flex: 1 0 auto;
   transition: opacity .15s;
   display: inline-block;

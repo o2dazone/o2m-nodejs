@@ -5,7 +5,17 @@ export default function search(state = { hasResults: false, results: [] }, actio
 
   switch (type) {
   case actionTypes.RECEIVE_SEARCH_RESULTS:
-    return {...state, results, query, hasResults: results.length ? true : false};
+    const sorted = results.sort((a, b) => {
+      if (a.album === b.album) {
+        return a.trackNumber - b.trackNumber;
+      } else if (a.album > b.album) {
+        return 1;
+      } else if (a.album < b.album) {
+        return -1;
+      }
+    });
+
+    return {...state, results: sorted, query, hasResults: results.length ? true : false};
   default:
     return state;
   }

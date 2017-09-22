@@ -20,7 +20,7 @@ class Songs extends Component {
 
   onPlaySong(e) {
     const { playSong, search } = this.props;
-    const trackId = e.currentTarget.dataset.trackid;
+    const trackId = e.currentTarget.dataset.id;
     const track = getTrackById(trackId, search.results);
     playSong(track);
   }
@@ -36,12 +36,13 @@ class Songs extends Component {
     const playingTrack = player.track ? player.track.id : null;
     return (
       results.map((track) => {
+        const { id, albumArtRef, trackNumber, title, artist, album } = track;
         return (
-          <div className={playingTrack === track.id ? styles.playing : null} onClick={this.onPlaySong} key={track.id} data-trackid={track.id}>
-            <AlbumArt art={track.albumArtRef ? track.albumArtRef[0].url : null} />
+          <div className={`${styles.track} ${playingTrack === id ? styles.playing : ''}`} onClick={this.onPlaySong} key={track.id} data-id={track.id}>
+            <AlbumArt art={albumArtRef ? albumArtRef[0].url : null} />
             <div>
-              <p>{track.title}</p>
-              <p>{`${track.artist}${track.album ? ' · ' + track.album : ''}`}</p>
+              <p>{`${trackNumber ? `${trackNumber}. ` : ''}`}{title}</p>
+              <p>{`${artist}${album ? ' · ' + album : ''}`}</p>
               <p>{this.makeTime(track.durationMillis)}</p>
             </div>
           </div>

@@ -75,7 +75,7 @@ module.exports = {
               options: {
                 modules: true,
                 importLoaders: true,
-                localIdentName: '[hash:base64:5]',
+                localIdentName: '[hash:base64:3]',
                 sourceMap: false
               }
             },
