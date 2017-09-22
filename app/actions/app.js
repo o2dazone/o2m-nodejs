@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 import {
   INDEX_URL,
   RECEIVE_INDEX

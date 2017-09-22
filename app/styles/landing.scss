@@ -1,0 +1,10 @@
+@import 'variables';
+
+.container {
+  flex-direction: row;
+  -webkit-overflow-scrolling: touch;
+  display: flex;
+  flex: 1;
+  flex-flow: column;
+  justify-content: flex-start;
+}

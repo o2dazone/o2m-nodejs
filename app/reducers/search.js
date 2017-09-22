@@ -1,6 +1,6 @@
 import * as actionTypes from 'constants';
 
-export default function search(state = { hasResults: false, results: [] }, action) {
+export default function search(state = { showLanding: true, results: [] }, action) {
   const { type, results, query } = action;
 
   switch (type) {
@@ -15,7 +15,7 @@ export default function search(state = { hasResults: false, results: [] }, actio
       }
     });
 
-    return {...state, results: sorted, query, hasResults: results.length ? true : false};
+    return {...state, results: sorted, query, showLanding: false};
   default:
     return state;
   }

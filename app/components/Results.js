@@ -52,7 +52,9 @@ class Songs extends Component {
   }
 
   render() {
-    const { search: { hasResults } } = this.props;
+    const { search: { results } } = this.props;
+    const hasResults = results.length;
+
     return (
       <div className={`${styles.container} ${hasResults ? styles.show : '' }`}>
         { hasResults ? this.makeSongs() : '' }

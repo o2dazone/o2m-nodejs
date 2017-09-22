@@ -2,13 +2,12 @@ dependencies:
   babel-cli: 6.24.1
   babel-core: 6.25.0
   babel-plugin-module-resolver: 2.7.1
-  isomorphic-fetch: 2.2.1
   json-loader: 0.5.7
   lodash.throttle: 4.1.1
-  node-fetch: 1.7.3
   react: 15.6.1
   react-dom: 15.6.1
   react-redux: 4.4.8
+  react-transform-hmr: 1.0.4
   redux: 3.7.2
   redux-thunk: 2.2.0
   rimraf: 2.6.1
@@ -31,11 +30,9 @@ devDependencies:
   file-loader: 0.11.2
   html-webpack-plugin: 2.30.1
   node-sass: 4.5.3
-  react-transform-hmr: 1.0.4
   sass-loader: 6.0.6
   style-loader: 0.18.2
   webpack: 2.7.0
-  webpack-bundle-analyzer: 2.9.0
   webpack-dev-middleware: 1.12.0
   webpack-hot-middleware: 2.19.1
 packages:
@@ -1696,7 +1693,6 @@ packages:
     resolution:
       integrity: sha1-BzxpdUbOB4DOI75KKOKT5AvDDII=
   /dom-walk/0.1.1:
-    dev: true
     resolution:
       integrity: sha1-ZyIm3HTI95mtNTB9+TaroRrNYBg=
   /domain-browser/1.1.7:
@@ -1730,10 +1726,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-3NhIiib1Y9YQeeSMn3t+Mjc2gs8=
-  /duplexer/0.1.1:
-    dev: true
-    resolution:
-      integrity: sha1-rOb/gIwc5mtX0ev5eXessCM0z8E=
   /ecc-jsbn/0.1.1:
     dependencies:
       jsbn: 0.1.1
@@ -1745,10 +1737,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-WQxhFWsK4vTwJVcyoViyZrxWsh0=
-  /ejs/2.5.7:
-    dev: true
-    resolution:
-      integrity: sha1-zIcsFoiArjxxiXYv1f/ACJbJUYo=
   /electron-to-chromium/1.3.21:
     dev: true
     resolution:
@@ -2054,10 +2042,6 @@ packages:
   /filename-regex/2.0.1:
     resolution:
       integrity: sha1-wcS5vuPglyXdsQa3XB4wH+LxiyY=
-  /filesize/3.5.10:
-    dev: true
-    resolution:
-      integrity: sha1-/I+iPdtO+eXgq24eZPZ5okpWdh8=
   /fill-range/2.2.3:
     dependencies:
       is-number: 2.1.0
@@ -2252,7 +2236,6 @@ packages:
     dependencies:
       min-document: 2.19.0
       process: 0.5.2
-    dev: true
     resolution:
       integrity: sha1-52mJJopsdMOJCLEwWxD8DjlOnQ8=
   /globals/9.18.0:
@@ -2280,12 +2263,6 @@ packages:
   /graceful-fs/4.1.11:
     resolution:
       integrity: sha1-Dovf5NHduIVNZOBOp8AOKgJuVlg=
-  /gzip-size/3.0.0:
-    dependencies:
-      duplexer: 0.1.1
-    dev: true
-    resolution:
-      integrity: sha1-VGGI6b3DN/Zzdy+BZgRks4nc5SA=
   /har-schema/2.0.0:
     dev: true
     resolution:
@@ -3023,7 +3000,6 @@ packages:
   /min-document/2.19.0:
     dependencies:
       dom-walk: 0.1.1
-    dev: true
     resolution:
       integrity: sha1-e9KC4/WELtKVu3SM3Z8f+iyCRoU=
   /minimalistic-assert/1.0.0:
@@ -3252,10 +3228,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-BnQoIw/WdEOyeUsiu6UotoZ5YtQ=
-  /opener/1.4.3:
-    dev: true
-    resolution:
-      integrity: sha1-XG2ixdflgx6P+jlklQ+NZnSskLg=
   /optionator/0.8.2:
     dependencies:
       deep-is: 0.1.3
@@ -3703,7 +3675,6 @@ packages:
     resolution:
       integrity: sha1-czIwDoQBYb2j5podHZGn1LwW8YI=
   /process/0.5.2:
-    dev: true
     resolution:
       integrity: sha1-FjjYqONML0QKkduVq5rrZ3/Bhc8=
   /progress/2.0.0:
@@ -3798,7 +3769,6 @@ packages:
     resolution:
       integrity: sha1-9JvmtIeJTdxA3MlKMi9hEJLgDV4=
   /react-deep-force-update/1.1.1:
-    dev: true
     resolution:
       integrity: sha1-vNMUeAJ7ZLMznxCJIatSC0MT3Cw=
   /react-dom/15.6.1:
@@ -3813,7 +3783,6 @@ packages:
     dependencies:
       lodash: 4.17.4
       react-deep-force-update: 1.1.1
-    dev: true
     resolution:
       integrity: sha1-nb/Z2SdSjDqp9ETkVYw3gwq4wmo=
   /react-redux/4.4.8:
@@ -3834,7 +3803,6 @@ packages:
     dependencies:
       global: 4.3.2
       react-proxy: 1.1.8
-    dev: true
     resolution:
       integrity: sha1-4aQL0Krvxy6N/Xp82gmvhQZjl7s=
   /react/15.6.1:
@@ -4106,10 +4074,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-Cx4Rr4vESDbwSmQH6S2kJGe3lEQ=
-  /safe-buffer/5.0.1:
-    dev: true
-    resolution:
-      integrity: sha1-0mPKVGls2KMGtcplUekt5XkY++c=
   /safe-buffer/5.1.1:
     resolution:
       integrity: sha512-kKvNJn6Mm93gAczWVJg7wH+wGYWNrDHdWvpUmHyEsgCtIwwo3bqPtV4tR5tuPaUhTOo/kvhVwd8XwwOllGYkbg==
@@ -4573,10 +4537,6 @@ packages:
     optional: true
     resolution:
       integrity: sha1-bgkk1r2mta/jSeOabWMoUKD4grc=
-  /ultron/1.1.0:
-    dev: true
-    resolution:
-      integrity: sha1-sHoualQagV/Go0zNRTO67DB8qGQ=
   /uniq/1.0.1:
     dev: true
     resolution:
@@ -4676,22 +4636,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-ShRyvLuVK9Cpu0A2gB+VTfs5+qw=
-  /webpack-bundle-analyzer/2.9.0:
-    dependencies:
-      acorn: 5.1.2
-      chalk: 1.1.3
-      commander: 2.11.0
-      ejs: 2.5.7
-      express: 4.15.4
-      filesize: 3.5.10
-      gzip-size: 3.0.0
-      lodash: 4.17.4
-      mkdirp: 0.5.1
-      opener: 1.4.3
-      ws: 2.3.1
-    dev: true
-    resolution:
-      integrity: sha1-tYvDTMMLJ//brz0AvyerpvopxuM=
   /webpack-dev-middleware/1.12.0:
     dependencies:
       memory-fs: 0.4.1
@@ -4795,13 +4739,6 @@ packages:
     dev: true
     resolution:
       integrity: sha1-X8A4KOJkzqP+kUVUdvejxWbLB1c=
-  /ws/2.3.1:
-    dependencies:
-      safe-buffer: 5.0.1
-      ultron: 1.1.0
-    dev: true
-    resolution:
-      integrity: sha1-a5Sz5EfLajY/eF6vlK9jWejoHIA=
   /xml-char-classes/1.0.0:
     dev: true
     resolution:
@@ -4897,10 +4834,8 @@ specifiers:
   extract-text-webpack-plugin: ^2.1.0
   file-loader: ^0.11.2
   html-webpack-plugin: ^2.30.1
-  isomorphic-fetch: ^2.2.1
   json-loader: ^0.5.3
   lodash.throttle: ^4.0.1
-  node-fetch: ^1.7.3
   node-sass: ^4.5.2
   react: ^15.6.1
   react-dom: ^15.6.1
@@ -4913,6 +4848,5 @@ specifiers:
   soundmanager2: ^2.97.20170602
   style-loader: ^0.18.2
   webpack: ^2.7.0
-  webpack-bundle-analyzer: ^2.8.2
   webpack-dev-middleware: ^1.12.0
   webpack-hot-middleware: ^2.19.1

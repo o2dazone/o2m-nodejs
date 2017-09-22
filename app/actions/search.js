@@ -26,23 +26,19 @@ const receiveAutoplayTrack = track => {
 export const fetchSearchResults = query => {
   return (dispatch, getState) => {
     if (query) {
-      const { index } = getState();
-      const words = getWords(query);
+      const { index: { words, tracks } } = getState();
+      const searchWords = getWords(query);
       let ids;
 
-      words.forEach(word => {
-        if (!ids) {
-          ids = index.words[word];
-        } else {
-          ids = intersection(ids, index.words[word]);
-        }
+      searchWords.forEach( searchWord => {
+        ids = !ids ? words[searchWord] : intersection(ids, words[searchWord]);
       });
 
       const results = [];
       if (ids) {
         ids.forEach( id => {
-          index.tracks[id].id = id;
-          results.push(index.tracks[id]);
+          tracks[id].id = id;
+          results.push(tracks[id]);
         });
       }
 
