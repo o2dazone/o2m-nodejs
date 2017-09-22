@@ -62,7 +62,7 @@ function indexAll(callback) {
           album: track.album,
           albumArtRef: track.albumArtRef,
           durationMillis: track.durationMillis,
-          creationTimestamp: track.creationTimestamp,
+          lastModifiedTimestamp: track.lastModifiedTimestamp,
           trackNumber: track.trackNumber
         };
       });
