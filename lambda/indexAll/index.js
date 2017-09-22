@@ -4,7 +4,8 @@ const pm = new(require('playmusic'));
 
 const playCredentials = {
   email: process.env.GOOGLE_PLAY_EMAIL,
-  password: process.env.GOOGLE_PLAY_PASSWORD
+  password: process.env.GOOGLE_PLAY_PASSWORD,
+  masterToken: process.env.GOOGLE_PLAY_MASTERTOKEN
 };
 
 const s3 = new AWS.S3();
@@ -60,7 +61,9 @@ function indexAll(callback) {
           artist: track.artist,
           album: track.album,
           albumArtRef: track.albumArtRef,
-          durationMillis: track.durationMillis
+          durationMillis: track.durationMillis,
+          creationTimestamp: track.creationTimestamp,
+          trackNumber: track.trackNumber
         };
       });
 
