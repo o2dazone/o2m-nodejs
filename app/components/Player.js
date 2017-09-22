@@ -26,18 +26,19 @@ class Player extends Component {
 
   render() {
     const { player, onToggleShuffle, onTogglePlayPause, onNextTrack, onPercentUpdate, onSoundCreated, onPreviousTrack } = this.props;
+
     return (
       <div className={styles.container}>
         { player ? <AudioModule onSoundCreated={onSoundCreated} onNextTrack={onNextTrack} onPercentUpdate={onPercentUpdate} streamUrl={player.streamUrl} /> : ''}
-        <Previous size={PLAYER_ICON_SIZE + 8} className={styles.prevNext} onClick={onPreviousTrack} />
+        <Previous size={PLAYER_ICON_SIZE + 8} className={styles.prevNext} onClick={onPreviousTrack} color="#ddd" />
 
         { player.playing ?
-          <Pause size={PLAYER_ICON_SIZE} onClick={onTogglePlayPause} /> :
-          <Play size={PLAYER_ICON_SIZE} onClick={onTogglePlayPause} />
+          <Pause size={PLAYER_ICON_SIZE} onClick={onTogglePlayPause} color="#ddd" /> :
+          <Play size={PLAYER_ICON_SIZE} onClick={onTogglePlayPause} color="#ddd" />
         }
 
-        <Next size={PLAYER_ICON_SIZE + 8} className={styles.prevNext} onClick={onNextTrack} />
-        <Shuffle size={PLAYER_ICON_SIZE} onClick={onToggleShuffle} color={player.shuffle ? '#3179a1' : '#fff'} />
+        <Next size={PLAYER_ICON_SIZE + 8} className={styles.prevNext} onClick={onNextTrack} color="#ddd" />
+        <Shuffle size={PLAYER_ICON_SIZE} onClick={onToggleShuffle} color={player.shuffle ? '#3179a1' : '#ddd'} />
       </div>
     );
   }

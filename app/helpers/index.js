@@ -4,8 +4,6 @@ import {
   REPLACE_MORE_WEIRD_CHARACTERS
 } from 'constants';
 
-import { hashHistory } from 'react-router';
-
 export const getTrackById = (id, results) => {
   for (let i = 0; i < results.length; i++) {
     if (results[i].id === id) {
@@ -38,5 +36,5 @@ export const intersection = (set1, set2) => {
 };
 
 export const makeHistory = (searchTerm, track) => {
-  hashHistory.replace(`search=${encodeURI(searchTerm)}${track ? `&track=${track}` : ''}`);
+  window.location = `#search=${encodeURI(searchTerm)}${track ? `&track=${track}` : ''}`;
 };
