@@ -2,11 +2,15 @@
 
 
 .container {
+
   svg {
     float: left;
     fill: $color-wht;
+
     @include mobile {
-      transform: scale(.8);
+      transform: scale(1.4);
+      margin-left: 10px;
+      margin-right: 10px;
     }
 
     @include desktop {

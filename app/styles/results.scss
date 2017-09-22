@@ -44,7 +44,6 @@
 }
 
 %individualSongWrapper {
-  min-height: $song-height + 10px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -52,6 +51,8 @@
   padding: 5px 0;
   transition: background .15s;
   @include desktop {
+    min-height: $song-height + 10px;
+
     &:hover {
       cursor: pointer;
       background: $color-highlight
@@ -60,6 +61,10 @@
         opacity: .6;
       }
     }
+  }
+
+  @include mobile {
+    min-height: $song-height + 20px;
   }
 }
 
@@ -72,25 +77,41 @@
 
   p {
     @extend %ellipsisOverflow;
-    line-height: 20px;
-    // title
-    &:nth-of-type(1) {
-      @include desktop {
+
+    /*
+      nth-of-type(1): title
+      nth-of-type(2): artist/album
+      nth-of-type(3): time
+    */
+    @include desktop {
+      line-height: 20px;
+
+      &:nth-of-type(1) {
+        padding-right: 50px;
+      }
+
+      &:nth-of-type(2) {
+        font-size: 13px;
         padding-right: 50px;
       }
     }
 
-    // info
+    @include mobile {
+      line-height: 24px;
+
+      &:nth-of-type(1) {
+        font-size: 18px;
+      }
+
+      &:nth-of-type(2) {
+        font-size: 15px;
+      }
+    }
+
     &:nth-of-type(2) {
-      font-size: 13px;
       color: $color-leland;
-
-      @include desktop {
-        padding-right: 50px;
-      }
     }
 
-    // time
     &:nth-of-type(3) {
       font-size: 12px;
       margin-top: -30px;
@@ -115,10 +136,5 @@
   height: $song-height;
   background-size: $song-height;
   position: relative;
-
-  @include mobile {
-    background: none !important;
-    display: none;
-  }
 }
 

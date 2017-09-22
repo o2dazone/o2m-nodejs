@@ -2,7 +2,6 @@
 
 
 .container {
-  background: $color-blk;
   position: relative;
   min-height: $info-album-height;
   display: flex;
@@ -11,6 +10,6 @@
 
   @include mobile {
     justify-content: center;
-    min-height: $info-album-height - 20px;
+    min-height: $info-album-height + 10px;
   }
 }

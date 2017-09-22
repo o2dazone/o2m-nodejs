@@ -10,7 +10,6 @@
 
 .container {
   @extend %durationBar;
-  background: $color-blk;
   top: -$progress-bar-height;
   z-index: 1;
 }

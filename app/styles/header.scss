@@ -9,7 +9,7 @@
   input {
     margin-left: 15px;
     border-radius: 3px;
-    background: black;
+    background: rgba(0, 0, 0, .5);
     width: 300px;
     color: $color-gauss;
     font-size: 18px;
@@ -21,6 +21,7 @@
     &:focus {
       box-shadow: 0px 0px 5px 2px $color-primary inset;
     }
+
     &::-webkit-input-placeholder {
       color: $color-kinsey;
     }
@@ -34,7 +35,7 @@
 
   @include mobile {
     padding: 0 10px;
-    min-height: $header-height - 25px;
+
     svg {
       display: none;
     }
@@ -42,8 +43,9 @@
     input {
       width: 100%;
       margin-left: auto;
-      line-height: $input-height - 10px;
-      height: $input-height - 10px;
+      font-size: 22px;
+      line-height: $input-height + 10px;
+      height: $input-height + 10px;
     }
   }
 }
@@ -52,6 +54,7 @@
   margin-left: 5px;
   fill: $color-primary;
   transition: width 1s;
+  filter: drop-shadow(-4px 4px 0px rgba(0,0,0,.2));
 }
 
 .small {
