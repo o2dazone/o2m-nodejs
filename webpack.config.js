@@ -10,7 +10,7 @@ module.exports = {
   devtool: 'eval',
   cache: true,
   entry: [
-    'webpack-hot-middleware/client?reload=true&timeout=100',
+    'webpack-hot-middleware/client?reload=true&timeout=1000&noInfo=true',
     path.join(__dirname, 'app/main.js')
   ],
   output: {
@@ -29,7 +29,7 @@ module.exports = {
   plugins: [
     new webpack.DllReferencePlugin({
       context: '.',
-      manifest: require('./dist/vendor-manifest.json')
+      manifest: require('./node_modules/vendor-manifest.json')
     }),
     new HtmlWebpackPlugin({
       template: 'app/index.tpl.html',
@@ -37,7 +37,7 @@ module.exports = {
       filename: 'index.html'
     }),
     new AddAssetHtmlPlugin({
-      filepath: require.resolve('./dist/vendor.bundle.js'),
+      filepath: require.resolve('./node_modules/vendor.bundle.js'),
       includeSourcemap: false
     }),
     new webpack.HotModuleReplacementPlugin(),
@@ -49,22 +49,25 @@ module.exports = {
   module: {
     rules: [
       { test: /\.js?$/,
-        enforce: 'pre',
         exclude: /node_modules/,
-        loader: 'eslint-loader'
-      },
-      { test: /\.js?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true,
-          presets: [
-            'react',
-            'es2015',
-            'stage-0',
-            'react-hmre'
-          ]
-        }
+        use: [{
+          loader: 'babel-loader?cacheDirectory',
+          options: {
+            presets: [
+              'react',
+              'es2015',
+              'stage-0',
+              'react-hmre'
+            ]
+          }
+        },
+        {
+          loader: 'eslint-loader',
+          options: {
+            emitWarning: true,
+            cache: true
+          }
+        }]
       },
       { test: /\.json?$/,
         use: 'json-loader'

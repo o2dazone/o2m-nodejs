@@ -80,18 +80,6 @@ module.exports = {
               }
             },
             {
-              loader: 'postcss-loader',
-              options: {
-                minimize: true,
-                debug: false,
-                plugins: function () {
-                  return [
-                    require('autoprefixer')
-                  ];
-                }
-              }
-            },
-            {
               loader: 'sass-loader',
               options: {
                 importLoaders: true,

@@ -8,9 +8,7 @@ module.exports = {
       'babel-cli',
       'babel-preset-react',
       'babel-preset-react-hmre',
-      'chai',
       'eslint-plugin-react',
-      'isomorphic-fetch',
       'lodash.throttle',
       'react',
       'react-dom',
@@ -23,13 +21,13 @@ module.exports = {
 
   output: {
     filename: '[name].bundle.js',
-    path: path.join(__dirname, './dist'),
+    path: path.join(__dirname, './node_modules'),
     library: '[name]_lib'
   },
 
   plugins: [
     new webpack.DllPlugin({
-      path: path.join(__dirname, './dist/[name]-manifest.json'),
+      path: path.join(__dirname, './node_modules/[name]-manifest.json'),
       name: '[name]_lib'
     })
   ]
