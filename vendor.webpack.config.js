@@ -5,7 +5,6 @@ module.exports = {
   entry: {
     vendor: [
       'add-asset-html-webpack-plugin',
-      'babel-cli',
       'babel-preset-react',
       'babel-preset-react-hmre',
       'eslint-plugin-react',

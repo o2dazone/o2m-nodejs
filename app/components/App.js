@@ -7,7 +7,6 @@ import styles from 'styles/app.scss';
 
 import Header from './Header';
 import Results from './Results';
-import Landing from './Landing';
 import Footer from './Footer';
 import LoadingIcon from './LoadingIcon';
 
@@ -51,7 +50,7 @@ class App extends Component {
   }
 
   render() {
-    const { player, store, search, index } = this.props;
+    const { player, store, index } = this.props;
 
     if (!Object.keys(index).length) {
       return <LoadingIcon />;
@@ -61,7 +60,7 @@ class App extends Component {
       <Provider store={store}>
         <div className={styles.container}>
           <Header query={this.searchQuery} />
-          { search.showLanding ? <Landing /> : <Results /> }
+          <Results />
           { player.track || player.autoplay ? <Footer /> : '' }
         </div>
       </Provider>
@@ -71,10 +70,9 @@ class App extends Component {
 
 
 const mapStateToProps = state => {
-  const { player, index, search } = state;
+  const { player, index } = state;
   return {
     player,
-    search,
     index
   };
 };
