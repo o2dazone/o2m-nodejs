@@ -19,9 +19,7 @@ class App extends Component {
     super(props);
     this.searchQuery = null;
     this.locQuery = null;
-    this.latest = [];
     this.getParam = this.getParam.bind(this);
-    this.getLatest = this.getLatest.bind(this);
   }
 
   componentWillMount() {
@@ -52,26 +50,6 @@ class App extends Component {
     return isInArray(key, locQuery) ? locQuery[locQuery.indexOf(key) + 1] : null;
   }
 
-  getLatest() {
-    const { index: { tracks } } = this.props;
-    const keys = Object.keys(tracks);
-    keys.sort((a, b) => {
-      return tracks[b].lastModifiedTimestamp - tracks[a].lastModifiedTimestamp;
-    });
-
-    let prev = 'ASDASDASDASDASDASDASDASDASD';
-
-    for (let i = 0; this.latest.length < 20; i++) {
-      const track = tracks[keys[i]];
-
-      if (track.album !== prev && track.albumArtRef) {
-        track.id = keys[i];
-        this.latest.push(track);
-        prev = track.album;
-      }
-    }
-  }
-
   render() {
     const { player, store, search, index } = this.props;
 
@@ -79,13 +57,11 @@ class App extends Component {
       return <LoadingIcon />;
     }
 
-    this.getLatest();
-
     return (
       <Provider store={store}>
         <div className={styles.container}>
           <Header query={this.searchQuery} />
-          { search.showLanding ? <Landing latest={this.latest} /> : <Results /> }
+          { search.showLanding ? <Landing /> : <Results /> }
           { player.track || player.autoplay ? <Footer /> : '' }
         </div>
       </Provider>
