@@ -1,41 +1,39 @@
 @import 'variables';
 
-:global {
-  * {
-    text-indent: 0;
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
-    border: 0;
-    outline: none;
-    list-style: none;
-    box-sizing: border-box;
-  }
+* {
+  text-indent: 0;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  border: 0;
+  outline: none;
+  list-style: none;
+  box-sizing: border-box;
+}
 
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  html {
-    background: linear-gradient(to bottom left, #311023, $color-blk);
-  }
+html {
+  background: linear-gradient(to bottom left, #311023, $color-blk);
+}
 
-  body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center
-  }
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center
+}
 
-  a {
-    color: inherit;
-  }
+a {
+  color: inherit;
+}
 
-  #app {
-    height: 100%;
-  }
+:global(#app) {
+  height: 100%;
 }
 
 .container {

@@ -18,7 +18,7 @@ class Header extends Component {
   }
 
   onSearch(e) {
-    const { player: { playing, track } } = this.props;
+    const { player: { playing, track }, fetchSearchResults } = this.props;
 
     // if the enter key was pressed...
     if (e.keyCode === 13) {
@@ -26,7 +26,7 @@ class Header extends Component {
       e.target.blur();
       const query = e.target.value;
       makeHistory(query, playing ? track.id : null);
-      this.props.fetchSearchResults(query);
+      fetchSearchResults(query);
     }
   }
 
@@ -35,7 +35,7 @@ class Header extends Component {
     return (
       <div className={`${styles.container} ${search.query ? styles.small : ''}`}>
         <Logo size={150} className={styles.logo} />
-        <input type="text" placeholder="Search for songs" autoComplete="off" onKeyDown={this.onSearch} defaultValue={query ? query : ''} />
+        <input type="text" placeholder="Search for songs" autoComplete="off" onKeyDown={this.onSearch} defaultValue={query || ''} />
       </div>
     );
   }
