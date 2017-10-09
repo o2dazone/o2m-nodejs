@@ -1,3 +1,4 @@
+import 'whatwg-fetch';
 import { soundManager as sm } from 'soundmanager2';
 import { TOGGLE_PLAY_PAUSE, RECEIVE_AUTOPLAY_TRACK, TOGGLE_SHUFFLE, PLAY_SONG, RECEIVE_STREAM_URL, STREAM_URL } from 'constants';
 

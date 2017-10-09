@@ -1,3 +1,5 @@
+import 'whatwg-fetch';
+
 import {
   INDEX_URL,
   RECEIVE_INDEX

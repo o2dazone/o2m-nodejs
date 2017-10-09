@@ -10,6 +10,7 @@ module.exports = {
   devtool: 'eval',
   cache: true,
   entry: [
+    'whatwg-fetch',
     'webpack-hot-middleware/client?reload=true&timeout=1000&noInfo=true',
     path.join(__dirname, 'app/main.js')
   ],
