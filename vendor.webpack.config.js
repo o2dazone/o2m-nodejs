@@ -14,7 +14,8 @@ module.exports = {
       'react-redux',
       'redux',
       'redux-thunk',
-      'soundmanager2'
+      'soundmanager2',
+      'whatwg-fetch'
     ]
   },
 
