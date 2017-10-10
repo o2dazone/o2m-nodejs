@@ -9,7 +9,7 @@ export const RECEIVE_AUTOPLAY_TRACK = 'RECEIVE_AUTOPLAY_TRACK';
 
 // local search stuff
 export const STOP_WORDS = ['a', 'the', 'of', 'is'];
-export const INDEX_URL = 'https://s3-us-west-1.amazonaws.com/o2dazone.com/api/musicIndex.json';
+export const INDEX_URL = 'http://d2phn2ea0nqfsq.cloudfront.net/api/musicIndex.json';
 export const STREAM_URL = 'https://xkjifuezph.execute-api.us-east-1.amazonaws.com/prod/o2m-getStreamUrl?id=';
 
 

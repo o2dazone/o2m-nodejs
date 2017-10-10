@@ -1,10 +1,10 @@
-'use strict';
 
 const path = require('path');
 const webpack = require('webpack');
 const srcPath = path.join(__dirname, './app');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const publicPath = 'http://d2phn2ea0nqfsq.cloudfront.net/m/';
 
 module.exports = {
   entry: [
@@ -13,7 +13,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, './dist/'),
     filename: '[name]-[hash].min.js',
-    publicPath: ''
+    publicPath: publicPath
   },
   resolve: {
     modules: [
@@ -32,7 +32,8 @@ module.exports = {
     new ExtractTextPlugin({
       filename: '[name]-[hash].min.css',
       disable: false,
-      allChunks: true
+      allChunks: true,
+      publicPath: publicPath
     }),
     new webpack.optimize.UglifyJsPlugin({
       output: {
