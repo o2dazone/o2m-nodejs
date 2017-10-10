@@ -70,7 +70,8 @@ function indexAll(callback) {
       const params = {
         Bucket: BUCKET_NAME,
         Key: FILENAME,
-        Body: JSON.stringify(searchData)
+        Body: JSON.stringify(searchData),
+        ContentType: 'application/json'
       };
       s3.putObject(params, function(err, data) {
         if ( err ) {
