@@ -9,10 +9,14 @@ const playCredentials = {
 };
 
 const s3 = new AWS.S3();
+var cloudfront = new AWS.CloudFront();
 
 const BUCKET_NAME = 'o2dazone.com';
 const FILENAME = 'api/musicIndex.json';
 const STOP_WORDS = ['a', 'the', 'of', 'is'];
+
+const CLOUDFRONT_DISTRIBUTION_ID = 'EDAT3HCZVKRZQ';
+
 
 function getWords(title) {
   const rval = [];
@@ -79,9 +83,29 @@ function indexAll(callback) {
           done(err);
         } else if ( data ) {
           const duration = (new Date).getTime() - timeStart;
-          const msg = `Wrote ${Object.keys(searchData.words).length} words and ${Object.keys(searchData.tracks).length} tracks (${params.Body.length} bytes) in ${duration} ms`;
+          const msg = `Wrote ${Object.keys(searchData.words).length} words and ${Object.keys(searchData.tracks).length} tracks (${params.Body.length} bytes) in ${duration} ms.`;
           console.log(msg);
-          done(null, msg);
+
+          // Invalidate File in cloudfront
+          const cfparams = {
+            DistributionId: CLOUDFRONT_DISTRIBUTION_ID,
+            InvalidationBatch: {
+              CallerReference: new Date().toString(),
+              Paths: {
+                Quantity: 1,
+                Items: [ '/' + FILENAME ]
+              }
+            }
+          };
+          cloudfront.createInvalidation(cfparams, function(err, data) {
+            if (err) {
+              console.log('error on CloudFront invalidation', err, err.stack);
+              done(err);
+            } else {
+              done(null, msg + ` Invalidated ${FILENAME}`);
+            }
+          });
+          
         }
       });
     });
@@ -92,13 +116,15 @@ exports.handler = (event, context, callback) => {
   indexAll(callback);
 };
 
-exports.setPlayCredentials = (email, password) => {
+exports.setPlayCredentials = (email, password, masterToken) => {
   playCredentials.email = email;
   playCredentials.password = password;
+  playCredentials.masterToken = masterToken;
 };
 
 exports.setAWSCredentials = (access, secret) => {
   s3.config.credentials = new AWS.Credentials(access, secret);
+  cloudfront = new AWS.CloudFront({credentials: new AWS.Credentials(access, secret)});
 };
 
 exports.extraExports = () => {
