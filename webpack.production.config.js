@@ -13,7 +13,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, './dist/'),
     filename: '[name]-[hash].min.js',
-    publicPath: publicPath
+    publicPath
   },
   resolve: {
     modules: [
@@ -33,7 +33,7 @@ module.exports = {
       filename: '[name]-[hash].min.css',
       disable: false,
       allChunks: true,
-      publicPath: publicPath
+      publicPath
     }),
     new webpack.optimize.UglifyJsPlugin({
       output: {
