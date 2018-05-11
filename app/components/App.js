@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { Component } from 'preact';
+import { connect } from 'preact-redux';
 
 import { MATCH_HASH, SPLIT_URL_PARAM } from 'constants';
 
@@ -65,7 +65,6 @@ class App extends Component {
     );
   }
 }
-
 
 const mapStateToProps = state => {
   const { player, index } = state;

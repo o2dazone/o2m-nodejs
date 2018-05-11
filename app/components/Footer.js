@@ -1,7 +1,7 @@
 import styles from 'styles/footer.scss';
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { Component } from 'preact';
+import { connect } from 'preact-redux';
 import throttle from 'lodash.throttle';
 import { fetchAutoplayTrack } from 'actions/search';
 import { togglePlayPause, receiveAutoplayTrackId, toggleShuffle, playSong, addPlayer, fetchStreamUrl } from 'actions/player';

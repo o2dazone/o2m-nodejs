@@ -11,8 +11,10 @@ const app = express();
 const port = 3000;
 const compiler = webpack(webpackConfig);
 const middleware = webpackDevMiddleware(compiler, {
+  noInfo: true,
   publicPath: webpackConfig.output.publicPath,
   contentBase: 'src',
+  reload: false,
   stats: {
     version: false,
     assets: false,

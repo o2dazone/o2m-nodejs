@@ -1,7 +1,7 @@
 import styles from 'styles/results.scss';
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { Component } from 'preact';
+import { connect } from 'preact-redux';
 import { playSong } from 'actions/player';
 import { getTrackById } from 'helpers';
 import AlbumArt from './AlbumArt';

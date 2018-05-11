@@ -1,7 +1,7 @@
 import styles from 'styles/header.scss';
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { Component } from 'preact';
+import { connect } from 'preact-redux';
 import { fetchSearchResults } from 'actions/search';
 import { makeHistory } from 'helpers';
 import { Logo } from 'icons';

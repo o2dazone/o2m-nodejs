@@ -27,7 +27,7 @@
     "no-shadow": 0,
     "no-shadow-restricted-names": 1,
     "no-undef": 1,
-    "no-unused-vars": [2, {"varsIgnorePattern": "React"}],
+    "no-unused-vars": [2, {"varsIgnorePattern": "^h$"}],
     "no-use-before-define": 1,
 
     /**
@@ -165,7 +165,6 @@
     "react/no-multi-comp": 0,
     "react/no-unknown-property": 1,
     "react/prop-types": 0,
-    "react/react-in-jsx-scope": 1,
     "react/self-closing-comp": 1,
     "react/sort-comp": 1
   }

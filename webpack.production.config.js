@@ -1,4 +1,3 @@
-
 const path = require('path');
 const webpack = require('webpack');
 const srcPath = path.join(__dirname, './app');
@@ -41,6 +40,9 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
+    new webpack.ProvidePlugin({
+      preact: 'preact'
+    }),
     process.env.NODE_ENV === 'analyze'
       ? new BundleAnalyzerPlugin({
         generateStatsFile: true
@@ -57,6 +59,11 @@ module.exports = {
               'react',
               'es2015',
               'stage-0'
+            ],
+            plugins: [
+              ['transform-react-jsx', {
+                pragma: 'preact.h'
+              }]
             ]
           }
         }

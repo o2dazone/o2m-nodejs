@@ -2,7 +2,6 @@
   "plugins": [
     ["babel-plugin-module-resolver", {
       "root": ["./app"]
-    }],
-    "react-hot-loader/babel"
+    }]
   ]
 }

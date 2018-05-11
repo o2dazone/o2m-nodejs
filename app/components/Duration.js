@@ -1,7 +1,7 @@
 import styles from 'styles/duration.scss';
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { Component } from 'preact';
+import { connect } from 'preact-redux';
 
 class Duration extends Component {
   makeTime() {

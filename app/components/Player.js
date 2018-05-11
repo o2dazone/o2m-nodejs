@@ -1,7 +1,7 @@
 import styles from 'styles/player.scss';
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { Component } from 'preact';
+import { connect } from 'preact-redux';
 import { makeHistory } from 'helpers';
 import { PLAYER_ICON_SIZE } from 'constants';
 import { fetchStreamUrl } from 'actions/player';

@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from 'styles/info.scss';
 
 import AlbumArt from './AlbumArt';

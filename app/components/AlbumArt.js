@@ -1,4 +1,3 @@
-import React from 'react';
 import { Album } from 'icons';
 
 const AlbumArt = ({ art, onClickAlbum, size = 50 }) => {

@@ -8,10 +8,8 @@ module.exports = {
       'babel-preset-react',
       'eslint-plugin-react',
       'lodash.throttle',
-      'react',
-      'react-dom',
-      'react-hot-loader',
-      'react-redux',
+      'preact',
+      'preact-redux',
       'redux',
       'redux-thunk',
       'soundmanager2'

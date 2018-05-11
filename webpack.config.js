@@ -1,5 +1,3 @@
-'use strict';
-
 const path = require('path');
 const webpack = require('webpack');
 const srcPath = path.join(__dirname, '/app');
@@ -11,7 +9,7 @@ module.exports = {
   devtool: 'eval',
   cache: true,
   entry: [
-    'webpack-hot-middleware/client?reload=true&timeout=1000&noInfo=true',
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     path.join(__dirname, 'app/main.js')
   ],
   output: {
@@ -41,6 +39,9 @@ module.exports = {
       filepath: require.resolve('./node_modules/vendor.bundle.js'),
       includeSourcemap: false
     }),
+    new webpack.ProvidePlugin({
+      preact: 'preact'
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.DefinePlugin({
@@ -58,6 +59,11 @@ module.exports = {
               'react',
               'es2015',
               'stage-0'
+            ],
+            plugins: [
+              ['transform-react-jsx', {
+                pragma: 'preact.h'
+              }]
             ]
           }
         },
