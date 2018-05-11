@@ -1,13 +1,14 @@
+import css from 'styles/loadingIcon.scss';
+
 import React from 'react';
-import styles from 'styles/loadingIcon.scss';
 
 const LoadingIcon = () => (
-  <div className={styles.container}>
-    <div className={styles.rect1} />
-    <div className={styles.rect2} />
-    <div className={styles.rect3} />
-    <div className={styles.rect4} />
-    <div className={styles.rect5} />
+  <div className={css.container}>
+    <div className={css.rect1} />
+    <div className={css.rect2} />
+    <div className={css.rect3} />
+    <div className={css.rect4} />
+    <div className={css.rect5} />
   </div>
 );
 

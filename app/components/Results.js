@@ -1,4 +1,4 @@
-import styles from 'styles/results.scss';
+import css from 'styles/results.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -38,7 +38,7 @@ class Songs extends Component {
       results.map((track) => {
         const { id, albumArtRef, trackNumber, title, artist, album } = track;
         return (
-          <div className={`${styles.track} ${playingTrack === id ? styles.playing : ''}`} onClick={this.onPlaySong} key={track.id} data-id={track.id}>
+          <div className={`${css.track} ${playingTrack === id ? css.playing : ''}`} onClick={this.onPlaySong} key={track.id} data-id={track.id}>
             <AlbumArt art={albumArtRef ? albumArtRef[0].url : null} />
             <div>
               <p>{`${trackNumber ? `${trackNumber}. ` : ''}`}{title}</p>
@@ -56,7 +56,7 @@ class Songs extends Component {
     const hasResults = results.length;
 
     return (
-      <div className={`${styles.container} ${hasResults ? styles.show : '' }`}>
+      <div className={`${css.container} ${hasResults ? css.show : '' }`}>
         { hasResults ? this.makeSongs() : '' }
       </div>
     );

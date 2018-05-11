@@ -1,4 +1,4 @@
-import styles from 'styles/duration.scss';
+import css from 'styles/duration.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -21,9 +21,9 @@ class Duration extends Component {
     const percent = { width: `${playerPercent}%` };
 
     return (
-      <div className={styles.container} onClick={onDurationClicked}>
-        <div style={percent} className={styles.elapsed} data-elapsed>
-          <div className={styles.time} data-timer>
+      <div className={css.container} onClick={onDurationClicked}>
+        <div style={percent} className={css.elapsed} data-elapsed>
+          <div className={css.time} data-timer>
             {percent ? this.makeTime() : ''}
           </div>
         </div>

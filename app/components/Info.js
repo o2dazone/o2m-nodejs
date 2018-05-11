@@ -1,13 +1,13 @@
-import React from 'react';
-import styles from 'styles/info.scss';
+import css from 'styles/info.scss';
 
+import React from 'react';
 import AlbumArt from './AlbumArt';
 
 const Info = ({track}) => (
-  <div className={styles.container}>
+  <div className={css.container}>
     <AlbumArt size={100} art={track.albumArtRef ? track.albumArtRef[0].url : null} />
-    <span className={styles.name}>{track.title}</span>
-    <span className={styles.artistalbum}>{track.artist} {track.album}</span>
+    <span className={css.name}>{track.title}</span>
+    <span className={css.artistalbum}>{track.artist} {track.album}</span>
   </div>
 );
 

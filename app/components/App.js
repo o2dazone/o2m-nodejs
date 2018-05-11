@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { MATCH_HASH, SPLIT_URL_PARAM } from 'constants';
 
-import styles from 'styles/app.scss';
+import css from 'styles/app.scss';
 
 import Header from './Header';
 import Results from './Results';
@@ -57,7 +57,7 @@ class App extends Component {
     }
 
     return (
-      <div className={styles.container}>
+      <div className={css.container}>
         <Header query={this.searchQuery} />
         <Results />
         { player.track || player.autoplay ? <Footer /> : '' }

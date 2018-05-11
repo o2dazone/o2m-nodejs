@@ -58,6 +58,9 @@ module.exports = {
               'react',
               'es2015',
               'stage-0'
+            ],
+            plugins: [
+              'react-hot-loader/babel'
             ]
           }
         },
@@ -84,7 +87,8 @@ module.exports = {
           {
             loader: 'sass-loader',
             options: {
-              outputStyle: 'expanded'
+              outputStyle: 'expanded',
+              data: '@import "app/styles/variables.scss";'
             }
           }
         ]

@@ -78,7 +78,8 @@ module.exports = {
             options: {
               importLoaders: true,
               sourceMap: false,
-              outputStyle: 'compressed'
+              outputStyle: 'compressed',
+              data: '@import "app/styles/variables.scss";'
             }
           }
         ]

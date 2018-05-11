@@ -1,4 +1,4 @@
-import styles from 'styles/player.scss';
+import css from 'styles/player.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -28,16 +28,16 @@ class Player extends Component {
     const { player, onToggleShuffle, onTogglePlayPause, onNextTrack, onPercentUpdate, onSoundCreated, onPreviousTrack } = this.props;
 
     return (
-      <div className={styles.container}>
+      <div className={css.container}>
         { player ? <AudioModule onSoundCreated={onSoundCreated} onNextTrack={onNextTrack} onPercentUpdate={onPercentUpdate} streamUrl={player.streamUrl} /> : ''}
-        <Previous size={PLAYER_ICON_SIZE + 8} className={styles.prevNext} onClick={onPreviousTrack} color="#ddd" />
+        <Previous size={PLAYER_ICON_SIZE + 8} className={css.prevNext} onClick={onPreviousTrack} color="#ddd" />
 
         { player.playing ?
           <Pause size={PLAYER_ICON_SIZE} onClick={onTogglePlayPause} color="#ddd" /> :
           <Play size={PLAYER_ICON_SIZE} onClick={onTogglePlayPause} color="#ddd" />
         }
 
-        <Next size={PLAYER_ICON_SIZE + 8} className={styles.prevNext} onClick={onNextTrack} color="#ddd" />
+        <Next size={PLAYER_ICON_SIZE + 8} className={css.prevNext} onClick={onNextTrack} color="#ddd" />
         <Shuffle size={PLAYER_ICON_SIZE} onClick={onToggleShuffle} color={player.shuffle ? '#3179a1' : '#ddd'} />
       </div>
     );

@@ -1,4 +1,4 @@
-import styles from 'styles/header.scss';
+import css from 'styles/header.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -33,8 +33,8 @@ class Header extends Component {
   render() {
     const { query, search } = this.props;
     return (
-      <div className={`${styles.container} ${search.query ? styles.small : ''}`}>
-        <Logo size={150} className={styles.logo} />
+      <div className={`${css.container} ${search.query ? css.small : ''}`}>
+        <Logo size={150} className={css.logo} />
         <input type="text" placeholder="Search for songs" autoComplete="off" onKeyDown={this.onSearch} defaultValue={query || ''} />
       </div>
     );

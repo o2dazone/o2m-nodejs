@@ -1,4 +1,4 @@
-import styles from 'styles/footer.scss';
+import css from 'styles/footer.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -136,7 +136,7 @@ class Footer extends Component {
     }
 
     return (
-      <div className={styles.container}>
+      <div className={css.container}>
         <Duration
           playerPercent={this.state.playerPercent}
           audioModule={this.audioModule}
