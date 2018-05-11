@@ -20,13 +20,12 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const { props: { receiveAutoplayTrackId } } = this;
     const query = parse(window.location.hash);
     const trackIdParam = query.track;
     SEARCH_QUERY = query.term;
 
     if (trackIdParam) {
-      receiveAutoplayTrackId(trackIdParam);
+      this.props.receiveAutoplayTrackId(trackIdParam);
     }
   }
 

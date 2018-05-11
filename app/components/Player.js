@@ -28,7 +28,15 @@ class Player extends Component {
   }
 
   render() {
-    const { player, onToggleShuffle, onTogglePlayPause, onNextTrack, onPercentUpdate, onSoundCreated, onPreviousTrack } = this.props;
+    const {
+      player,
+      onToggleShuffle,
+      onTogglePlayPause,
+      onNextTrack,
+      onPercentUpdate,
+      onSoundCreated,
+      onPreviousTrack
+    } = this.props;
 
     return (
       <div className={css.container}>
