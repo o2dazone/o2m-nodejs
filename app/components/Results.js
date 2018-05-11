@@ -2,7 +2,9 @@ import css from 'styles/results.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { playSong } from 'actions/player';
+
+import actions from 'actions';
+import {rootReducers as reducers} from 'reducers';
 import { getTrackById } from 'helpers';
 import AlbumArt from './AlbumArt';
 
@@ -52,12 +54,4 @@ class Songs extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { search, player } = state;
-  return {
-    search,
-    player
-  };
-};
-
-export default connect(mapStateToProps, { playSong })(Songs);
+export default connect(reducers, actions)(Songs);

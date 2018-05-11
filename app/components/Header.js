@@ -2,7 +2,9 @@ import css from 'styles/header.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchSearchResults } from 'actions/search';
+
+import actions from 'actions';
+import {rootReducers as reducers} from 'reducers';
 import { setQueryString } from 'helpers';
 import { Logo } from 'icons';
 
@@ -36,12 +38,4 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { player, search } = state;
-  return {
-    player,
-    search
-  };
-};
-
-export default connect(mapStateToProps, { fetchSearchResults })(Header);
+export default connect(reducers, actions)(Header);

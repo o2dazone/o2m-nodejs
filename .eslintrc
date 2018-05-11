@@ -90,7 +90,6 @@
     "no-script-url": 1,
     "no-self-compare": 1,
     "no-sequences": 1,
-    "no-throw-literal": 1,
     "no-with": 1,
     "radix": 1,
     "vars-on-top": 1,

@@ -5,14 +5,14 @@ import { index } from './app';
 import search from './search';
 import player from './player';
 
-const reducers = {
+export const rootReducers = combineReducers({
   index,
   player,
   search
-};
+});
 
 const store = createStore(
-  combineReducers(reducers),
+  rootReducers,
   compose(
     applyMiddleware(thunk),
     window.devToolsExtension ? window.devToolsExtension() : f => f

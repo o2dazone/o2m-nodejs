@@ -3,8 +3,9 @@ import css from 'styles/footer.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import throttle from 'lodash.throttle';
-import { fetchAutoplayTrack } from 'actions/search';
-import { togglePlayPause, receiveAutoplayTrackId, toggleShuffle, playSong, addPlayer, fetchStreamUrl } from 'actions/player';
+
+import actions from 'actions';
+import {rootReducers as reducers} from 'reducers';
 import Info from './Info';
 import Player from './Player';
 import Duration from './Duration';
@@ -151,12 +152,4 @@ class Footer extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { player, search } = state;
-  return {
-    player,
-    search
-  };
-};
-
-export default connect(mapStateToProps, { receiveAutoplayTrackId, fetchAutoplayTrack, togglePlayPause, toggleShuffle, playSong, addPlayer, fetchStreamUrl })(Footer);
+export default connect(reducers, actions)(Footer);

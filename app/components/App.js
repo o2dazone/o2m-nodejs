@@ -9,8 +9,8 @@ import Results from './Results';
 import Footer from './Footer';
 import LoadingIcon from './LoadingIcon';
 
-import { receiveIndex, getSearchData } from 'actions/app';
-import { receiveAutoplayTrackId } from 'actions/player';
+import {rootReducers as reducers} from 'reducers';
+import actions from 'actions';
 
 let SEARCH_QUERY = '';
 
@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   render() {
-    const { player, index } = this.props;
+    const { player: { track, autoplay }, index } = this.props;
 
     if (!Object.keys(index).length) {
       return <LoadingIcon />;
@@ -45,18 +45,10 @@ class App extends Component {
       <div className={css.container}>
         <Header query={SEARCH_QUERY} />
         <Results />
-        { player.track || player.autoplay ? <Footer /> : '' }
+        { track || autoplay ? <Footer /> : '' }
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  const { player, index } = state;
-  return {
-    player,
-    index
-  };
-};
-
-export default connect(mapStateToProps, { receiveAutoplayTrackId, receiveIndex, getSearchData })(App);
+export default connect(reducers, actions)(App);

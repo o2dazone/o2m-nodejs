@@ -3,6 +3,8 @@ import css from 'styles/duration.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import {rootReducers as reducers} from 'reducers';
+
 class Duration extends Component {
   makeTime() {
     const { player, audioModule } = this.props;
@@ -32,11 +34,4 @@ class Duration extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { player } = state;
-  return {
-    player
-  };
-};
-
-export default connect(mapStateToProps)(Duration);
+export default connect(reducers)(Duration);

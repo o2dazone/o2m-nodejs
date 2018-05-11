@@ -4,7 +4,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setQueryString } from 'helpers';
 import { PLAYER_ICON_SIZE } from 'constants';
-import { fetchStreamUrl } from 'actions/player';
+import actions from 'actions';
+import {rootReducers as reducers} from 'reducers';
 import AudioModule from './AudioModule';
 import { Previous, Next, Shuffle, Play, Pause } from 'icons';
 
@@ -46,12 +47,4 @@ class Player extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  const { search } = state;
-  return {
-    search
-  };
-};
-
-
-export default connect(mapStateToProps, { fetchStreamUrl })(Player);
+export default connect(reducers, actions)(Player);
