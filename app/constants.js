@@ -16,8 +16,6 @@ export const STREAM_URL = 'https://xkjifuezph.execute-api.us-east-1.amazonaws.co
 // regexes
 export const REPLACE_WEIRD_CHARACTERS = /-|&|\//g;
 export const REPLACE_MORE_WEIRD_CHARACTERS = /'|\(|\)|\.|!/g;
-export const MATCH_HASH = /^#\/?|\/$/g;
-export const SPLIT_URL_PARAM = /\&|\=|\?\_k=\w+/;
 
 // misc
 export const PLAYER_ICON_SIZE = 40;

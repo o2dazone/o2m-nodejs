@@ -3,30 +3,25 @@ import css from 'styles/header.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSearchResults } from 'actions/search';
-import { makeHistory } from 'helpers';
+import { setQueryString } from 'helpers';
 import { Logo } from 'icons';
 
 class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.onSearch = this.onSearch.bind(this);
-  }
-
   componentDidMount() {
     const { query, fetchSearchResults } = this.props;
     fetchSearchResults(query);
   }
 
-  onSearch(e) {
-    const { player: { playing, track }, fetchSearchResults } = this.props;
+  onSearch = e => {
+    const { fetchSearchResults } = this.props;
 
     // if the enter key was pressed...
     if (e.keyCode === 13) {
       e.preventDefault();
       e.target.blur();
-      const query = e.target.value;
-      makeHistory(query, playing ? track.id : null);
-      fetchSearchResults(query);
+      const term = e.target.value;
+      setQueryString({ term });
+      fetchSearchResults(term);
     }
   }
 

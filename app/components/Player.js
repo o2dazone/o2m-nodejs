@@ -2,7 +2,7 @@ import css from 'styles/player.scss';
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { makeHistory } from 'helpers';
+import { setQueryString } from 'helpers';
 import { PLAYER_ICON_SIZE } from 'constants';
 import { fetchStreamUrl } from 'actions/player';
 import AudioModule from './AudioModule';
@@ -10,17 +10,19 @@ import { Previous, Next, Shuffle, Play, Pause } from 'icons';
 
 class Player extends Component {
   componentWillMount() {
-    const { fetchStreamUrl, player, search: { query } } = this.props;
+    const { fetchStreamUrl, player } = this.props;
     // make an initial fetch on mount
-    makeHistory(query, player.track.id);
-    fetchStreamUrl(player.track.id);
+    const track = player.track.id;
+    setQueryString({ track });
+    fetchStreamUrl(track);
   }
 
   componentWillReceiveProps(nextState) {
-    const { fetchStreamUrl, player, search: { query } } = this.props;
+    const { fetchStreamUrl, player } = this.props;
     if (nextState.player.track.id !== player.track.id) {
-      fetchStreamUrl(nextState.player.track.id);
-      makeHistory(query, nextState.player.track.id);
+      const track = nextState.player.track.id;
+      setQueryString({ track });
+      fetchStreamUrl(track);
     }
   }
 

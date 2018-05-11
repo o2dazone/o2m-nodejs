@@ -12,13 +12,7 @@ import Duration from './Duration';
 class Footer extends Component {
   constructor(props) {
     super(props);
-    this.onTogglePlayPause = this.onTogglePlayPause.bind(this);
-    this.onToggleShuffle = this.onToggleShuffle.bind(this);
-    this.onNextTrack = this.onNextTrack.bind(this);
     this.onPercentUpdate = throttle(this.onPercentUpdate.bind(this), 250);
-    this.onPreviousTrack = this.onPreviousTrack.bind(this);
-    this.onSoundCreated = this.onSoundCreated.bind(this);
-    this.onDurationClicked = this.onDurationClicked.bind(this);
     this.audioModule = null;
     this.state = {
       playerPercent: 0
@@ -39,7 +33,7 @@ class Footer extends Component {
     document.removeEventListener('keydown', this.handleKeyDown.bind(this));
   }
 
-  handleKeyDown(e) {
+  handleKeyDown = e => {
     if (e.target.tagName !== 'INPUT') {
       if (e.key === ' ') {
         e.preventDefault();
@@ -48,7 +42,7 @@ class Footer extends Component {
     }
   }
 
-  onTogglePlayPause() {
+  onTogglePlayPause = () => {
     const { togglePlayPause, player } = this.props;
     togglePlayPause(player.playing ? false : true );
 
@@ -59,7 +53,7 @@ class Footer extends Component {
     }
   }
 
-  getTrack(itr) {
+  getTrack = itr => {
     const { player, search } = this.props;
 
     const trackid = player.track.id;
@@ -72,18 +66,18 @@ class Footer extends Component {
     }
   }
 
-  onPercentUpdate() {
+  onPercentUpdate = () => {
     const { player } = this.props;
     this.setState({
       playerPercent: ((this.audioModule.position + player.begin) / player.track.durationMillis * 100).toFixed(2)
     });
   }
 
-  onSoundCreated(obj) {
+  onSoundCreated = obj => {
     this.audioModule = obj;
   }
 
-  onNextTrack() {
+  onNextTrack = () => {
     const { player, playSong, search } = this.props;
 
     if (player.shuffle) {
@@ -98,7 +92,7 @@ class Footer extends Component {
     }
   }
 
-  onDurationClicked(e) {
+  onDurationClicked = e => {
     const { player, fetchStreamUrl, togglePlayPause } = this.props;
     let target = e.target;
 
@@ -114,14 +108,14 @@ class Footer extends Component {
     fetchStreamUrl(player.track.id, Math.round(e.clientX / target.clientWidth * player.track.durationMillis));
   }
 
-  onPreviousTrack() {
+  onPreviousTrack = () => {
     const previousTrack = this.getTrack(-1);
     if (previousTrack) {
       this.props.playSong(previousTrack);
     }
   }
 
-  onToggleShuffle() {
+  onToggleShuffle = () => {
     const { toggleShuffle, player } = this.props;
     toggleShuffle(player.shuffle ? false : true );
   }

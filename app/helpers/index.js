@@ -1,3 +1,5 @@
+import { parse, stringify } from 'query-string';
+
 import {
   STOP_WORDS,
   REPLACE_WEIRD_CHARACTERS,
@@ -35,6 +37,21 @@ export const intersection = (set1, set2) => {
   return rval;
 };
 
-export const makeHistory = (searchTerm, track) => {
-  window.location = `#search=${encodeURI(searchTerm)}${track ? `&track=${track}` : ''}`;
+export const setQueryString = ({ term, track }) => {
+  const urlQuery = parse(window.location.hash);
+
+  const newSearchTerm = term || urlQuery.term;
+  const newTrack = track || urlQuery.track;
+
+  const newQuery = {};
+
+  if (newSearchTerm) {
+    newQuery.term = newSearchTerm;
+  }
+
+  if (newTrack) {
+    newQuery.track = newTrack;
+  }
+
+  window.location = `#${stringify(newQuery)}`;
 };
