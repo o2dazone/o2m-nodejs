@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Provider, connect } from 'react-redux';
+import { connect } from 'react-redux';
 
 import { MATCH_HASH, SPLIT_URL_PARAM } from 'constants';
 
@@ -50,20 +50,18 @@ class App extends Component {
   }
 
   render() {
-    const { player, store, index } = this.props;
+    const { player, index } = this.props;
 
     if (!Object.keys(index).length) {
       return <LoadingIcon />;
     }
 
     return (
-      <Provider store={store}>
-        <div className={styles.container}>
-          <Header query={this.searchQuery} />
-          <Results />
-          { player.track || player.autoplay ? <Footer /> : '' }
-        </div>
-      </Provider>
+      <div className={styles.container}>
+        <Header query={this.searchQuery} />
+        <Results />
+        { player.track || player.autoplay ? <Footer /> : '' }
+      </div>
     );
   }
 }

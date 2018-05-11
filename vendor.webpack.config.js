@@ -2,20 +2,19 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: {
     vendor: [
-      'add-asset-html-webpack-plugin',
       'babel-preset-react',
-      'babel-preset-react-hmre',
       'eslint-plugin-react',
       'lodash.throttle',
       'react',
       'react-dom',
+      'react-hot-loader',
       'react-redux',
       'redux',
       'redux-thunk',
-      'soundmanager2',
-      'whatwg-fetch'
+      'soundmanager2'
     ]
   },
 
