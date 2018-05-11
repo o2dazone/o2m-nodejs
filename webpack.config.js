@@ -7,10 +7,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 process.noDeprecation = true;
 module.exports = {
+  mode: 'development',
   devtool: 'eval',
   cache: true,
   entry: [
-    'whatwg-fetch',
     'webpack-hot-middleware/client?reload=true&timeout=1000&noInfo=true',
     path.join(__dirname, 'app/main.js')
   ],
@@ -57,8 +57,7 @@ module.exports = {
             presets: [
               'react',
               'es2015',
-              'stage-0',
-              'react-hmre'
+              'stage-0'
             ]
           }
         },
@@ -69,9 +68,6 @@ module.exports = {
             cache: true
           }
         }]
-      },
-      { test: /\.json?$/,
-        use: 'json-loader'
       },
       { test: /\.scss$/,
         use: [

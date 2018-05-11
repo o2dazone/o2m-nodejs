@@ -1,9 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import store from 'reducers';
+import App from 'components/App';
 
-import App from './components/App.js';
-import configureStore from './store/configureStore';
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+  , document.getElementById('app')
+);
 
-const store = configureStore(window.__INITIAL_STATE__);
+if (module.hot) {
+  module.hot.accept();
+}
 
-render(<App store={store} />, document.getElementById('app'));

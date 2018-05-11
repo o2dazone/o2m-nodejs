@@ -1,13 +1,22 @@
-import { combineReducers } from 'redux';
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
 
 import { index } from './app';
 import search from './search';
 import player from './player';
 
-const rootReducer = combineReducers({
+const reducers = {
   index,
   player,
   search
-});
+};
 
-export default rootReducer;
+const store = createStore(
+  combineReducers(reducers),
+  compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )
+);
+
+export default store;
