@@ -3,15 +3,6 @@
   width: 100%;
   font-weight: 300;
 
-  :global(.aa) {
-    width: $info-album-height;
-    max-width: $info-album-height;
-    height: $info-album-height;
-    background-size: $info-album-height;
-    float: left;
-    margin-right: 10px;
-  }
-
   @include mobile {
     display: none;
   }
@@ -32,4 +23,13 @@
 .artistalbum {
   font-size: 16px;
   color: $color-leland;
+}
+
+.aa {
+  width: $info-album-height;
+  max-width: $info-album-height;
+  height: $info-album-height;
+  background-size: $info-album-height;
+  float: left;
+  margin-right: 10px;
 }

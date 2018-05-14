@@ -6,13 +6,7 @@ import {
   REPLACE_MORE_WEIRD_CHARACTERS
 } from 'constants';
 
-export const getTrackById = (id, results) => {
-  for (let i = 0; i < results.length; i++) {
-    if (results[i].id === id) {
-      return results[i];
-    }
-  }
-};
+export const getTrackById = (id, results) => results.filter(r => r.id === id)[0];
 
 export const getWords = str => {
   const rval = [];

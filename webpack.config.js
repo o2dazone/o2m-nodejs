@@ -67,8 +67,7 @@ module.exports = {
         {
           loader: 'eslint-loader',
           options: {
-            emitWarning: true,
-            cache: true
+            emitWarning: true
           }
         }]
       },

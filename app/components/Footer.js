@@ -55,16 +55,16 @@ class Footer extends Component {
   }
 
   getTrack = itr => {
-    const { player, search } = this.props;
-
-    const trackid = player.track.id;
+    const { player: { track: { id } }, search } = this.props;
     const results = search.results;
-
-    for (let i = 0; i < results.length; i++) {
-      if (results[i].id === trackid) {
-        return results[i + itr];
+    let track = null;
+    results.filter((r, i) => {
+      if (r.id === id) {
+        track = results[i + itr];
       }
-    }
+    });
+
+    return !!track && track;
   }
 
   onPercentUpdate = () => {
@@ -117,17 +117,15 @@ class Footer extends Component {
   }
 
   onToggleShuffle = () => {
-    const { toggleShuffle, player } = this.props;
-    toggleShuffle(player.shuffle ? false : true );
+    const { toggleShuffle, player: { shuffle } } = this.props;
+    toggleShuffle(shuffle ? false : true );
   }
 
   render() {
     const { player } = this.props;
 
     if (!player.track) {
-      return (
-        <div />
-      );
+      return null;
     }
 
     return (

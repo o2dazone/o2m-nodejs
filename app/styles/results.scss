@@ -10,9 +10,9 @@
 
     &:hover {
       cursor: pointer;
-      background: $color-highlight
+      background: $color-highlight;
 
-      :global(.aa) {
+      .aa {
         opacity: .6;
       }
     }
@@ -100,8 +100,6 @@
     }
 
     &.playing {
-      background: $color-highlight;
-
       > div > p {
         position: relative;
         color: lighten($color-primary, 20%);
@@ -126,7 +124,7 @@
   opacity: 1;
 }
 
-:global(.aa) {
+.aa {
   flex: 1 0 auto;
   transition: opacity .15s;
   display: inline-block;
