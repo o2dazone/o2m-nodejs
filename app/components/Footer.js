@@ -13,7 +13,7 @@ import Duration from './Duration';
 class Footer extends Component {
   constructor(props) {
     super(props);
-    this.onPercentUpdate = throttle(this.onPercentUpdate.bind(this), 250);
+    this.onPercentUpdate = throttle(this.onPercentUpdate.bind(this), 100);
     this.audioModule = null;
     this.state = {
       playerPercent: 0
