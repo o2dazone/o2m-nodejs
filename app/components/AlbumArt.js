@@ -1,4 +1,6 @@
-import React from 'react';
+/** @jsx h */
+
+import { h } from 'preact';
 import { Album } from 'icons';
 
 const AlbumArt = ({ art, className, onClickAlbum, size = 50 }) => {

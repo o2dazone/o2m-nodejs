@@ -1,6 +1,7 @@
+/** @jsx h */
 import css from 'styles/info.scss';
 
-import React from 'react';
+import { h } from 'preact';
 import AlbumArt from './AlbumArt';
 
 const Info = ({track}) => (

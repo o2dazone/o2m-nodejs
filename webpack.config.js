@@ -11,7 +11,7 @@ module.exports = {
   devtool: 'eval',
   cache: true,
   entry: [
-    'webpack-hot-middleware/client?reload=true&timeout=1000&noInfo=true',
+    'webpack-hot-middleware/client?reload=true&timeout=1000',
     path.join(__dirname, 'app/main.js')
   ],
   output: {

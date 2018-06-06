@@ -1,11 +1,12 @@
+/** @jsx h */
 import css from 'styles/player.scss';
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { h, Component } from 'preact';
+import { connect } from 'preact-redux';
 import { setQueryString } from 'helpers';
 import { PLAYER_ICON_SIZE } from 'constants';
 import actions from 'actions';
-import {rootReducers as reducers} from 'reducers';
+import reducers from 'reducers';
 import AudioModule from './AudioModule';
 import { Previous, Next, Shuffle, Play, Pause } from 'icons';
 

@@ -1,7 +1,8 @@
+/** @jsx h */
 import css from 'styles/app.scss';
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { h, Component } from 'preact';
+import { connect } from 'preact-redux';
 import { parse } from 'query-string';
 
 import Header from './Header';
@@ -9,7 +10,7 @@ import Results from './Results';
 import Footer from './Footer';
 import LoadingIcon from './LoadingIcon';
 
-import {rootReducers as reducers} from 'reducers';
+import reducers from 'reducers';
 import actions from 'actions';
 
 let SEARCH_QUERY = '';

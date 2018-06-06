@@ -1,10 +1,12 @@
+/** @jsx h */
+
 import css from 'styles/results.scss';
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { h, Component } from 'preact';
+import { connect } from 'preact-redux';
 
 import actions from 'actions';
-import {rootReducers as reducers} from 'reducers';
+import reducers from 'reducers';
 import { getTrackById } from 'helpers';
 import AlbumArt from './AlbumArt';
 

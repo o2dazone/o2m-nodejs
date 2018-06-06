@@ -1,4 +1,5 @@
-import React from 'react';
+/** @jsx h */
+import { h } from 'preact';
 import Icon from './Icon';
 
 const Shuffle = props => (

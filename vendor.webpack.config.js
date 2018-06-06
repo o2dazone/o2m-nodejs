@@ -5,13 +5,12 @@ module.exports = {
   mode: 'development',
   entry: {
     vendor: [
-      'babel-preset-react',
-      'eslint-plugin-react',
       'lodash.throttle',
+      'preact',
+      'preact-redux',
+      'query-string',
       'react',
-      'react-dom',
       'react-hot-loader',
-      'react-redux',
       'redux',
       'redux-thunk',
       'soundmanager2'

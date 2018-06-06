@@ -13,16 +13,7 @@ const compiler = webpack(webpackConfig);
 const middleware = webpackDevMiddleware(compiler, {
   publicPath: webpackConfig.output.publicPath,
   contentBase: 'src',
-  stats: {
-    version: false,
-    assets: false,
-    colors: true,
-    hash: false,
-    timings: false,
-    chunks: false,
-    chunkModules: false,
-    modules: false
-  }
+  stats: 'errors-only'
 });
 
 app.use(middleware);

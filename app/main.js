@@ -1,17 +1,19 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import store from 'reducers';
-import App from 'components/App';
+/** @jsx h */
+import { render, h } from 'preact';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'preact-redux';
+import thunk from 'redux-thunk';
+import rootReducer from 'reducers';
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-  , document.getElementById('app')
-);
+import Root from 'components/Root';
 
-if (module.hot) {
-  module.hot.accept();
-}
+const store = () => {
+  const finalCreateStore = compose(
+    applyMiddleware(thunk),
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  )(createStore);
+  return finalCreateStore(rootReducer, window.__INITIAL_STATE__);
+};
+
+render(<Provider store={store()}><Root /></Provider>, document.getElementById('app'));
 

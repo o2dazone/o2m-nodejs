@@ -1,11 +1,13 @@
+/** @jsx h */
+
 import css from 'styles/footer.scss';
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { h, Component } from 'preact';
+import { connect } from 'preact-redux';
 import throttle from 'lodash.throttle';
 
 import actions from 'actions';
-import {rootReducers as reducers} from 'reducers';
+import reducers from 'reducers';
 import Info from './Info';
 import Player from './Player';
 import Duration from './Duration';
