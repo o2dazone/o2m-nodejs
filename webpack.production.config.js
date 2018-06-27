@@ -57,9 +57,13 @@ module.exports = {
           loader: 'babel-loader',
           query: {
             presets: [
-              'react',
-              'es2015',
-              'stage-0'
+              '@babel/preset-react',
+              '@babel/preset-env',
+              [
+                '@babel/preset-stage-0', {
+                  'decoratorsLegacy': true
+                }
+              ]
             ]
           }
         }

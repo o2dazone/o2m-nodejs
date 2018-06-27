@@ -26,7 +26,8 @@ class Songs extends Component {
 
   makeSongs() {
     const { player, search: { results } } = this.props;
-    const playingTrack = player.track ? player.track.id : null;
+    const playingTrack = player.track?.id;
+
     return (
       results.map(({ id, albumArtRef, durationMillis, trackNumber, title, artist, album }) => (
         <div className={playingTrack === id ? css.playing : null} onClick={this.onPlaySong} key={id} data-id={id}>

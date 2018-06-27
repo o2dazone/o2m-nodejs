@@ -55,12 +55,13 @@ module.exports = {
           loader: 'babel-loader?cacheDirectory',
           options: {
             presets: [
-              'react',
-              'es2015',
-              'stage-0'
-            ],
-            plugins: [
-              'react-hot-loader/babel'
+              '@babel/preset-react',
+              '@babel/preset-env',
+              [
+                '@babel/preset-stage-0', {
+                  'decoratorsLegacy': true
+                }
+              ]
             ]
           }
         },

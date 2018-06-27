@@ -5,7 +5,7 @@ import { Provider } from 'preact-redux';
 import thunk from 'redux-thunk';
 import rootReducer from 'reducers';
 
-import Root from 'components/Root';
+import App from 'components/App';
 
 const store = () => {
   const finalCreateStore = compose(
@@ -15,5 +15,5 @@ const store = () => {
   return finalCreateStore(rootReducer, window.__INITIAL_STATE__);
 };
 
-render(<Provider store={store()}><Root /></Provider>, document.getElementById('app'));
+render(<Provider store={store()}><App /></Provider>, document.getElementById('app'));
 
