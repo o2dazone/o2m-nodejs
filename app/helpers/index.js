@@ -21,13 +21,13 @@ export const getWords = str => {
 
 export const intersection = (set1, set2) => {
   const rval = [];
-  if ( set1 && set2 ) {
-    set1.forEach(e => {
-      if (set2.indexOf(e) !== -1) {
-        rval.push(e);
-      }
-    });
-  }
+
+  set1?.forEach(e => {
+    if (set2?.indexOf(e) !== -1) {
+      rval.push(e);
+    }
+  });
+
   return rval;
 };
 

@@ -30,12 +30,11 @@ export const fetchSearchResults = query => (dispatch, getState) => {
     });
 
     const results = [];
-    if (ids) {
-      ids.forEach( id => {
-        tracks[id].id = id;
-        results.push(tracks[id]);
-      });
-    }
+
+    ids?.forEach( id => {
+      tracks[id].id = id;
+      results.push(tracks[id]);
+    });
 
     dispatch(receiveSearchResults(results, query));
   }

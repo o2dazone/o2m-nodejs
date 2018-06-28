@@ -9,8 +9,6 @@ module.exports = {
       'preact',
       'preact-redux',
       'query-string',
-      'react',
-      'react-hot-loader',
       'redux',
       'redux-thunk',
       'soundmanager2'

@@ -29,9 +29,17 @@ class Songs extends Component {
     const playingTrack = player.track?.id;
 
     return (
-      results.map(({ id, albumArtRef, durationMillis, trackNumber, title, artist, album }) => (
+      results.map(({
+        albumArtRef: { [0]: art } = {[0]: null}, // lol
+        id,
+        durationMillis,
+        trackNumber,
+        title,
+        artist,
+        album
+      }) => (
         <div className={playingTrack === id ? css.playing : null} onClick={this.onPlaySong} key={id} data-id={id}>
-          <AlbumArt className={css.aa} art={albumArtRef ? albumArtRef[0].url : null} />
+          <AlbumArt className={css.aa} art={art?.url} />
           <div>
             <p>{`${trackNumber ? `${trackNumber}. ` : ''}`}{title}</p>
             <p>{`${artist}${album ? ' · ' + album : ''}`}</p>

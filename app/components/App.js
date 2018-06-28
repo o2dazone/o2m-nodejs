@@ -15,6 +15,7 @@ import actions from 'actions';
 
 class App extends Component {
   static SEARCH_QUERY;
+
   componentWillMount() {
     this.props.getSearchData();
   }
