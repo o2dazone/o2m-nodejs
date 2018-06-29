@@ -1,7 +1,6 @@
-/** @jsx h */
 import css from 'styles/loadingIcon.scss';
 
-import { h } from 'preact';
+import React from 'react';
 
 const LoadingIcon = () => (
   <div className={css.container}>

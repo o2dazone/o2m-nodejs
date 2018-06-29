@@ -1,8 +1,7 @@
-/** @jsx h */
 import css from 'styles/player.scss';
 
-import { h, Component } from 'preact';
-import { connect } from 'preact-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { setQueryString } from 'helpers';
 import { PLAYER_ICON_SIZE } from 'constants';
 import actions from 'actions';

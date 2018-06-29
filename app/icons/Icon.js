@@ -1,5 +1,4 @@
-/** @jsx h */
-import { h } from 'preact';
+import React from 'react';
 
 const IconBase = ({ children, color = '#fff', size = '1em', ...props }) => (
   <svg children={children}

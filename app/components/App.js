@@ -1,8 +1,7 @@
-/** @jsx h */
 import css from 'styles/app.scss';
 
-import { h, Component } from 'preact';
-import { connect } from 'preact-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { parse } from 'query-string';
 
 import Header from './Header';

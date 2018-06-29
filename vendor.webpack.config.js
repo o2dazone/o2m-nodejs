@@ -6,9 +6,10 @@ module.exports = {
   entry: {
     vendor: [
       'lodash.throttle',
-      'preact',
-      'preact-redux',
       'query-string',
+      'react',
+      'react-dom',
+      'react-redux',
       'redux',
       'redux-thunk',
       'soundmanager2'

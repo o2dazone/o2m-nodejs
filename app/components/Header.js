@@ -1,9 +1,7 @@
-/** @jsx h */
-
 import css from 'styles/header.scss';
 
-import { h, Component } from 'preact';
-import { connect } from 'preact-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import actions from 'actions';
 import reducers from 'reducers';

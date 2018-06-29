@@ -1,8 +1,6 @@
-/** @jsx h */
-
-import { Component } from 'preact';
+import { Component } from 'react';
 import { soundManager as sm } from 'soundmanager2';
-import { connect } from 'preact-redux';
+import { connect } from 'react-redux';
 
 class AudioModule extends Component {
   componentWillMount() {

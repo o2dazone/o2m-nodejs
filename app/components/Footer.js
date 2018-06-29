@@ -1,9 +1,7 @@
-/** @jsx h */
-
 import css from 'styles/footer.scss';
 
-import { h, Component } from 'preact';
-import { connect } from 'preact-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import throttle from 'lodash.throttle';
 
 import actions from 'actions';
