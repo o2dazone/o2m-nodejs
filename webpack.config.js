@@ -11,7 +11,8 @@ module.exports = {
   devtool: 'eval',
   cache: true,
   entry: [
-    'webpack-hot-middleware/client?reload=true&timeout=1000',
+    'react-hot-loader/patch',
+    'webpack-hot-middleware/client?quiet=true',
     path.join(__dirname, 'app/main.js')
   ],
   output: {
@@ -62,7 +63,8 @@ module.exports = {
                   'decoratorsLegacy': true
                 }
               ]
-            ]
+            ],
+            plugins: ['react-hot-loader/babel']
           }
         },
         {

@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
+import App from 'components/App';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import rootReducer from 'reducers';
-
-import Root from 'components/Root';
 
 const store = () => {
   const finalCreateStore = compose(
@@ -15,5 +15,21 @@ const store = () => {
   return finalCreateStore(rootReducer, window.__INITIAL_STATE__);
 };
 
-render(<Provider store={store()}><Root /></Provider>, document.getElementById('app'));
+const renderApp = () => {
+  render(
+    <Provider store={store()}>
+      <AppContainer>
+        <App />
+      </AppContainer>
+    </Provider>,
+    document.getElementById('app')
+  );
+};
 
+renderApp();
+
+if (module.hot) {
+  module.hot.accept(App, () => {
+    renderApp();
+  });
+}
