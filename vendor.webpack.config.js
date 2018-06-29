@@ -9,6 +9,7 @@ module.exports = {
       'query-string',
       'react',
       'react-dom',
+      'react-hot-loader',
       'react-redux',
       'redux',
       'redux-thunk',
