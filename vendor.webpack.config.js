@@ -5,9 +5,8 @@ module.exports = {
   mode: 'development',
   entry: {
     vendor: [
-      'babel-preset-react',
-      'eslint-plugin-react',
       'lodash.throttle',
+      'query-string',
       'react',
       'react-dom',
       'react-hot-loader',

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import actions from 'actions';
-import {rootReducers as reducers} from 'reducers';
+import reducers from 'reducers';
 import { setQueryString } from 'helpers';
 import { Logo } from 'icons';
 

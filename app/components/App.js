@@ -9,12 +9,12 @@ import Results from './Results';
 import Footer from './Footer';
 import LoadingIcon from './LoadingIcon';
 
-import {rootReducers as reducers} from 'reducers';
+import reducers from 'reducers';
 import actions from 'actions';
 
-let SEARCH_QUERY = '';
-
 class App extends Component {
+  static SEARCH_QUERY;
+
   componentWillMount() {
     this.props.getSearchData();
   }
@@ -22,7 +22,7 @@ class App extends Component {
   componentDidMount() {
     const query = parse(window.location.hash);
     const trackIdParam = query.track;
-    SEARCH_QUERY = query.term;
+    App.SEARCH_QUERY = query.term;
 
     if (trackIdParam) {
       this.props.receiveAutoplayTrackId(trackIdParam);
@@ -42,7 +42,7 @@ class App extends Component {
 
     return (
       <div className={css.container}>
-        <Header query={SEARCH_QUERY} />
+        <Header query={App.SEARCH_QUERY} />
         <Results />
         { track || autoplay ? <Footer /> : '' }
       </div>

@@ -3,7 +3,7 @@ import css from 'styles/duration.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {rootReducers as reducers} from 'reducers';
+import reducers from 'reducers';
 
 class Duration extends Component {
   makeTime() {

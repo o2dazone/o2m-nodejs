@@ -11,7 +11,8 @@ module.exports = {
   devtool: 'eval',
   cache: true,
   entry: [
-    'webpack-hot-middleware/client?reload=true&timeout=1000&noInfo=true',
+    'react-hot-loader/patch',
+    'webpack-hot-middleware/client?quiet=true',
     path.join(__dirname, 'app/main.js')
   ],
   output: {
@@ -55,13 +56,15 @@ module.exports = {
           loader: 'babel-loader?cacheDirectory',
           options: {
             presets: [
-              'react',
-              'es2015',
-              'stage-0'
+              '@babel/preset-react',
+              '@babel/preset-env',
+              [
+                '@babel/preset-stage-0', {
+                  'decoratorsLegacy': true
+                }
+              ]
             ],
-            plugins: [
-              'react-hot-loader/babel'
-            ]
+            plugins: ['react-hot-loader/babel']
           }
         },
         {

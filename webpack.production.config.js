@@ -10,18 +10,7 @@ const publicPath = 'http://d2phn2ea0nqfsq.cloudfront.net/m/';
 module.exports = {
   mode: 'production',
   optimization: {
-    splitChunks: {
-      cacheGroups: {
-        vendor: {
-          chunks: 'initial',
-          name: 'vendor',
-          test: /node_modules/,
-          enforce: true,
-          priority: 10
-        }
-      },
-      name: false
-    }
+    splitChunks: false
   },
   entry: [
     path.join(__dirname, './app/main.js')
@@ -68,9 +57,13 @@ module.exports = {
           loader: 'babel-loader',
           query: {
             presets: [
-              'react',
-              'es2015',
-              'stage-0'
+              '@babel/preset-react',
+              '@babel/preset-env',
+              [
+                '@babel/preset-stage-0', {
+                  'decoratorsLegacy': true
+                }
+              ]
             ]
           }
         }

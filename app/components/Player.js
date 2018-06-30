@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { setQueryString } from 'helpers';
 import { PLAYER_ICON_SIZE } from 'constants';
 import actions from 'actions';
-import {rootReducers as reducers} from 'reducers';
+import reducers from 'reducers';
 import AudioModule from './AudioModule';
 import { Previous, Next, Shuffle, Play, Pause } from 'icons';
 
