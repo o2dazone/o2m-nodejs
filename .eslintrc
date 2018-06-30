@@ -17,22 +17,17 @@
     "browser": true,
     "node": true
   },
+  "globals": {
+    "Promise": true
+  },
   "rules": {
     "no-var": 1,
     "prefer-const": 1,
-
-    /**
-     * Variables
-     */
     "no-shadow": 0,
     "no-shadow-restricted-names": 1,
     "no-undef": 1,
-    "no-unused-vars": [2, {"varsIgnorePattern": "React"}],
+    "no-unused-vars": [1, {"varsIgnorePattern": "React"}],
     "no-use-before-define": 1,
-
-    /**
-     * Possible errors
-     */
     "no-cond-assign": [1, "always"],
     "no-console": 1,
     "no-debugger": 1,
@@ -53,10 +48,6 @@
     "no-unreachable": 1,
     "use-isnan": 1,
     "block-scoped-var": 1,
-
-    /**
-     * Best practices
-     */
     "arrow-body-style": [1, "as-needed"],
     "consistent-return": 0,
     "curly": [1, "multi-line"],
@@ -95,10 +86,6 @@
     "vars-on-top": 1,
     "wrap-iife": [1, "any"],
     "yoda": 1,
-
-    /**
-     * Style
-     */
     "indent": [1, 2],
     "brace-style": [
       1,
@@ -148,7 +135,7 @@
     "space-infix-ops": 1,
     "spaced-comment": [1, "always",  {
       "exceptions": ["-", "+"],
-      "markers": ["=", "!"]           // space here to support sprockets directives
+      "markers": ["=", "!"]
     }],
     // React
     "jsx-quotes": [1, "prefer-double"],

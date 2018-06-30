@@ -9,6 +9,10 @@ import { getTrackById } from 'helpers';
 import AlbumArt from './AlbumArt';
 
 class Songs extends Component {
+  componentDidUpdate() {
+    this.refs.results.scrollTop = 0;
+  }
+
   onPlaySong = ({ currentTarget }) => {
     const { playSong, search } = this.props;
     const trackId = currentTarget.dataset.id;
@@ -53,7 +57,7 @@ class Songs extends Component {
     const hasResults = results.length;
 
     return (
-      <div className={`${css.container} ${hasResults ? css.show : '' }`}>
+      <div ref="results" className={`${css.container} ${hasResults ? css.show : '' }`}>
         { hasResults ? this.makeSongs() : '' }
       </div>
     );
