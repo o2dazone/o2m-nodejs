@@ -3,7 +3,6 @@
   right: 0;
   left: 0;
   height: $progress-bar-height;
-  cursor: pointer;
 }
 
 .container {
@@ -19,7 +18,8 @@
 }
 
 .time {
-  color: $color-wht;
+  color: $color-blk;
+  font-weight: bold;
   font-size: 10px;
   background: inherit;
   position: absolute;

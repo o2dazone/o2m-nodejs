@@ -1,6 +1,7 @@
 import css from 'styles/app.scss';
 
-import React, { Component } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { hot } from 'react-hot-loader/root';
 import { connect } from 'react-redux';
 import { parse } from 'query-string';
 
@@ -12,43 +13,42 @@ import LoadingIcon from './LoadingIcon';
 import { getSearchData } from 'actions/app';
 import { receiveAutoplayTrackId } from 'actions/player';
 
-class App extends Component {
-  static SEARCH_QUERY;
+const App = ({ getSearchData, receiveAutoplayTrackId, player: { track, autoplay }, index }) => {
+  const SEARCH_QUERY = useRef(null);
 
-  componentDidMount() {
-    this.props.getSearchData();
+  useEffect(() => {
+    getSearchData();
     const query = parse(window.location.hash);
     const trackId = query.track;
 
-    App.SEARCH_QUERY = query.term;
+    SEARCH_QUERY.current = query.term;
     if (trackId) {
-      this.props.receiveAutoplayTrackId(trackId);
+      receiveAutoplayTrackId(trackId);
     }
+  }, [getSearchData, receiveAutoplayTrackId]);
+
+  if (!Object.keys(index).length) {
+    return <LoadingIcon />;
   }
 
-  render() {
-    const { player: { track, autoplay }, index } = this.props;
-
-    if (!Object.keys(index).length) {
-      return <LoadingIcon />;
-    }
-
-    return (
-      <div className={css.container}>
-        <Header query={App.SEARCH_QUERY} />
-        <Results />
-        { track || autoplay ? <Footer /> : '' }
-      </div>
-    );
-  }
-}
+  return (
+    <div className={css.container}>
+      <Header query={SEARCH_QUERY.current} />
+      <Results />
+      { track || autoplay ? <Footer /> : '' }
+    </div>
+  );
+};
 
 const stateToProps = ({ player, index }) => ({
   player,
   index
 });
 
-export default connect(stateToProps, {
+const ConnectedApp = connect(stateToProps, {
   getSearchData,
   receiveAutoplayTrackId
 })(App);
+
+export default hot(ConnectedApp);
+

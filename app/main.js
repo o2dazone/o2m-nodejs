@@ -1,6 +1,5 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
 import App from 'components/App';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
@@ -15,21 +14,8 @@ const store = () => {
   return finalCreateStore(rootReducer, window.__INITIAL_STATE__);
 };
 
-const renderApp = () => {
-  render(
-    <Provider store={store()}>
-      <AppContainer>
-        <App />
-      </AppContainer>
-    </Provider>,
-    document.getElementById('app')
-  );
-};
+render(
+  <Provider store={store()}><App /></Provider>,
+  document.getElementById('app')
+);
 
-renderApp();
-
-if (module.hot) {
-  module.hot.accept(App, () => {
-    renderApp();
-  });
-}

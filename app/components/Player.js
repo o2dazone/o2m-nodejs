@@ -1,6 +1,6 @@
 import css from 'styles/player.scss';
 
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { setQueryString } from 'helpers';
 import { PLAYER_ICON_SIZE } from 'constants';
@@ -10,55 +10,49 @@ import { Previous, Next, Shuffle, Play, Pause } from 'icons';
 
 import { fetchStreamUrl } from 'actions/player';
 
-class Player extends Component {
-  componentWillMount() {
-    const { fetchStreamUrl } = this.props;
+const Player = ({
+  onToggleShuffle,
+  onTogglePlayPause,
+  onNextTrack,
+  onPercentUpdate,
+  onSoundCreated,
+  onPreviousTrack,
+  fetchStreamUrl,
+  player
+}) => {
+  useEffect(() => {
     // make an initial fetch on mount
-
     const query = parse(window.location.hash);
     const track = query.track;
 
     setQueryString({ track });
     fetchStreamUrl(track);
-  }
+  }, [fetchStreamUrl]);
 
-  componentWillReceiveProps(nextState) {
-    const { fetchStreamUrl, player } = this.props;
-    if (nextState.player.track.id !== player.track.id) {
-      const track = nextState.player.track.id;
-      setQueryString({ track });
-      fetchStreamUrl(track);
-    }
-  }
+  useEffect(() => {
+    const track = player.track.id;
+    setQueryString({ track });
+    fetchStreamUrl(track);
+  }, [fetchStreamUrl, player.track.id]);
 
-  render() {
-    const {
-      player,
-      onToggleShuffle,
-      onTogglePlayPause,
-      onNextTrack,
-      onPercentUpdate,
-      onSoundCreated,
-      onPreviousTrack
-    } = this.props;
+  return (
+    <div className={css.container}>
+      { player && <AudioModule onSoundCreated={onSoundCreated} onNextTrack={onNextTrack} onPercentUpdate={onPercentUpdate} streamUrl={player.streamUrl} /> }
+      <Previous size={PLAYER_ICON_SIZE + 8} className={css.prevNext} onClick={onPreviousTrack} color="#ddd" />
 
-    return (
-      <div className={css.container}>d
-        { player ? <AudioModule onSoundCreated={onSoundCreated} onNextTrack={onNextTrack} onPercentUpdate={onPercentUpdate} streamUrl={player.streamUrl} /> : ''}
-        <Previous size={PLAYER_ICON_SIZE + 8} className={css.prevNext} onClick={onPreviousTrack} color="#ddd" />
+      { player.playing
+        ? <Pause size={PLAYER_ICON_SIZE} onClick={onTogglePlayPause} color="#ddd" />
+        : <Play size={PLAYER_ICON_SIZE} onClick={onTogglePlayPause} color="#ddd" />
+      }
 
-        { player.playing ?
-          <Pause size={PLAYER_ICON_SIZE} onClick={onTogglePlayPause} color="#ddd" /> :
-          <Play size={PLAYER_ICON_SIZE} onClick={onTogglePlayPause} color="#ddd" />
-        }
+      <Next size={PLAYER_ICON_SIZE + 8} className={css.prevNext} onClick={onNextTrack} color="#ddd" />
+      <Shuffle size={PLAYER_ICON_SIZE} onClick={onToggleShuffle} color={player.shuffle ? '#3179a1' : '#ddd'} />
+    </div>
+  );
+};
 
-        <Next size={PLAYER_ICON_SIZE + 8} className={css.prevNext} onClick={onNextTrack} color="#ddd" />
-        <Shuffle size={PLAYER_ICON_SIZE} onClick={onToggleShuffle} color={player.shuffle ? '#3179a1' : '#ddd'} />
-      </div>
-    );
-  }
-}
+const stateToProps = ({ player }) => ({ player });
 
-export default connect(({ player }) => ({ player }), {
+export default connect(stateToProps, {
   fetchStreamUrl
 })(Player);

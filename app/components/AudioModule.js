@@ -1,11 +1,8 @@
-import { Component } from 'react';
+import { useEffect } from 'react';
 import { soundManager as sm } from 'soundmanager2';
-import { connect } from 'react-redux';
 
-class AudioModule extends Component {
-  componentWillMount() {
-    const { onNextTrack, onPercentUpdate, onSoundCreated } = this.props;
-
+const AudioModule = ({ onNextTrack, onPercentUpdate, onSoundCreated, streamUrl }) => {
+  useEffect(() => {
     sm.setup({
       'useHTML5Audio': true,
       'preferFlash': false,
@@ -24,17 +21,15 @@ class AudioModule extends Component {
     });
 
     onSoundCreated(sm.getSoundById('smTrack'));
-  }
+  }, [onNextTrack, onPercentUpdate, onSoundCreated]);
 
-  componentWillReceiveProps(nextState) {
+  useEffect(() => {
     sm.getSoundById('smTrack').play({
-      url: nextState.streamUrl
+      url: streamUrl
     });
-  }
+  }, [streamUrl]);
 
-  render() {
-    return null;
-  }
-}
+  return null;
+};
 
-export default connect()(AudioModule);
+export default AudioModule;

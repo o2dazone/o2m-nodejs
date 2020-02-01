@@ -1,11 +1,10 @@
 import css from 'styles/duration.scss';
 
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-class Duration extends Component {
-  makeTime() {
-    const { player, audioModule } = this.props;
+const Duration = ({ player, audioModule, playerPercent }) => {
+  const makeTime = () => {
     if (audioModule) {
       const t = (audioModule.position + player.begin) * 0.001;
       const hr =  t / 3600 >> 0;
@@ -14,23 +13,20 @@ class Duration extends Component {
 
       return ((hr ? hr + ':' : '') + (min ? min + ':' : '0:') + (sec < 10 ? '0' : '') + sec);
     }
-  }
+  };
 
-  render() {
-    const { onDurationClicked, playerPercent } = this.props;
-    const percent = { width: `${playerPercent}%` };
+  const percent = { width: `${playerPercent}%` };
 
-    return (
-      <div className={css.container} onClick={onDurationClicked}>
-        <div style={percent} className={css.elapsed} data-elapsed>
-          <div className={css.time} data-timer>
-            {percent ? this.makeTime() : ''}
-          </div>
+  return (
+    <div className={css.container}>
+      <div style={percent} className={css.elapsed} data-elapsed>
+        <div className={css.time} data-timer>
+          {percent ? makeTime() : ''}
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 const stateToProps = ({ player }) => ({
   player

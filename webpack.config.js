@@ -19,6 +19,9 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
+    alias: {
+      'react-dom': '@hot-loader/react-dom'
+    },
     modules: [
       srcPath,
       'node_modules',

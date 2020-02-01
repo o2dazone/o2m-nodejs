@@ -1,7 +1,8 @@
 {
   "parser": "babel-eslint", // https://github.com/babel/babel-eslint,
   "plugins": [
-    "react"
+    "react",
+    "react-hooks"
   ],
   "parserOptions": {
     "sourceType": "module",
@@ -114,7 +115,7 @@
       "newIsCap": true
     }],
     "no-multiple-empty-lines": [1, {
-      "max": 2
+      "max": 1
     }],
     "no-nested-ternary": 1,
     "no-new-object": 1,
@@ -153,6 +154,9 @@
     "react/prop-types": 0,
     "react/react-in-jsx-scope": 1,
     "react/self-closing-comp": 1,
-    "react/sort-comp": 1
+    "react/sort-comp": 1,
+
+    "react-hooks/rules-of-hooks": 1,
+    "react-hooks/exhaustive-deps": 1
   }
 }

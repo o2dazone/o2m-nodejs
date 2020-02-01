@@ -1,62 +1,55 @@
 import css from 'styles/footer.scss';
 
-import React, { Component } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
-import throttle from 'lodash.throttle';
 
 import Info from './Info';
 import Player from './Player';
 import Duration from './Duration';
 
-import { playSong, receiveAutoplayTrackId, togglePlayPause, fetchStreamUrl } from 'actions/player';
+import { playSong, receiveAutoplayTrackId, togglePlayPause, fetchStreamUrl, toggleShuffle } from 'actions/player';
 import { fetchAutoplayTrack } from 'actions/search';
 
-class Footer extends Component {
-  constructor(props) {
-    super(props);
-    this.onPercentUpdate = throttle(this.onPercentUpdate.bind(this), 100);
-    this.audioModule = null;
-    this.state = {
-      playerPercent: 0
-    };
-  }
+const Footer = ({
+  fetchAutoplayTrack,
+  receiveAutoplayTrackId,
+  toggleShuffle,
+  playSong,
+  togglePlayPause,
+  player,
+  search
+}) => {
+  const [ playerPercent, setPlayerPercent ] = useState(0);
+  const audioModule = useRef(null);
 
-  componentDidMount() {
-    const { player, fetchAutoplayTrack, receiveAutoplayTrackId } = this.props;
-    document.addEventListener('keydown', this.handleKeyDown.bind(this));
+  const {
+    shuffle,
+    playing,
+    autoplay,
+    begin = 0,
+    track
+  } = player;
 
-    if (player.autoplay) {
-      fetchAutoplayTrack(player.autoplay);
+  const { id, durationMillis } = track || {};
+
+  const onTogglePlayPause = useCallback(() => {
+    togglePlayPause(playing ? false : true );
+
+    if (playing) {
+      audioModule.current.pause();
+    } else {
+      audioModule.current.play();
+    }
+  }, [playing, togglePlayPause]);
+
+  useEffect(() => {
+    if (autoplay) {
+      fetchAutoplayTrack(autoplay);
       receiveAutoplayTrackId(null);
     }
-  }
+  }, [fetchAutoplayTrack, autoplay, receiveAutoplayTrackId]);
 
-  componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyDown.bind(this));
-  }
-
-  handleKeyDown = e => {
-    if (e.target.tagName !== 'INPUT') {
-      if (e.key === ' ') {
-        e.preventDefault();
-        this.onTogglePlayPause();
-      }
-    }
-  }
-
-  onTogglePlayPause = () => {
-    const { togglePlayPause, player } = this.props;
-    togglePlayPause(player.playing ? false : true );
-
-    if (player.playing) {
-      this.audioModule.pause();
-    } else {
-      this.audioModule.play();
-    }
-  }
-
-  getTrack = itr => {
-    const { player: { track: { id } }, search } = this.props;
+  const getTrack = itr => {
     const results = search.results;
     let track = null;
     results.filter((r, i) => {
@@ -66,90 +59,63 @@ class Footer extends Component {
     });
 
     return !!track && track;
-  }
+  };
 
-  onPercentUpdate = () => {
-    const { player } = this.props;
-    this.setState({
-      playerPercent: ((this.audioModule.position + player.begin) / player.track.durationMillis * 100).toFixed(2)
-    });
-  }
+  const onPercentUpdate = () => {
+    setPlayerPercent(((audioModule.current.position + begin) / +durationMillis * 100).toFixed(2));
+  };
 
-  onSoundCreated = obj => {
-    this.audioModule = obj;
-  }
+  const onSoundCreated = obj => {
+    audioModule.current = obj;
+  };
 
-  onNextTrack = () => {
-    const { player, playSong, search } = this.props;
-
-    if (player.shuffle) {
+  const onNextTrack = () => {
+    if (shuffle) {
       const randomTrackId = Math.round(Math.random() * (search.results.length - 1));
       const randomTrack = search.results[randomTrackId];
       playSong(randomTrack);
     } else {
-      const nextTrack = this.getTrack(+1);
+      const nextTrack = getTrack(+1);
       if (nextTrack) {
         playSong(nextTrack);
       }
     }
-  }
+  };
 
-  onDurationClicked = e => {
-    const { player, fetchStreamUrl, togglePlayPause } = this.props;
-    let target = e.target;
-
-    if (target.dataset.timer) {
-      target = target.parentNode;
-    }
-
-    if (target.dataset.elapsed) {
-      target = target.parentNode;
-    }
-
-    togglePlayPause(true);
-    fetchStreamUrl(player.track.id, Math.round(e.clientX / target.clientWidth * player.track.durationMillis));
-  }
-
-  onPreviousTrack = () => {
-    const previousTrack = this.getTrack(-1);
+  const onPreviousTrack = () => {
+    const previousTrack = getTrack(-1);
     if (previousTrack) {
-      this.props.playSong(previousTrack);
+      playSong(previousTrack);
     }
-  }
+  };
 
-  onToggleShuffle = () => {
-    const { toggleShuffle, player: { shuffle } } = this.props;
+  const onToggleShuffle = () => {
     toggleShuffle(shuffle ? false : true );
+  };
+
+  if (!track) {
+    return null;
   }
 
-  render() {
-    const { player } = this.props;
+  return (
+    <div className={css.container}>
+      <Duration
+        playerPercent={playerPercent}
+        audioModule={audioModule.current} />
 
-    if (!player.track) {
-      return null;
-    }
+      <Info track={track} />
 
-    return (
-      <div className={css.container}>
-        <Duration
-          playerPercent={this.state.playerPercent}
-          audioModule={this.audioModule}
-          onDurationClicked={this.onDurationClicked} />
-
-        <Info track={player.track} />
-
-        <Player
-          player={player}
-          onSoundCreated={this.onSoundCreated}
-          onNextTrack={this.onNextTrack}
-          onPercentUpdate={this.onPercentUpdate}
-          onPreviousTrack={this.onPreviousTrack}
-          onTogglePlayPause={this.onTogglePlayPause}
-          onToggleShuffle={this.onToggleShuffle} />
-      </div>
-    );
-  }
-}
+      <Player
+        player={player}
+        onSoundCreated={onSoundCreated}
+        onNextTrack={onNextTrack}
+        onPercentUpdate={onPercentUpdate}
+        onPreviousTrack={onPreviousTrack}
+        onTogglePlayPause={onTogglePlayPause}
+        onToggleShuffle={onToggleShuffle} />
+    </div>
+  );
+};
 
 const stateToProps = ({ player, search }) => ({
   player,
@@ -160,6 +126,7 @@ export default connect(stateToProps, {
   playSong,
   fetchStreamUrl,
   togglePlayPause,
+  toggleShuffle,
   fetchAutoplayTrack,
   receiveAutoplayTrackId
 })(Footer);

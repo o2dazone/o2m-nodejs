@@ -1,6 +1,7 @@
 {
   "plugins": [
     "transform-optional-chaining",
+    "react-hot-loader/babel",
     ["babel-plugin-module-resolver", {
       "root": ["./app"]
     }]
