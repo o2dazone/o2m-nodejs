@@ -3,10 +3,10 @@ import css from 'styles/header.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import actions from 'actions';
-import reducers from 'reducers';
 import { setQueryString } from 'helpers';
 import { Logo } from 'icons';
+
+import { fetchSearchResults } from 'actions/search';
 
 class Header extends Component {
   componentDidMount() {
@@ -37,5 +37,10 @@ class Header extends Component {
     );
   }
 }
+const stateToProps = ({ search }) => ({
+  search
+});
 
-export default connect(reducers, actions)(Header);
+export default connect(stateToProps, {
+  fetchSearchResults
+})(Header);

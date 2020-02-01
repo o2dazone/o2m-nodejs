@@ -4,7 +4,7 @@ const webpack = require('webpack');
 const srcPath = path.join(__dirname, './app');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const generateMinimalClassname = require('webpack-minimal-classnames');
+const IncrementalCSS  = require('webpack-incremental-ident');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const publicPath = 'http://d2phn2ea0nqfsq.cloudfront.net/m/';
 
@@ -77,7 +77,7 @@ module.exports = {
             options: {
               modules: {
                 mode: 'local',
-                getLocalIdent: generateMinimalClassname
+                getLocalIdent: IncrementalCSS.getLocalIdent
               },
               importLoaders: true,
               sourceMap: false

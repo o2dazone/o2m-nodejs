@@ -1,5 +1,12 @@
 import { soundManager as sm } from 'soundmanager2';
-import { TOGGLE_PLAY_PAUSE, RECEIVE_AUTOPLAY_TRACK, TOGGLE_SHUFFLE, PLAY_SONG, RECEIVE_STREAM_URL, STREAM_URL } from 'constants';
+import {
+  TOGGLE_PLAY_PAUSE,
+  RECEIVE_AUTOPLAY_TRACK,
+  TOGGLE_SHUFFLE,
+  PLAY_SONG,
+  RECEIVE_STREAM_URL,
+  STREAM_URL
+} from 'constants';
 
 export const playSong = track => ({
   type: PLAY_SONG,
@@ -32,6 +39,7 @@ export const receiveAutoplayTrackId = trackId => ({
 
 export const fetchStreamUrl = (id, begin) => dispatch => {
   if (id) {
+    // console.log(id);
     if (sm.getSoundById('smTrack')) {
       sm.getSoundById('smTrack').pause();
     }

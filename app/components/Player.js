@@ -4,16 +4,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setQueryString } from 'helpers';
 import { PLAYER_ICON_SIZE } from 'constants';
-import actions from 'actions';
-import reducers from 'reducers';
+import { parse } from 'query-string';
 import AudioModule from './AudioModule';
 import { Previous, Next, Shuffle, Play, Pause } from 'icons';
 
+import { fetchStreamUrl } from 'actions/player';
+
 class Player extends Component {
   componentWillMount() {
-    const { fetchStreamUrl, player } = this.props;
+    const { fetchStreamUrl } = this.props;
     // make an initial fetch on mount
-    const track = player.track.id;
+
+    const query = parse(window.location.hash);
+    const track = query.track;
+
     setQueryString({ track });
     fetchStreamUrl(track);
   }
@@ -39,7 +43,7 @@ class Player extends Component {
     } = this.props;
 
     return (
-      <div className={css.container}>
+      <div className={css.container}>d
         { player ? <AudioModule onSoundCreated={onSoundCreated} onNextTrack={onNextTrack} onPercentUpdate={onPercentUpdate} streamUrl={player.streamUrl} /> : ''}
         <Previous size={PLAYER_ICON_SIZE + 8} className={css.prevNext} onClick={onPreviousTrack} color="#ddd" />
 
@@ -55,4 +59,6 @@ class Player extends Component {
   }
 }
 
-export default connect(reducers, actions)(Player);
+export default connect(({ player }) => ({ player }), {
+  fetchStreamUrl
+})(Player);

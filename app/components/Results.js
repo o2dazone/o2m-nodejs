@@ -3,10 +3,10 @@ import css from 'styles/results.scss';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import actions from 'actions';
-import reducers from 'reducers';
 import { getTrackById } from 'helpers';
 import AlbumArt from './AlbumArt';
+
+import { playSong } from 'actions/player';
 
 class Songs extends Component {
   componentDidUpdate() {
@@ -64,4 +64,11 @@ class Songs extends Component {
   }
 }
 
-export default connect(reducers, actions)(Songs);
+const stateToProps = ({ player, search }) => ({
+  player,
+  search
+});
+
+export default connect(stateToProps, {
+  playSong
+})(Songs);

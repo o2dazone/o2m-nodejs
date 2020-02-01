@@ -4,11 +4,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import throttle from 'lodash.throttle';
 
-import actions from 'actions';
-import reducers from 'reducers';
 import Info from './Info';
 import Player from './Player';
 import Duration from './Duration';
+
+import { playSong, receiveAutoplayTrackId, togglePlayPause, fetchStreamUrl } from 'actions/player';
+import { fetchAutoplayTrack } from 'actions/search';
 
 class Footer extends Component {
   constructor(props) {
@@ -150,4 +151,15 @@ class Footer extends Component {
   }
 }
 
-export default connect(reducers, actions)(Footer);
+const stateToProps = ({ player, search }) => ({
+  player,
+  search
+});
+
+export default connect(stateToProps, {
+  playSong,
+  fetchStreamUrl,
+  togglePlayPause,
+  fetchAutoplayTrack,
+  receiveAutoplayTrackId
+})(Footer);

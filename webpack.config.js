@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const srcPath = path.join(__dirname, '/app');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const generateMinimalClassname = require('webpack-minimal-classnames');
 
 process.noDeprecation = true;
 module.exports = {
@@ -75,7 +74,7 @@ module.exports = {
             options: {
               modules: {
                 mode: 'local',
-                getLocalIdent: generateMinimalClassname
+                localIdentName: '[name]__[local]--[hash:base64:5]'
               }
             }
           },

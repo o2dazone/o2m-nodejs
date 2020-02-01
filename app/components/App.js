@@ -9,28 +9,21 @@ import Results from './Results';
 import Footer from './Footer';
 import LoadingIcon from './LoadingIcon';
 
-import reducers from 'reducers';
-import actions from 'actions';
+import { getSearchData } from 'actions/app';
+import { receiveAutoplayTrackId } from 'actions/player';
 
 class App extends Component {
   static SEARCH_QUERY;
 
-  componentWillMount() {
-    this.props.getSearchData();
-  }
-
   componentDidMount() {
+    this.props.getSearchData();
     const query = parse(window.location.hash);
-    const trackIdParam = query.track;
+    const trackId = query.track;
+
     App.SEARCH_QUERY = query.term;
-
-    if (trackIdParam) {
-      this.props.receiveAutoplayTrackId(trackIdParam);
+    if (trackId) {
+      this.props.receiveAutoplayTrackId(trackId);
     }
-  }
-
-  isInArray(value, array) {
-    return array.indexOf(value) > -1;
   }
 
   render() {
@@ -50,4 +43,12 @@ class App extends Component {
   }
 }
 
-export default connect(reducers, actions)(App);
+const stateToProps = ({ player, index }) => ({
+  player,
+  index
+});
+
+export default connect(stateToProps, {
+  getSearchData,
+  receiveAutoplayTrackId
+})(App);
