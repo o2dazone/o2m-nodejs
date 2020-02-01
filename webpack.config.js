@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const srcPath = path.join(__dirname, '/app');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const generateMinimalClassname = require('webpack-minimal-classnames');
 
 process.noDeprecation = true;
@@ -29,18 +28,10 @@ module.exports = {
     extensions: ['.js']
   },
   plugins: [
-    new webpack.DllReferencePlugin({
-      context: '.',
-      manifest: require('./node_modules/vendor-manifest.json')
-    }),
     new HtmlWebpackPlugin({
       template: 'app/index.tpl.html',
       inject: 'body',
       filename: 'index.html'
-    }),
-    new AddAssetHtmlPlugin({
-      filepath: require.resolve('./node_modules/vendor.bundle.js'),
-      includeSourcemap: false
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
